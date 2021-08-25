@@ -15,11 +15,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final _pages = [
-    const CreditScreen(),
-    const PlayScreen(),
-    const SynopsisScreen()
-  ];
+  final _pages = [const CreditScreen(), PlayScreen(), const SynopsisScreen()];
 
   int _selectedIndex = 1;
 

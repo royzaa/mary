@@ -6,6 +6,7 @@ class LabelMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
@@ -14,7 +15,8 @@ class LabelMenu extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       child: Text(
         title,
-        style: TextStyle(color: Colors.white),
+        style:
+            TextStyle(color: Colors.white, fontSize: size.width < 330 ? 9 : 12),
       ),
     );
   }

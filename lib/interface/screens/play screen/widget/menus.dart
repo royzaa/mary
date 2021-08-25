@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -14,12 +16,9 @@ class Menus extends StatefulWidget {
 class _MenusState extends State<Menus> {
   PageController? _pageController;
 
-  void automateNavigate() {
-    Future.delayed(const Duration(milliseconds: 3000),
-        () => _selectedMenu < 5 ? _selectedMenu++ : _selectedMenu = 0);
-  }
-
   int _selectedMenu = 0;
+
+  int indexMenuIcon = 0;
 
   void programaticNavigateMenu() {
     _pageController?.animateToPage(_selectedMenu,
@@ -29,9 +28,14 @@ class _MenusState extends State<Menus> {
 
   @override
   void initState() {
-    automateNavigate();
     _pageController = PageController(initialPage: 0);
-    // programaticNavigateMenu();
+
+    Timer.periodic(const Duration(milliseconds: 4500), (timer) {
+      _selectedMenu < 3 ? _selectedMenu++ : _selectedMenu = 0;
+      _pageController!.animateToPage(_selectedMenu,
+          duration: const Duration(milliseconds: 2500),
+          curve: Curves.easeInCubic);
+    });
     super.initState();
   }
 
@@ -68,153 +72,168 @@ class _MenusState extends State<Menus> {
       'Learn and practice more'
     ];
 
-    return Flexible(
-      child: SizedBox(
-        height: 350,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: SizedBox(
-                width: 72,
-                height: 320,
-                child: ListView.separated(
-                    controller: ScrollController(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    physics: const BouncingScrollPhysics(
-                        parent: ClampingScrollPhysics()),
-                    itemBuilder: (context, index) => GestureDetector(
-                          onTap: () {
-                            setState(
-                              () {
-                                _selectedMenu = index;
-                                _pageController!.animateToPage(index,
-                                    duration: const Duration(milliseconds: 750),
-                                    curve: Curves.easeInCubic);
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            curve: Curves.elasticInOut,
-                            padding: EdgeInsets.all(
-                                index == _selectedMenu ? 14.0 : 10.0),
-                            duration: const Duration(milliseconds: 750),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromRGBO(137, 137, 137, 0.25),
-                                  blurRadius: 50,
-                                  spreadRadius: 5,
-                                  offset: Offset(0, 20),
-                                ),
-                              ],
-                            ),
-                            child: Icon(
-                              iconMenus[index],
-                              color: index == _selectedMenu
-                                  ? Theme.of(context).primaryColor
-                                  : _iconColor,
-                              size: _iconSize,
-                            ),
+    final Size size = MediaQuery.of(context).size;
+
+    return SizedBox(
+      height: 350,
+      width: size.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Flexible(
+            child: SizedBox(
+              width: 72,
+              height: 320,
+              child: ListView.separated(
+                  controller: ScrollController(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  physics: const BouncingScrollPhysics(
+                      parent: ClampingScrollPhysics()),
+                  itemBuilder: (context, indexMenuIcon) => GestureDetector(
+                        onTap: () {
+                          setState(
+                            () {
+                              _selectedMenu = indexMenuIcon;
+                              _pageController!.animateToPage(indexMenuIcon,
+                                  duration: const Duration(milliseconds: 750),
+                                  curve: Curves.easeInCubic);
+                            },
+                          );
+                        },
+                        child: AnimatedContainer(
+                          curve: Curves.elasticInOut,
+                          padding: EdgeInsets.all(
+                              indexMenuIcon == _selectedMenu ? 14.0 : 10.0),
+                          duration: const Duration(milliseconds: 750),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(137, 137, 137, 0.25),
+                                blurRadius: 50,
+                                spreadRadius: 5,
+                                offset: Offset(0, 20),
+                              ),
+                            ],
+                          ),
+                          child: Icon(
+                            iconMenus[indexMenuIcon],
+                            color: indexMenuIcon == _selectedMenu
+                                ? Theme.of(context).primaryColor
+                                : _iconColor,
+                            size: _iconSize,
                           ),
                         ),
-                    separatorBuilder: (context, _) => const SizedBox(
-                          height: 15,
-                        ),
-                    itemCount: 4),
-              ),
+                      ),
+                  separatorBuilder: (context, _) => const SizedBox(
+                        height: 15,
+                      ),
+                  itemCount: 4),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color.fromRGBO(137, 137, 137, 0.25),
-                          blurRadius: 50,
-                          spreadRadius: 5,
-                          offset: Offset(0, 20),
-                        ),
-                      ]),
-                  height: 260,
-                  width: 250,
-                  child: PageView.builder(
-                    scrollDirection: Axis.vertical,
-                    clipBehavior: Clip.antiAlias,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: menusTitle.length,
-                    controller: _pageController,
-                    itemBuilder: (context, index) => Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 25),
+          ),
+          Flexible(
+            flex: 2,
+            child: SizedBox(
+              height: 358,
+              child: SingleChildScrollView(
+                controller: ScrollController(),
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              menusTitle[index],
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color.fromRGBO(137, 137, 137, 0.25),
+                              blurRadius: 50,
+                              spreadRadius: 5,
+                              offset: Offset(0, 20),
+                            ),
+                          ]),
+                      height: 260,
+                      width: size.width < 330 ? 200 : 250,
+                      child: PageView.builder(
+                        onPageChanged: (index) {
+                          setState(() {
+                            indexMenuIcon = index;
+                          });
+                        },
+                        scrollDirection: Axis.vertical,
+                        clipBehavior: Clip.antiAlias,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: menusTitle.length,
+                        controller: _pageController,
+                        itemBuilder: (context, index) => Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 25),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  menusTitle[index],
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: size.width < 330 ? 16 : 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Flexible(
-                            child: Text(
-                              menusDescription[index],
-                              maxLines: 2,
-                              style: TextStyle(
-                                color: Colors.grey[400],
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
+                              const SizedBox(
+                                height: 4,
                               ),
-                            ),
+                              Flexible(
+                                child: Text(
+                                  menusDescription[index],
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    color: Colors.grey[400],
+                                    fontSize: size.width < 330 ? 13 : 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Flexible(
+                                flex: 2,
+                                child: SvgPicture.network(
+                                  'https://drive.google.com/uc?id=1BCjZ57grYVjc2-IoshXqlg_w6zr82Gf9',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          Flexible(
-                            flex: 2,
-                            child: SvgPicture.network(
-                              'https://drive.google.com/uc?id=1BCjZ57grYVjc2-IoshXqlg_w6zr82Gf9',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Flexible(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(235, 68),
-                      primary: Theme.of(context).primaryColor,
-                      onPrimary: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      padding: const EdgeInsets.all(0),
+                    const SizedBox(
+                      height: 20,
                     ),
-                    onPressed: () {},
-                    child: Container(
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: Size(size.width < 330 ? 200 : 235, 68),
+                        primary: Theme.of(context).primaryColor,
+                        onPrimary: Colors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.all(0),
+                      ),
+                      onPressed: () {},
+                      child: Container(
                         alignment: Alignment.center,
                         decoration: const BoxDecoration(
                             // color: Theme.of(context).primaryColor,
@@ -232,13 +251,15 @@ class _MenusState extends State<Menus> {
                               color: Colors.white,
                               fontSize: 22,
                               fontWeight: FontWeight.w600),
-                        )),
-                  ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
