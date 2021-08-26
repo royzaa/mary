@@ -2,7 +2,9 @@ import '../model/onboarding.dart';
 
 import '../services/shared_preferences.dart';
 
-final String userName = DataSharedPreferences.getTitle();
+final String userName = DataSharedPreferences.getTitle() == ''
+    ? '!'
+    : DataSharedPreferences.getTitle();
 
 final List<OnBoarding> onBoadringData = [
   OnBoarding(

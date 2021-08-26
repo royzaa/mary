@@ -11,6 +11,7 @@ import './screens/play screen/play_screen.dart';
 import './widget/label_menu.dart';
 import './widget/drawer.dart';
 import './widget/my_show_case.dart';
+import '../services/shared_preferences.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -50,7 +51,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
     ];
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      ShowCaseWidget.of(context)!.startShowCase([_one, _two, _three, _four]);
+      if (DataSharedPreferences.getFinishShowCase()!) {
+        ShowCaseWidget.of(context)!.startShowCase(
+          [_one, _two, _three, _four],
+        );
+      }
     });
   }
 

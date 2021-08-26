@@ -31,13 +31,18 @@ class MyApp extends StatelessWidget {
       ),
       home: DataSharedPreferences.getTitle() == ''
           ? const OnBoardingScreen()
-          : ShowCaseWidget(
-              builder: Builder(
-                builder: (context) {
-                  return const BottomNavBar();
-                },
-              ),
-            ),
+          : DataSharedPreferences.getFinishShowCase()!
+              ? const BottomNavBar()
+              : ShowCaseWidget(
+                  onFinish: () {
+                    DataSharedPreferences.setFinishShowCasee(true);
+                  },
+                  builder: Builder(
+                    builder: (context) {
+                      return const BottomNavBar();
+                    },
+                  ),
+                ),
       routes: {
         BottomNavBar.routeName: (context) => ShowCaseWidget(
               builder: Builder(

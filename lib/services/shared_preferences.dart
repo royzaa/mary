@@ -5,6 +5,8 @@ class DataSharedPreferences {
 
   static const _keyName = 'name';
 
+  static const _keyShowCase = 'case';
+
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
 
@@ -14,4 +16,10 @@ class DataSharedPreferences {
   static String getTitle() => _preferences.getString(_keyName) == null
       ? ''
       : _preferences.getString(_keyName).toString();
+
+  static Future setFinishShowCasee(bool status) async =>
+      await _preferences.setBool(_keyShowCase, status);
+
+  static bool? getFinishShowCase() =>
+      _preferences.getBool(_keyShowCase) ?? false;
 }

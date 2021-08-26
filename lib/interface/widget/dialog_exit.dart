@@ -11,7 +11,7 @@ class DialogExit extends StatelessWidget {
     double seriesWidth = size.width < 330 ? 130 : 160;
     return Dialog(
       insetAnimationCurve: Curves.easeIn,
-      insetAnimationDuration: Duration(milliseconds: 250),
+      insetAnimationDuration: const Duration(milliseconds: 250),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       child: Container(
         padding: const EdgeInsets.all(25),

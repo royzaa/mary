@@ -29,12 +29,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         useRootNavigator: true,
         context: context,
         builder: (context) {
-          return WelcomeDialog();
+          return const WelcomeDialog();
         },
-      );
+      ).then((value) {
+        name = value;
+        setState(() {});
+      });
     });
     super.initState();
   }
+
+  String name = '';
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +134,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           height: 15,
                         ),
                         Text(
-                          onBoadringData[index].desc,
+                          index == 0
+                              ? onBoadringData[index].desc.replaceAll('!', name)
+                              : onBoadringData[index].desc,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -148,7 +155,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                       primary: Colors.white,
                                       onPrimary: Colors.blue,
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 25, vertical: 12),
+                                          horizontal: 25, vertical: 15),
                                     ),
                                     onPressed: () {
                                       Navigator.of(context)
@@ -159,7 +166,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                       'Get Started',
                                       style: TextStyle(
                                         color: Theme.of(context).primaryColor,
-                                        fontSize: 16,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),

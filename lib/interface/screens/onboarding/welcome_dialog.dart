@@ -5,16 +5,16 @@ import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart
 
 import '../../../services/shared_preferences.dart';
 
-class WelcomeDialog extends StatelessWidget {
-  WelcomeDialog({Key? key}) : super(key: key);
+final formKey = GlobalKey<FormState>();
 
-  final formKey = GlobalKey<FormState>();
+class WelcomeDialog extends StatelessWidget {
+  const WelcomeDialog({Key? key}) : super(key: key);
 
   bool validate() {
     bool status = false;
     final form = formKey.currentState;
-    form!.save();
-    if (form.validate()) {
+
+    if (form!.validate()) {
       form.save();
       status = true;
     } else {
@@ -82,10 +82,14 @@ class WelcomeDialog extends StatelessWidget {
                 ),
                 Form(
                   key: formKey,
-                  autovalidateMode: AutovalidateMode.always,
                   child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (name) {
-                      name == '' ? 'Please enter your name correctly' : null;
+                      if (name == '' || name!.isEmpty) {
+                        return 'Please input your name corectly';
+                      } else {
+                        return null;
+                      }
                     },
                     controller: controller,
                     cursorColor: Colors.black,
@@ -111,8 +115,8 @@ class WelcomeDialog extends StatelessWidget {
                   onPressed: () {
                     if (validate()) {
                       DataSharedPreferences.setTitle(controller.text);
+                      Navigator.pop(context, controller.text);
                     }
-                    Navigator.pop(context, controller.text);
                   },
                   child: SizedBox(
                     width: size.width * 0.5,
