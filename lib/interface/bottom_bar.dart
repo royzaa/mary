@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import './screens/credit_screen.dart';
 import './screens/synopsis_screen.dart';
 import './screens/play screen/play_screen.dart';
 import './widget/label_menu.dart';
+import './widget/drawer.dart';
+import './widget/my_show_case.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -15,7 +20,12 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final _pages = [const CreditScreen(), PlayScreen(), const SynopsisScreen()];
+  final _one = GlobalKey();
+  final _two = GlobalKey();
+  final _three = GlobalKey();
+  final _four = GlobalKey();
+
+  late List<Widget> _pages;
 
   int _selectedIndex = 1;
 
@@ -26,14 +36,27 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 
   @override
+  void initState() {
+    _pages = [
+      const CreditScreen(),
+      PlayScreen(
+        secondShowCaseKey: _two,
+        thirdShowCaseKey: _three,
+        fourthShowCaseKey: _four,
+      ),
+      const SynopsisScreen()
+    ];
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      ShowCaseWidget.of(context)!.startShowCase([_one, _two, _three, _four]);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: const Drawer(
-        child: Center(
-          child: Text('Drawer'),
-        ),
-      ),
+      drawer: const MyDrawer(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -74,63 +97,68 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: SpeedDial(
-        animationSpeed: 300,
-        curve: Curves.easeInCubic,
-        spaceBetweenChildren: 10,
-        icon: Icons.play_arrow_rounded,
-        backgroundColor: Theme.of(context).primaryColor,
-        iconTheme: const IconThemeData(size: 32),
-        activeIcon: Icons.close,
-        useRotationAnimation: true,
-        overlayOpacity: 0.7,
-        onOpen: () {
-          setState(() {
-            _selectedIndex = 1;
-          });
-        },
-        children: [
-          SpeedDialChild(
-            labelWidget: const LabelMenu(
-              title: 'Learning Guide',
+      floatingActionButton: MyShowCase(
+        title: "Bottom tab bar",
+        desc: "Tap here to change tab",
+        showCaseKey: _one,
+        child: SpeedDial(
+          animationSpeed: 225,
+          curve: Curves.easeInCubic,
+          spaceBetweenChildren: 10,
+          icon: Icons.play_arrow_rounded,
+          backgroundColor: Theme.of(context).primaryColor,
+          iconTheme: const IconThemeData(size: 32),
+          activeIcon: Icons.close,
+          useRotationAnimation: true,
+          overlayOpacity: 0.7,
+          onOpen: () {
+            setState(() {
+              _selectedIndex = 1;
+            });
+          },
+          children: [
+            SpeedDialChild(
+              labelWidget: const LabelMenu(
+                title: 'Learning Guide',
+              ),
+              elevation: 20,
+              child: Icon(
+                Icons.ballot_outlined,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
-            elevation: 20,
-            child: Icon(
-              Icons.ballot_outlined,
-              color: Theme.of(context).primaryColor,
+            SpeedDialChild(
+              labelWidget: const LabelMenu(
+                title: 'Goal',
+              ),
+              elevation: 20,
+              child: Icon(
+                Icons.auto_awesome,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
-          ),
-          SpeedDialChild(
-            labelWidget: const LabelMenu(
-              title: 'Goal',
+            SpeedDialChild(
+              elevation: 20,
+              labelWidget: const LabelMenu(
+                title: 'Augmented Reality',
+              ),
+              child: Icon(
+                Icons.camera_alt,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
-            elevation: 20,
-            child: Icon(
-              Icons.auto_awesome,
-              color: Theme.of(context).primaryColor,
+            SpeedDialChild(
+              elevation: 20,
+              labelWidget: const LabelMenu(
+                title: 'Learning Enrichment',
+              ),
+              child: Icon(
+                Icons.border_color_sharp,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
-          ),
-          SpeedDialChild(
-            elevation: 20,
-            labelWidget: const LabelMenu(
-              title: 'Augmented Reality',
-            ),
-            child: Icon(
-              Icons.camera_alt,
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-          SpeedDialChild(
-            elevation: 20,
-            labelWidget: const LabelMenu(
-              title: 'Learning Enrichment',
-            ),
-            child: Icon(
-              Icons.border_color_sharp,
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

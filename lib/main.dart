@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:showcaseview/showcaseview.dart';
 
-import './interface/screens/play screen/play_screen.dart';
 import './interface/bottom_bar.dart';
 
-void main() {
+void main() async {
+  await Future.delayed(
+    const Duration(milliseconds: 1500),
+  );
   runApp(const MyApp());
 }
 
@@ -20,7 +23,11 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color.fromRGBO(102, 117, 255, 1),
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: const BottomNavBar(),
+      home: ShowCaseWidget(
+        builder: Builder(builder: (context) {
+          return const BottomNavBar();
+        }),
+      ),
     );
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class QuizBox extends StatelessWidget {
   const QuizBox({
@@ -19,7 +22,20 @@ class QuizBox extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        if (isOpen!) {
+          Fluttertoast.showToast(
+            msg: 'Quiz currently unavailable',
+            gravity: ToastGravity.BOTTOM,
+          );
+        } else {
+          HapticFeedback.mediumImpact();
+          Fluttertoast.showToast(
+            msg: 'Complete previous quiz, please',
+            gravity: ToastGravity.BOTTOM,
+          );
+        }
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -47,11 +63,14 @@ class QuizBox extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15),
-                          child: SvgPicture.network(
-                            imageUrl!,
-                            width: size.width < 330 ? 80 : 110,
-                            fit: BoxFit.cover,
-                          ),
+                          child: SvgPicture.network(imageUrl!,
+                              width: size.width < 330 ? 80 : 110,
+                              fit: BoxFit.cover,
+                              placeholderBuilder: (context) => const Center(
+                                    child: PlaceholderLines(
+                                      count: 2,
+                                    ),
+                                  )),
                         ),
                         Text(
                           quizTitle!,

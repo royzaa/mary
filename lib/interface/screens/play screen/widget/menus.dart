@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
 
 import 'package:flutter_svg/svg.dart';
 
@@ -30,7 +31,7 @@ class _MenusState extends State<Menus> {
   void initState() {
     _pageController = PageController(initialPage: 0);
 
-    Timer.periodic(const Duration(milliseconds: 4500), (timer) {
+    Timer.periodic(const Duration(milliseconds: 6500), (timer) {
       _selectedMenu < 3 ? _selectedMenu++ : _selectedMenu = 0;
       _pageController!.animateToPage(_selectedMenu,
           duration: const Duration(milliseconds: 2500),
@@ -212,6 +213,12 @@ class _MenusState extends State<Menus> {
                                 child: SvgPicture.network(
                                   'https://drive.google.com/uc?id=1BCjZ57grYVjc2-IoshXqlg_w6zr82Gf9',
                                   fit: BoxFit.cover,
+                                  placeholderBuilder: (context) => const Center(
+                                    child: PlaceholderLines(
+                                      count: 3,
+                                      animate: true,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
