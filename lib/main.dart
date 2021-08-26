@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import './interface/bottom_bar.dart';
+import './interface/screens/onboarding/onboarding_screen.dart';
+import './services/shared_preferences.dart';
 
-void main() async {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Future.delayed(
     const Duration(milliseconds: 1500),
   );
+  await DataSharedPreferences.init();
   runApp(const MyApp());
 }
 
@@ -23,11 +29,24 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color.fromRGBO(102, 117, 255, 1),
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: ShowCaseWidget(
-        builder: Builder(builder: (context) {
-          return const BottomNavBar();
-        }),
-      ),
+      home: DataSharedPreferences.getTitle() == ''
+          ? const OnBoardingScreen()
+          : ShowCaseWidget(
+              builder: Builder(
+                builder: (context) {
+                  return const BottomNavBar();
+                },
+              ),
+            ),
+      routes: {
+        BottomNavBar.routeName: (context) => ShowCaseWidget(
+              builder: Builder(
+                builder: (context) {
+                  return const BottomNavBar();
+                },
+              ),
+            )
+      },
     );
   }
 }

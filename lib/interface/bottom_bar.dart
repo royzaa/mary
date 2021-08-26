@@ -15,6 +15,8 @@ import './widget/my_show_case.dart';
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
 
+  static const routeName = 'main-app';
+
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
 }

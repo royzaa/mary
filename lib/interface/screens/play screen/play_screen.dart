@@ -7,8 +7,10 @@ import './widget/menus.dart';
 import './quiiz_box.dart';
 import '../../../data/quizes.dart';
 import '../../widget/my_show_case.dart';
+import '../../../services/shared_preferences.dart';
 
 class PlayScreen extends StatelessWidget {
+  static const routeName = '/player-screen';
   const PlayScreen(
       {Key? key,
       required this.secondShowCaseKey,
@@ -62,6 +64,7 @@ class PlayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final String userName = DataSharedPreferences.getTitle();
 
     return NestedScrollView(
       floatHeaderSlivers: true,
@@ -79,7 +82,11 @@ class PlayScreen extends StatelessWidget {
                 showCaseKey: secondShowCaseKey,
                 title: 'Drawer',
                 desc: 'Here you can find other spesic menu',
-                child: const Icon(Icons.filter_list),
+                child: const Icon(
+                  Icons.filter_list,
+                  size: 32,
+                  color: Colors.black,
+                ),
               ),
             ),
             actions: [
@@ -131,7 +138,7 @@ class PlayScreen extends StatelessWidget {
               ),
               titlePadding: const EdgeInsets.only(left: 54, bottom: 16),
               title: Text(
-                '${getTimeSession()}, User',
+                '${getTimeSession()}, ${userName.split(' ')[0]}',
                 style: const TextStyle(
                     fontSize: 16.0,
                     color: Colors.black,

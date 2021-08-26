@@ -73,6 +73,13 @@ class _MenusState extends State<Menus> {
       'Learn and practice more'
     ];
 
+    List<String> imageUrl = const [
+      'https://drive.google.com/uc?id=1rpqeO5WdnIPIQZ5-1N9D6O9oEelS8mq0',
+      'https://drive.google.com/uc?id=1BCjZ57grYVjc2-IoshXqlg_w6zr82Gf9',
+      'https://drive.google.com/uc?id=15B5_58TpJhR6RKuRMUvBRqrfx3Bswm80',
+      'https://drive.google.com/uc?id=1bfqnxYFwjfJS-PtCCqeQfP_Ae3BOEeN4'
+    ];
+
     final Size size = MediaQuery.of(context).size;
 
     return SizedBox(
@@ -211,7 +218,7 @@ class _MenusState extends State<Menus> {
                               Flexible(
                                 flex: 2,
                                 child: SvgPicture.network(
-                                  'https://drive.google.com/uc?id=1BCjZ57grYVjc2-IoshXqlg_w6zr82Gf9',
+                                  imageUrl[index],
                                   fit: BoxFit.cover,
                                   placeholderBuilder: (context) => const Center(
                                     child: PlaceholderLines(
