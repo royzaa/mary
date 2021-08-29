@@ -82,10 +82,19 @@ class PlayScreen extends StatelessWidget {
                 showCaseKey: secondShowCaseKey,
                 title: 'Drawer',
                 desc: 'Here you can find other spesic menu',
-                child: const Icon(
-                  Icons.filter_list,
-                  size: 32,
-                  color: Colors.black,
+                child: Container(
+                  decoration: const BoxDecoration(boxShadow: [
+                    BoxShadow(
+                        color: Color.fromRGBO(255, 255, 255, 0.5),
+                        blurRadius: 15,
+                        spreadRadius: 5,
+                        offset: Offset(0, -3))
+                  ]),
+                  child: const Icon(
+                    Icons.filter_list,
+                    size: 32,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -140,7 +149,7 @@ class PlayScreen extends StatelessWidget {
               title: Text(
                 '${getTimeSession()}, ${userName.split(' ')[0]}',
                 style: const TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 18.0,
                     color: Colors.black,
                     fontWeight: FontWeight.w600),
               ),

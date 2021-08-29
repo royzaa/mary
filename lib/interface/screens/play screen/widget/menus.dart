@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
 
 import 'package:flutter_svg/svg.dart';
@@ -29,10 +30,7 @@ class _MenusState extends State<Menus> {
         curve: Curves.elasticInOut);
   }
 
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: 0);
-
+  void autoMoveMenu() {
     Timer.periodic(const Duration(milliseconds: 6500), (timer) {
       if (!_recentlyPressed) {
         _selectedMenu < 3 ? _selectedMenu++ : _selectedMenu = 0;
@@ -41,17 +39,26 @@ class _MenusState extends State<Menus> {
             curve: Curves.easeInCubic);
       }
     });
+  }
 
+  void delayAfterClick() {
     Timer.periodic(const Duration(microseconds: 1000), (timer) {
       //  debugPrint('recentlypressed value: $_recentlyPressed');
       if (_recentlyPressed) {
         Future.delayed(const Duration(milliseconds: 4000), () {
-          setState(() {
-            _recentlyPressed = false;
-          });
+          _recentlyPressed = false;
         });
       }
     });
+  }
+
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: 0);
+
+    autoMoveMenu();
+    delayAfterClick();
+
     super.initState();
   }
 
@@ -122,9 +129,10 @@ class _MenusState extends State<Menus> {
                               _pageController!.animateToPage(indexMenuIcon,
                                   duration: const Duration(milliseconds: 750),
                                   curve: Curves.easeInCubic);
-                              _recentlyPressed = true;
                             },
                           );
+                          _recentlyPressed = true;
+                          HapticFeedback.lightImpact();
                         },
                         child: AnimatedContainer(
                           curve: Curves.elasticInOut,

@@ -17,7 +17,15 @@ class PopUpVolume extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      icon: const Icon(Icons.tune_outlined),
+      icon: Container(
+          decoration: const BoxDecoration(boxShadow: [
+            BoxShadow(
+                color: Color.fromRGBO(255, 255, 255, 0.5),
+                blurRadius: 15,
+                spreadRadius: 5,
+                offset: Offset(0, -3))
+          ]),
+          child: const Icon(Icons.tune_outlined)),
       itemBuilder: (context) => [
         PopupMenuItem(
           child: Padding(
