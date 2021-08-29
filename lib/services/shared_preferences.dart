@@ -17,8 +17,9 @@ class DataSharedPreferences {
       ? ''
       : _preferences.getString(_keyName).toString();
 
-  static Future setFinishShowCasee(bool status) async =>
-      await _preferences.setBool(_keyShowCase, status);
+  static Future setFinishShowCase(bool status) async {
+    await _preferences.setBool(_keyShowCase, status);
+  }
 
   static bool? getFinishShowCase() =>
       _preferences.getBool(_keyShowCase) ?? false;

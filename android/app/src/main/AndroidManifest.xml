@@ -1,11 +1,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.bpmpk.mary">
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
-     <uses-permission android:name="android.permission.INTERNET"/> 
+    <uses-permission android:name="android.permission.INTERNET"/> 
+
+    <queries>
+      <!-- If your app opens https URLs -->
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https" />
+      </intent>
+      <!-- If your app makes calls -->
+      <intent>
+        <action android:name="android.intent.action.DIAL" />
+        <data android:scheme="tel" />
+      </intent>
+      <!-- If your app emails -->
+      <intent>
+        <action android:name="android.intent.action.SEND" />
+        <data android:mimeType="*/*" />
+      </intent>
+    </queries>
+
    <application
         android:label="MARY"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:extractNativeLibs="true"
+        tools:replace="android:extractNativeLibs"
+        >
         
         <activity
             android:name=".MainActivity"
@@ -41,5 +64,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            
     </application>
 </manifest>

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../services/volume_controller.dart';
+
 class PopUpVolume extends StatelessWidget {
-  PopUpVolume({
+  const PopUpVolume({
     Key? key,
   }) : super(key: key);
 
-  var val = 0.02.obs;
-
   @override
   Widget build(BuildContext context) {
+    final soundController = Get.put(SoundController());
+
+    RxDouble val = soundController.volume;
     return PopupMenuButton(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -42,7 +45,7 @@ class PopUpVolume extends StatelessWidget {
                           min: 0,
                           value: val.value,
                           onChanged: (value) {
-                            val.value = value;
+                            soundController.volumeController.setVolume(value);
                             debugPrint('value: ${val.value}');
                           },
                         ),

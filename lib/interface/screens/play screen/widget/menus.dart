@@ -53,7 +53,7 @@ class _MenusState extends State<Menus> {
   @override
   Widget build(BuildContext context) {
     List<IconData> iconMenus = [
-      Icons.source_outlined,
+      Icons.ballot_outlined,
       Icons.auto_awesome,
       Icons.camera_alt,
       Icons.border_color_sharp,
@@ -191,9 +191,10 @@ class _MenusState extends State<Menus> {
                               Flexible(
                                 child: Text(
                                   menusTitle[index],
+                                  maxLines: 1,
                                   style: TextStyle(
                                     color: Theme.of(context).primaryColor,
-                                    fontSize: size.width < 330 ? 16 : 20,
+                                    fontSize: size.width < 330 ? 16 : 18,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),

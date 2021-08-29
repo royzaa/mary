@@ -51,7 +51,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     ];
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      if (DataSharedPreferences.getFinishShowCase()!) {
+      if (!DataSharedPreferences.getFinishShowCase()!) {
         ShowCaseWidget.of(context)!.startShowCase(
           [_one, _two, _three, _four],
         );
@@ -80,22 +80,27 @@ class _BottomNavBarState extends State<BottomNavBar> {
               const TextStyle(color: Colors.black, fontSize: 14),
           selectedLabelStyle: const TextStyle(
               color: Colors.black, fontSize: 14, fontWeight: FontWeight.w600),
-          items: const [
-            BottomNavigationBarItem(
+          items: [
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.source_outlined,
               ),
               label: 'Credit',
               tooltip: 'Sources and developer team',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(null),
               label: 'Play',
               tooltip: 'Play',
             ),
             BottomNavigationBarItem(
-              icon: Icon(
-                Icons.menu_book_outlined,
+              icon: MyShowCase(
+                title: "Bottom tab bar",
+                desc: "Tap here to change tab",
+                showCaseKey: _one,
+                child: const Icon(
+                  Icons.menu_book_outlined,
+                ),
               ),
               label: 'Synopsis',
               tooltip: 'Synopsis',
@@ -104,68 +109,63 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: MyShowCase(
-        title: "Bottom tab bar",
-        desc: "Tap here to change tab",
-        showCaseKey: _one,
-        child: SpeedDial(
-          animationSpeed: 225,
-          curve: Curves.easeInCubic,
-          spaceBetweenChildren: 10,
-          icon: Icons.play_arrow_rounded,
-          backgroundColor: Theme.of(context).primaryColor,
-          iconTheme: const IconThemeData(size: 32),
-          activeIcon: Icons.close,
-          useRotationAnimation: true,
-          overlayOpacity: 0.7,
-          onOpen: () {
-            setState(() {
-              _selectedIndex = 1;
-            });
-          },
-          children: [
-            SpeedDialChild(
-              labelWidget: const LabelMenu(
-                title: 'Learning Guide',
-              ),
-              elevation: 20,
-              child: Icon(
-                Icons.ballot_outlined,
-                color: Theme.of(context).primaryColor,
-              ),
+      floatingActionButton: SpeedDial(
+        animationSpeed: 225,
+        curve: Curves.easeInCubic,
+        spaceBetweenChildren: 10,
+        icon: Icons.play_arrow_rounded,
+        backgroundColor: Theme.of(context).primaryColor,
+        iconTheme: const IconThemeData(size: 32),
+        activeIcon: Icons.close,
+        useRotationAnimation: true,
+        overlayOpacity: 0.7,
+        onOpen: () {
+          setState(() {
+            _selectedIndex = 1;
+          });
+        },
+        children: [
+          SpeedDialChild(
+            labelWidget: const LabelMenu(
+              title: 'Learning Guide',
             ),
-            SpeedDialChild(
-              labelWidget: const LabelMenu(
-                title: 'Goal',
-              ),
-              elevation: 20,
-              child: Icon(
-                Icons.auto_awesome,
-                color: Theme.of(context).primaryColor,
-              ),
+            elevation: 20,
+            child: Icon(
+              Icons.ballot_outlined,
+              color: Theme.of(context).primaryColor,
             ),
-            SpeedDialChild(
-              elevation: 20,
-              labelWidget: const LabelMenu(
-                title: 'Augmented Reality',
-              ),
-              child: Icon(
-                Icons.camera_alt,
-                color: Theme.of(context).primaryColor,
-              ),
+          ),
+          SpeedDialChild(
+            labelWidget: const LabelMenu(
+              title: 'Goal',
             ),
-            SpeedDialChild(
-              elevation: 20,
-              labelWidget: const LabelMenu(
-                title: 'Learning Enrichment',
-              ),
-              child: Icon(
-                Icons.border_color_sharp,
-                color: Theme.of(context).primaryColor,
-              ),
+            elevation: 20,
+            child: Icon(
+              Icons.auto_awesome,
+              color: Theme.of(context).primaryColor,
             ),
-          ],
-        ),
+          ),
+          SpeedDialChild(
+            elevation: 20,
+            labelWidget: const LabelMenu(
+              title: 'Augmented Reality',
+            ),
+            child: Icon(
+              Icons.camera_alt,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          SpeedDialChild(
+            elevation: 20,
+            labelWidget: const LabelMenu(
+              title: 'Learning Enrichment',
+            ),
+            child: Icon(
+              Icons.border_color_sharp,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+        ],
       ),
     );
   }

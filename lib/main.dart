@@ -29,22 +29,12 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color.fromRGBO(102, 117, 255, 1),
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
-      home: DataSharedPreferences.getTitle() == ''
-          ? const OnBoardingScreen()
-          : DataSharedPreferences.getFinishShowCase()!
-              ? const BottomNavBar()
-              : ShowCaseWidget(
-                  onFinish: () {
-                    DataSharedPreferences.setFinishShowCasee(true);
-                  },
-                  builder: Builder(
-                    builder: (context) {
-                      return const BottomNavBar();
-                    },
-                  ),
-                ),
+      home: homeController(),
       routes: {
         BottomNavBar.routeName: (context) => ShowCaseWidget(
+              onFinish: () {
+                DataSharedPreferences.setFinishShowCase(true);
+              },
               builder: Builder(
                 builder: (context) {
                   return const BottomNavBar();
@@ -54,4 +44,20 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+Widget homeController() {
+  late Widget home;
+  if (DataSharedPreferences.getTitle() == '') {
+    home = const OnBoardingScreen();
+  } else if (DataSharedPreferences.getFinishShowCase()!) {
+    home = ShowCaseWidget(
+      builder: Builder(
+        builder: (context) {
+          return const BottomNavBar();
+        },
+      ),
+    );
+  }
+  return home;
 }

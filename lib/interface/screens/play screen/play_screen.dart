@@ -94,7 +94,7 @@ class PlayScreen extends StatelessWidget {
                 title: "Settings",
                 desc: "Tap here to adjust app setting",
                 showCaseKey: thirdShowCaseKey,
-                child: PopUpVolume(),
+                child: const PopUpVolume(),
               ),
             ],
             iconTheme: const IconThemeData(color: Colors.black),

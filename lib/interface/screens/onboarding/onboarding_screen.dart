@@ -123,7 +123,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           height: 30,
                         ),
                         Text(
-                          onBoadringData[index].title,
+                          index == 0
+                              ? onBoadringData[index]
+                                  .title
+                                  .replaceAll('!', name)
+                              : onBoadringData[index].title,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 25,

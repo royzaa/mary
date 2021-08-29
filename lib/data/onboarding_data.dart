@@ -8,9 +8,9 @@ final String userName = DataSharedPreferences.getTitle() == ''
 
 final List<OnBoarding> onBoadringData = [
   OnBoarding(
-      title: 'My Name is Mary',
+      title: 'Welcome $userName',
       desc:
-          """Hi welcome $userName, I am mary. Today we will go around in our city. We will spot any of wonderful city vehicle. I am very looking forward to start a journey with you.
+          """Hi $userName, I am mary. Today we will go around in our city. We will spot any of wonderful city vehicle. I am very looking forward to start a journey with you.
 """,
       imageUrl:
           'https://drive.google.com/uc?id=1DyeB3wusaZZc3Iii5iEwWAkkqFnyrmoZ'),
