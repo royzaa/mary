@@ -21,6 +21,8 @@ class _MenusState extends State<Menus> {
 
   int indexMenuIcon = 0;
 
+  bool _recentlyPressed = false;
+
   void programaticNavigateMenu() {
     _pageController?.animateToPage(_selectedMenu,
         duration: const Duration(microseconds: 250),
@@ -32,10 +34,23 @@ class _MenusState extends State<Menus> {
     _pageController = PageController(initialPage: 0);
 
     Timer.periodic(const Duration(milliseconds: 6500), (timer) {
-      _selectedMenu < 3 ? _selectedMenu++ : _selectedMenu = 0;
-      _pageController!.animateToPage(_selectedMenu,
-          duration: const Duration(milliseconds: 2500),
-          curve: Curves.easeInCubic);
+      if (!_recentlyPressed) {
+        _selectedMenu < 3 ? _selectedMenu++ : _selectedMenu = 0;
+        _pageController!.animateToPage(_selectedMenu,
+            duration: const Duration(milliseconds: 2500),
+            curve: Curves.easeInCubic);
+      }
+    });
+
+    Timer.periodic(const Duration(microseconds: 1000), (timer) {
+      //  debugPrint('recentlypressed value: $_recentlyPressed');
+      if (_recentlyPressed) {
+        Future.delayed(const Duration(milliseconds: 4000), () {
+          setState(() {
+            _recentlyPressed = false;
+          });
+        });
+      }
     });
     super.initState();
   }
@@ -107,6 +122,7 @@ class _MenusState extends State<Menus> {
                               _pageController!.animateToPage(indexMenuIcon,
                                   duration: const Duration(milliseconds: 750),
                                   curve: Curves.easeInCubic);
+                              _recentlyPressed = true;
                             },
                           );
                         },
