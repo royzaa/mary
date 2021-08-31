@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
-
 import 'package:flutter_svg/svg.dart';
+
+// import '../../ar_screen.dart';
 
 class Menus extends StatefulWidget {
   const Menus({
@@ -201,59 +202,63 @@ class _MenusState extends State<Menus> {
                         physics: const BouncingScrollPhysics(),
                         itemCount: menusTitle.length,
                         controller: _pageController,
-                        itemBuilder: (context, index) => Container(
-                          margin: const EdgeInsets.only(top: 20),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 25),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  menusTitle[index],
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: size.width < 330 ? 16 : 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              Flexible(
-                                child: Text(
-                                  menusDescription[index],
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                    color: Colors.grey[400],
-                                    fontSize: size.width < 330 ? 13 : 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Flexible(
-                                flex: 2,
-                                child: SvgPicture.network(
-                                  imageUrl[index],
-                                  fit: BoxFit.cover,
-                                  placeholderBuilder: (context) => const Center(
-                                    child: PlaceholderLines(
-                                      count: 3,
-                                      animate: true,
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 25),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    menusTitle[index],
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontSize: size.width < 330 ? 16 : 18,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    menusDescription[index],
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                      color: Colors.grey[400],
+                                      fontSize: size.width < 330 ? 13 : 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 12,
+                                ),
+                                Flexible(
+                                  flex: 2,
+                                  child: SvgPicture.network(
+                                    imageUrl[index],
+                                    fit: BoxFit.cover,
+                                    placeholderBuilder: (context) =>
+                                        const Center(
+                                      child: PlaceholderLines(
+                                        count: 3,
+                                        animate: true,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -271,7 +276,10 @@ class _MenusState extends State<Menus> {
                         ),
                         padding: const EdgeInsets.all(0),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (contest) => ArScreen()));
+                      },
                       child: Container(
                         alignment: Alignment.center,
                         decoration: const BoxDecoration(

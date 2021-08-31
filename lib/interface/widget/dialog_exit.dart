@@ -16,7 +16,9 @@ class DialogExit extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(25),
         width: size.width * 1 / 2,
-        height: size.width < 330 ? size.height * 0.8 : size.height * 0.55,
+        height: size.width < 330 || size.height < 660
+            ? size.height * 0.8
+            : size.height * 0.55,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40), color: Colors.white),
         child: Column(

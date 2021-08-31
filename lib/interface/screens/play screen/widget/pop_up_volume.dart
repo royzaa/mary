@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../services/volume_controller.dart';
+import '../../../../services/time_session.dart';
 
 class PopUpVolume extends StatelessWidget {
   const PopUpVolume({
@@ -11,21 +12,15 @@ class PopUpVolume extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final soundController = Get.put(SoundController());
+    final TimeSession timeSession = Get.find<TimeSession>();
 
     RxDouble val = soundController.volume;
     return PopupMenuButton(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      icon: Container(
-          decoration: const BoxDecoration(boxShadow: [
-            BoxShadow(
-                color: Color.fromRGBO(255, 255, 255, 0.5),
-                blurRadius: 15,
-                spreadRadius: 5,
-                offset: Offset(0, -3))
-          ]),
-          child: const Icon(Icons.tune_outlined)),
+      icon: Icon(Icons.tune_outlined,
+          color: timeSession.isDay ? Colors.black : Colors.white),
       itemBuilder: (context) => [
         PopupMenuItem(
           child: Padding(

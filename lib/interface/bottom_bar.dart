@@ -6,12 +6,12 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import './screens/credit_screen.dart';
-import './screens/synopsis_screen.dart';
+import './screens/synopsis_screen/synopsis_screen.dart';
 import './screens/play screen/play_screen.dart';
 import './widget/label_menu.dart';
-import './widget/drawer.dart';
 import './widget/my_show_case.dart';
 import '../services/shared_preferences.dart';
+import './main_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -41,13 +41,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   void initState() {
     _pages = [
-      const CreditScreen(),
-      PlayScreen(
+      MainScreen(
+        child: const CreditScreen(),
         secondShowCaseKey: _two,
-        thirdShowCaseKey: _three,
-        fourthShowCaseKey: _four,
       ),
-      const SynopsisScreen()
+      MainScreen(
+        child: PlayScreen(
+          thirdShowCaseKey: _three,
+          fourthShowCaseKey: _four,
+        ),
+        secondShowCaseKey: _two,
+      ),
+      MainScreen(
+        child: const SynopsisScreen(),
+        secondShowCaseKey: _two,
+      ),
     ];
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -63,7 +71,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: const MyDrawer(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),

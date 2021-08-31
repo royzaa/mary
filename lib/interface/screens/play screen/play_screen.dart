@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
+import 'package:get/get.dart';
 
 import './widget/pop_up_volume.dart';
 import './widget/menus.dart';
@@ -8,63 +9,46 @@ import './quiiz_box.dart';
 import '../../../data/quizes.dart';
 import '../../widget/my_show_case.dart';
 import '../../../services/shared_preferences.dart';
+import '../../../services/time_session.dart';
 
 class PlayScreen extends StatelessWidget {
   static const routeName = '/player-screen';
   const PlayScreen(
       {Key? key,
-      required this.secondShowCaseKey,
       required this.thirdShowCaseKey,
       required this.fourthShowCaseKey})
       : super(key: key);
 
-  final GlobalKey secondShowCaseKey;
   final GlobalKey thirdShowCaseKey;
   final GlobalKey fourthShowCaseKey;
-
-  String getTimeSession() {
-    String session = '';
-
-    int hour = DateTime.now().hour;
-
-    if (hour > 4 && hour < 12) {
-      session = 'Good Morning';
-    } else if (hour >= 12 && hour < 15) {
-      session = 'Good Afternoon';
-    } else if (hour >= 15 && hour <= 19) {
-      session = 'Good Evening';
-    } else {
-      session = 'Good Night';
-    }
-    return session;
-  }
-
-  String getImageSession() {
-    String imageUrl = '';
-
-    int hour = DateTime.now().hour;
-
-    if (hour > 3 && hour < 12) {
-      imageUrl =
-          'https://drive.google.com/uc?id=1cE48IYRJQvtPcsod-xcfuhIsw9ebzWTi';
-    } else if (hour >= 12 && hour < 15) {
-      imageUrl =
-          'https://drive.google.com/uc?id=1yWcazbQVw1iIhPu5R0ouNONTEHf0vK5I';
-    } else if (hour >= 15 && hour <= 19) {
-      imageUrl =
-          'https://drive.google.com/uc?id=13BsjrU03ErBDAcgmXbgXHHH2tKJBKMe8';
-    } else {
-      imageUrl =
-          'https://drive.google.com/uc?id=1lRWBEEfnHPfeMejG-mD4NUYPmMOHIxfk';
-    }
-
-    return imageUrl;
-  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final String userName = DataSharedPreferences.getTitle();
+    final TimeSession timeSession = Get.find<TimeSession>();
+
+    String getImageSession() {
+      String imageUrl = '';
+
+      int hour = DateTime.now().hour;
+
+      if (hour > 3 && hour < 12) {
+        imageUrl =
+            'https://drive.google.com/uc?id=1cE48IYRJQvtPcsod-xcfuhIsw9ebzWTi';
+      } else if (hour >= 12 && hour < 15) {
+        imageUrl =
+            'https://drive.google.com/uc?id=1yWcazbQVw1iIhPu5R0ouNONTEHf0vK5I';
+      } else if (hour >= 15 && hour <= 19) {
+        imageUrl =
+            'https://drive.google.com/uc?id=13BsjrU03ErBDAcgmXbgXHHH2tKJBKMe8';
+      } else {
+        imageUrl =
+            'https://drive.google.com/uc?id=1lRWBEEfnHPfeMejG-mD4NUYPmMOHIxfk';
+      }
+
+      return imageUrl;
+    }
 
     return NestedScrollView(
       floatHeaderSlivers: true,
@@ -76,28 +60,7 @@ class PlayScreen extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 180.0,
             backgroundColor: Colors.white,
-            leading: IconButton(
-              onPressed: () => Scaffold.of(context).openDrawer(),
-              icon: MyShowCase(
-                showCaseKey: secondShowCaseKey,
-                title: 'Drawer',
-                desc: 'Here you can find other spesic menu',
-                child: Container(
-                  decoration: const BoxDecoration(boxShadow: [
-                    BoxShadow(
-                        color: Color.fromRGBO(255, 255, 255, 0.5),
-                        blurRadius: 15,
-                        spreadRadius: 5,
-                        offset: Offset(0, -3))
-                  ]),
-                  child: const Icon(
-                    Icons.filter_list,
-                    size: 32,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
+
             actions: [
               MyShowCase(
                 title: "Settings",
@@ -147,7 +110,7 @@ class PlayScreen extends StatelessWidget {
               ),
               titlePadding: const EdgeInsets.only(left: 54, bottom: 16),
               title: Text(
-                '${getTimeSession()}, ${userName.split(' ')[0]}',
+                '${timeSession.getTimeSession()}, ${userName.split(' ')[0]}',
                 style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.black,
