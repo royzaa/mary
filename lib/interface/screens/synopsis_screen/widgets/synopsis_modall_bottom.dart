@@ -36,8 +36,8 @@ class SynopsisModalBottom extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'My Wonderful City Vehicle',
                       style: TextStyle(
                         color: Colors.black,
@@ -45,14 +45,14 @@ class SynopsisModalBottom extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
                       '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit, tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit, quia.''',
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 18,
+                        fontSize: size.height < 600 ? 16 : 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

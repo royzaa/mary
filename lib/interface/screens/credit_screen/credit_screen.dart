@@ -54,52 +54,67 @@ class CreditScreen extends StatelessWidget {
                     children: [
                       Positioned(
                         left: 20,
-                        top: MediaQuery.of(context).padding.top + 16 + 30 + 20,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Thanks for hard work',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              textAlign: TextAlign.start,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              width: size.width * 0.7,
-                              child: const Text(
-                                'Your contributions give significant other in this project',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                        top: MediaQuery.of(context).padding.top + 16 + 30 + 15,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxHeight: size.height * 0.4,
+                            maxWidth: size.width,
+                          ),
+                          child: LayoutBuilder(
+                            builder: (context, constraint) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  height: constraint.maxHeight * 0.1,
+                                  child: const FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: Text(
+                                      'Thanks for hard work',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
                                 ),
-                                textAlign: TextAlign.start,
-                              ),
+                                SizedBox(
+                                  height: constraint.maxHeight * 0.15,
+                                  child: const FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      'Your contributions give significant\nother in this project',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+                                ),
+                                LottieBuilder.network(
+                                  'https://assets3.lottiefiles.com/packages/lf20_sk5h1kfn.json',
+                                  animate: true,
+                                  height: constraint.maxHeight * 0.65,
+                                  width: size.width * 0.3,
+                                  fit: BoxFit.cover,
+                                  alignment: Alignment.center,
+                                  frameBuilder:
+                                      (context, child, lottieCompotition) {
+                                    if (!(lottieCompotition == null)) {
+                                      return child;
+                                    }
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  },
+                                )
+                              ],
                             ),
-                            LottieBuilder.network(
-                              'https://assets3.lottiefiles.com/packages/lf20_sk5h1kfn.json',
-                              animate: true,
-                              height: size.height * 0.3,
-                              width: size.width * 0.3,
-                              fit: BoxFit.cover,
-                              alignment: Alignment.center,
-                              frameBuilder:
-                                  (context, child, lottieCompotition) {
-                                if (!(lottieCompotition == null)) {
-                                  return child;
-                                }
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              },
-                            )
-                          ],
+                          ),
                         ),
                       ),
                       const Positioned(
@@ -115,11 +130,8 @@ class CreditScreen extends StatelessWidget {
                             HapticFeedback.mediumImpact();
                             showModalBottomSheet(
                               context: context,
-                              backgroundColor: Colors.white,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(40),
-                                      topRight: Radius.circular(40))),
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
                               builder: (context) => const ReferencModalBottom(),
                             );
                           },

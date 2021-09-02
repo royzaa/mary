@@ -64,19 +64,38 @@ class DeveloperTeamIcon extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Name:',
-                style: TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                name,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
+              ListTile(
+                leading: imageUrl == ''
+                    ? Container(
+                        height: 80,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Theme.of(context).primaryColor),
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.grey[200],
+                          size: 36,
+                        ),
+                      )
+                    : Container(
+                        height: 80,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: NetworkImage(imageUrl),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                title: Text(
+                  name,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
                 ),
               ),
               const Divider(

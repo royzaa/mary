@@ -137,14 +137,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          index == 0
-                              ? onBoadringData[index].desc.replaceAll('!', name)
-                              : onBoadringData[index].desc,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
+                        Expanded(
+                          child: Text(
+                            index == 0
+                                ? onBoadringData[index]
+                                    .desc
+                                    .replaceAll('!', name)
+                                : onBoadringData[index].desc,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: size.height < 600 ? 14 : 16,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                         Row(
