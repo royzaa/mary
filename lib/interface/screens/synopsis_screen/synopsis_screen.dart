@@ -22,6 +22,7 @@ class _SynopsisScreenState extends State<SynopsisScreen>
   AnimationController? _animationController;
   AnimationController? _animationController_2;
   AnimationController? _bubbleController;
+  Animation? _bubbleAnimation;
 
   @override
   void initState() {
@@ -38,6 +39,10 @@ class _SynopsisScreenState extends State<SynopsisScreen>
       duration: const Duration(milliseconds: 2000),
     );
 
+    _bubbleAnimation = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _bubbleController!, curve: Curves.fastOutSlowIn),
+    );
+
     messages = 'Hi, are you calling me?';
 
     _bubbleController!.forward();
@@ -50,8 +55,12 @@ class _SynopsisScreenState extends State<SynopsisScreen>
 
     _bubbleController!.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Future.delayed(const Duration(milliseconds: 5000),
-            () => _bubbleController!.reset());
+        Future.delayed(
+          const Duration(milliseconds: 5000),
+          () => _bubbleController!.reverse().then(
+                (_) => _bubbleController!.reset(),
+              ),
+        );
       }
     });
     super.initState();
@@ -134,17 +143,23 @@ class _SynopsisScreenState extends State<SynopsisScreen>
                     height: size.width * 0.6,
                   ),
                   Positioned(
-                    top: -60,
+                    top: -40,
                     right: -20,
                     child: AnimatedBuilder(
-                      animation: _bubbleController!,
+                      animation: _bubbleAnimation!,
                       builder: (context, _) => Transform(
                         transform: Matrix4.identity()..rotateY(math.pi),
                         alignment: Alignment.center,
-                        child: Opacity(
-                          opacity: _bubbleController!.value,
-                          child: ChatBubble(
-                            message: message(),
+                        child: Transform.translate(
+                          offset: Offset(
+                            0,
+                            (-20 * _bubbleAnimation!.value).toDouble(),
+                          ),
+                          child: Opacity(
+                            opacity: _bubbleAnimation!.value,
+                            child: ChatBubble(
+                              message: message(),
+                            ),
                           ),
                         ),
                       ),
