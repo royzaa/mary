@@ -137,7 +137,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Expanded(
+                        Flexible(
                           child: Text(
                             index == 0
                                 ? onBoadringData[index]

@@ -5,13 +5,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:showcaseview/showcaseview.dart';
 
-import 'screens/credit_screen/credit_screen.dart';
+import './screens/credit_screen/credit_screen.dart';
 import './screens/synopsis_screen/synopsis_screen.dart';
 import './screens/play screen/play_screen.dart';
 import './widget/label_menu.dart';
 import './widget/my_show_case.dart';
 import '../services/shared_preferences.dart';
-import './main_screen.dart';
+import './widget/drawer.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -41,22 +41,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   void initState() {
     _pages = [
-      MainScreen(
-        child: const CreditScreen(),
-        secondShowCaseKey: _two,
-        isCreditScreen: true,
-      ),
-      MainScreen(
-        child: PlayScreen(
-          thirdShowCaseKey: _three,
-          fourthShowCaseKey: _four,
-        ),
+      const CreditScreen(),
+      PlayScreen(
+        thirdShowCaseKey: _three,
+        fourthShowCaseKey: _four,
         secondShowCaseKey: _two,
       ),
-      MainScreen(
-        child: const SynopsisScreen(),
-        secondShowCaseKey: _two,
-      ),
+      const SynopsisScreen(),
     ];
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -71,6 +62,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const MyDrawer(),
       backgroundColor: Colors.white,
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomAppBar(

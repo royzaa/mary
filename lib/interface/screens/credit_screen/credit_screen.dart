@@ -243,12 +243,24 @@ class CreditScreen extends StatelessWidget {
         ),
         Positioned(
           left: 56,
-          top: MediaQuery.of(context).padding.top + 16,
+          top: MediaQuery.of(context).padding.top + 12,
           child: Text(
             '${timeSession.getTimeSession()}, $userName',
             style: const TextStyle(
               color: Colors.black,
+              fontWeight: FontWeight.w500,
               fontSize: 18,
+            ),
+          ),
+        ),
+        Positioned(
+          top: MediaQuery.of(context).padding.top,
+          child: IconButton(
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            icon: const Icon(
+              Icons.filter_list,
+              size: 32,
+              color: Colors.black,
             ),
           ),
         ),

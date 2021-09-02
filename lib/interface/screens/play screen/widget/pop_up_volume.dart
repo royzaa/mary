@@ -8,8 +8,10 @@ class PopUpVolume extends StatelessWidget {
   const PopUpVolume({
     Key? key,
     this.isInCreditScreen = false,
+    this.iconColor = Colors.white,
   }) : super(key: key);
   final bool isInCreditScreen;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class PopUpVolume extends StatelessWidget {
               ? Colors.black
               : timeSession.isDay
                   ? Colors.black
-                  : Colors.white),
+                  : iconColor),
       itemBuilder: (context) => [
         PopupMenuItem(
           child: Padding(

@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -206,11 +207,12 @@ class _SynopsisScreenState extends State<SynopsisScreen>
           ),
           Positioned(
             left: 56,
-            top: MediaQuery.of(context).padding.top + 16,
+            top: MediaQuery.of(context).padding.top + 12,
             child: Text(
               '${timeSession.getTimeSession()}, $userName',
               style: TextStyle(
                 color: timeSession.isDay ? Colors.black : Colors.white,
+                fontWeight: FontWeight.w500,
                 fontSize: 18,
               ),
             ),
@@ -219,6 +221,17 @@ class _SynopsisScreenState extends State<SynopsisScreen>
             right: 0,
             top: MediaQuery.of(context).padding.top,
             child: const PopUpVolume(),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).padding.top,
+            child: IconButton(
+              onPressed: () => Scaffold.of(context).openDrawer(),
+              icon: Icon(
+                Icons.filter_list,
+                size: 32,
+                color: timeSession.isDay ? Colors.black : Colors.white,
+              ),
+            ),
           ),
           Positioned(
             height: size.height,
