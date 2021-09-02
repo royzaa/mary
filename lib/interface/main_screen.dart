@@ -10,11 +10,13 @@ import '../services/time_session.dart';
 class MainScreen extends StatefulWidget {
   final Widget child;
   final GlobalKey secondShowCaseKey;
+  final bool isCreditScreen;
 
   const MainScreen({
     Key? key,
     required this.child,
     required this.secondShowCaseKey,
+    this.isCreditScreen = false,
   }) : super(key: key);
 
   static MainScreenState? of(BuildContext context) =>
@@ -59,7 +61,7 @@ class MainScreenState extends State<MainScreen>
       onHorizontalDragStart: _onDragStart,
       onHorizontalDragUpdate: _onDragUpdate,
       onHorizontalDragEnd: _onDragEnd,
-      behavior: HitTestBehavior.deferToChild,
+      behavior: HitTestBehavior.opaque,
       child: AnimatedBuilder(
         animation: animationController,
         builder: (context, _) {
@@ -102,7 +104,11 @@ class MainScreenState extends State<MainScreen>
                       child: Icon(
                         Icons.filter_list,
                         size: 32,
-                        color: _timeSession.isDay ? Colors.black : Colors.white,
+                        color: widget.isCreditScreen
+                            ? Colors.black
+                            : _timeSession.isDay
+                                ? Colors.black
+                                : Colors.white,
                       ),
                     ),
                   ),

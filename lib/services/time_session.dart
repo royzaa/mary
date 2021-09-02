@@ -10,7 +10,7 @@ class TimeSession extends GetxController {
       session = 'Good Morning';
     } else if (hour >= 12 && hour < 15) {
       session = 'Good Afternoon';
-    } else if (hour >= 15 && hour <= 19) {
+    } else if (hour >= 15 && hour <= 18) {
       session = 'Good Evening';
     } else {
       session = 'Good Night';
@@ -25,7 +25,8 @@ class TimeSession extends GetxController {
   @override
   void onInit() {
     _isDay = getTimeSession() == 'Good Morning' ||
-        getTimeSession() == 'Good Afternoon';
+        getTimeSession() == 'Good Afternoon' ||
+        getTimeSession() == 'Good Evening';
     super.onInit();
   }
 }

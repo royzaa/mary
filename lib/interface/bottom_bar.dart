@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:showcaseview/showcaseview.dart';
 
-import './screens/credit_screen.dart';
+import 'screens/credit_screen/credit_screen.dart';
 import './screens/synopsis_screen/synopsis_screen.dart';
 import './screens/play screen/play_screen.dart';
 import './widget/label_menu.dart';
@@ -44,6 +44,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       MainScreen(
         child: const CreditScreen(),
         secondShowCaseKey: _two,
+        isCreditScreen: true,
       ),
       MainScreen(
         child: PlayScreen(

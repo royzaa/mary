@@ -7,7 +7,9 @@ import '../../../../services/time_session.dart';
 class PopUpVolume extends StatelessWidget {
   const PopUpVolume({
     Key? key,
+    this.isInCreditScreen = false,
   }) : super(key: key);
+  final bool isInCreditScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,11 @@ class PopUpVolume extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       icon: Icon(Icons.tune_outlined,
-          color: timeSession.isDay ? Colors.black : Colors.white),
+          color: isInCreditScreen
+              ? Colors.black
+              : timeSession.isDay
+                  ? Colors.black
+                  : Colors.white),
       itemBuilder: (context) => [
         PopupMenuItem(
           child: Padding(

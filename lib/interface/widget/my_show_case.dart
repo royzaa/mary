@@ -30,6 +30,11 @@ class MyShowCase extends StatelessWidget {
         fontSize: 14,
         color: Colors.white,
       ),
+      descTextStyle: const TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 14,
+        color: Colors.white,
+      ),
       child: child,
     );
   }

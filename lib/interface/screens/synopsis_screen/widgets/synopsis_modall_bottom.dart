@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './start_learning_button.dart';
+
 class SynopsisModalBottom extends StatelessWidget {
   const SynopsisModalBottom({Key? key}) : super(key: key);
 
@@ -50,7 +52,7 @@ class SynopsisModalBottom extends StatelessWidget {
                       '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit, tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit, quia.''',
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 14,
+                        fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -58,53 +60,10 @@ class SynopsisModalBottom extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
+            const Positioned(
               left: 20,
               top: -30,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  primary: const Color.fromRGBO(
-                    255,
-                    135,
-                    127,
-                    1,
-                  ),
-                  shadowColor: const Color.fromRGBO(
-                    255,
-                    135,
-                    127,
-                    0.25,
-                  ),
-                  elevation: 20,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 25,
-                    vertical: 15,
-                  ),
-                ),
-                child: Row(
-                  children: const [
-                    Text(
-                      'Start learning',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
-              ),
+              child: StartLearningButton(),
             )
           ],
         ),

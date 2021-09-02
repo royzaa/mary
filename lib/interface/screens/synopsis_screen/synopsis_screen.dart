@@ -9,44 +9,19 @@ import '../play screen/widget/pop_up_volume.dart';
 import './widgets/synopsis_modall_bottom.dart';
 import '../../../services/time_session.dart';
 
-class SynopsisScreen extends StatefulWidget {
+class SynopsisScreen extends StatelessWidget {
   const SynopsisScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SynopsisScreen> createState() => _SynopsisScreenState();
-}
-
-class _SynopsisScreenState extends State<SynopsisScreen> {
-  final TimeSession _timeSession = Get.find<TimeSession>();
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      // showModalBottomSheet(
-      //   context: context,
-      //   isScrollControlled: true,
-      //   enableDrag: true,
-      //   backgroundColor: Colors.transparent,
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.only(
-      //       topLeft: Radius.circular(60),
-      //     ),
-      //   ),
-      //   clipBehavior: Clip.none,
-      //   builder: (contex) => const SynopsisModalBottom(),
-      // );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     final String userName = DataSharedPreferences.getTitle();
+    final TimeSession timeSession = Get.find<TimeSession>();
 
     Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
         LottieBuilder.network(
-          _timeSession.isDay
+          timeSession.isDay
               ? 'https://assets1.lottiefiles.com/packages/lf20_boJRmE.json'
               : 'https://assets9.lottiefiles.com/packages/lf20_HlhzUG.json',
           animate: true,
@@ -81,10 +56,10 @@ class _SynopsisScreenState extends State<SynopsisScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Synopsis',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: timeSession.isDay ? Colors.black : Colors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: 28,
                 ),
@@ -94,10 +69,10 @@ class _SynopsisScreenState extends State<SynopsisScreen> {
               ),
               SizedBox(
                 width: size.width * 0.38,
-                child: const Text(
+                child: Text(
                   'Let\'s read this beautiful synopsis for understanding more about our topic',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: timeSession.isDay ? Colors.black : Colors.white,
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
                   ),
@@ -112,23 +87,23 @@ class _SynopsisScreenState extends State<SynopsisScreen> {
           left: 56,
           top: MediaQuery.of(context).padding.top + 16,
           child: Text(
-            '${_timeSession.getTimeSession()}, $userName',
+            '${timeSession.getTimeSession()}, $userName',
             style: TextStyle(
-              color: _timeSession.isDay ? Colors.black : Colors.white,
+              color: timeSession.isDay ? Colors.black : Colors.white,
               fontSize: 18,
             ),
           ),
+        ),
+        Positioned(
+          right: 0,
+          top: MediaQuery.of(context).padding.top,
+          child: const PopUpVolume(),
         ),
         Positioned(
           height: size.height,
           width: size.width,
           bottom: 0,
           child: const SynopsisModalBottom(),
-        ),
-        Positioned(
-          right: 0,
-          top: MediaQuery.of(context).padding.top,
-          child: const PopUpVolume(),
         ),
       ],
     );
