@@ -70,6 +70,7 @@ class _SynopsisScreenState extends State<SynopsisScreen>
   void dispose() {
     _animationController!.dispose();
     _animationController_2!.dispose();
+    _bubbleController!.dispose();
     super.dispose();
   }
 
