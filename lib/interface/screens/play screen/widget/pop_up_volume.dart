@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../services/volume_controller.dart';
 import '../../../../services/time_session.dart';
+import '../../../../services/audio_player_controller.dart';
 
 class PopUpVolume extends StatelessWidget {
   const PopUpVolume({
@@ -17,6 +18,8 @@ class PopUpVolume extends StatelessWidget {
   Widget build(BuildContext context) {
     final soundController = Get.put(SoundController());
     final TimeSession timeSession = Get.find<TimeSession>();
+    final AudioPlayerController audioPlayerController =
+        Get.put(AudioPlayerController());
 
     RxDouble val = soundController.volume;
     return PopupMenuButton(
@@ -58,6 +61,11 @@ class PopUpVolume extends StatelessWidget {
                           onChanged: (value) {
                             soundController.volumeController.setVolume(value);
                             debugPrint('value: ${val.value}');
+                            if (value == 0) {
+                              audioPlayerController.pause();
+                            } else {
+                              audioPlayerController.resume();
+                            }
                           },
                         ),
                       ),

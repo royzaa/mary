@@ -33,11 +33,11 @@ class _SynopsisScreenState extends State<SynopsisScreen>
     );
     _animationController_2 = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 20),
+      duration: const Duration(seconds: 25),
     );
     _bubbleController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 1200),
     );
 
     _bubbleAnimation = Tween(begin: 0.0, end: 1.0).animate(
@@ -57,7 +57,9 @@ class _SynopsisScreenState extends State<SynopsisScreen>
     _bubbleController!.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         Future.delayed(
-          const Duration(milliseconds: 5000),
+          Duration(
+              milliseconds:
+                  messages == 'Hi, are you calling me?' ? 2500 : 5000),
           () => _bubbleController!.reverse().then(
                 (_) => _bubbleController!.reset(),
               ),
@@ -105,13 +107,14 @@ class _SynopsisScreenState extends State<SynopsisScreen>
       onTap: forwardAnimation,
       child: Stack(
         children: [
+          // lottie background
+
           LottieBuilder.network(
             timeSession.isDay
                 ? 'https://assets1.lottiefiles.com/packages/lf20_boJRmE.json'
                 : 'https://assets9.lottiefiles.com/packages/lf20_HlhzUG.json',
             controller: _animationController_2,
             onLoaded: (_) {
-              _animationController_2!.forward();
               _animationController_2!.repeat();
             },
             fit: BoxFit.cover,
@@ -126,6 +129,8 @@ class _SynopsisScreenState extends State<SynopsisScreen>
               );
             },
           ),
+          // lottie girl
+
           Positioned(
             right: -40,
             bottom: size.height * 0.35,
@@ -144,8 +149,10 @@ class _SynopsisScreenState extends State<SynopsisScreen>
                     fit: BoxFit.cover,
                     height: size.width * 0.6,
                   ),
+                  // bubble dialog
+
                   Positioned(
-                    top: -40,
+                    top: -20,
                     right: -20,
                     child: AnimatedBuilder(
                       animation: _bubbleAnimation!,
@@ -155,12 +162,15 @@ class _SynopsisScreenState extends State<SynopsisScreen>
                         child: Transform.translate(
                           offset: Offset(
                             0,
-                            (-20 * _bubbleAnimation!.value).toDouble(),
+                            (-40 * _bubbleAnimation!.value).toDouble(),
                           ),
-                          child: Opacity(
-                            opacity: _bubbleAnimation!.value,
-                            child: ChatBubble(
-                              message: message(),
+                          child: Transform.scale(
+                            scale: 0.35 + (_bubbleAnimation!.value * 0.65),
+                            child: Opacity(
+                              opacity: _bubbleAnimation!.value,
+                              child: ChatBubble(
+                                message: message(),
+                              ),
                             ),
                           ),
                         ),
@@ -205,6 +215,8 @@ class _SynopsisScreenState extends State<SynopsisScreen>
               ],
             ),
           ),
+          // appbar
+
           Positioned(
             left: 56,
             top: MediaQuery.of(context).padding.top + 12,
@@ -233,6 +245,8 @@ class _SynopsisScreenState extends State<SynopsisScreen>
               ),
             ),
           ),
+          // bottom sheet synopsis
+
           Positioned(
             height: size.height,
             width: size.width,
@@ -240,9 +254,7 @@ class _SynopsisScreenState extends State<SynopsisScreen>
             child: NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) {
                 if (scrollNotification is ScrollStartNotification) {
-                  _animationController!
-                      .forward()
-                      .then((_) => _animationController!.reset());
+                  _animationController!.forward();
                   setState(() {
                     startScrolled = true;
                   });

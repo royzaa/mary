@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -12,6 +11,7 @@ import '../synopsis_screen/widgets/start_learning_button.dart';
 import '../../../data/developer_data.dart';
 import './widgets/developer_team_icon.dart';
 import './widgets/reference_modal_bottom.dart';
+import './widgets/attribution.dart';
 
 class CreditScreen extends StatelessWidget {
   const CreditScreen({Key? key}) : super(key: key);
@@ -52,6 +52,8 @@ class CreditScreen extends StatelessWidget {
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
+                      // container: lottie, title, and subtitle
+
                       Positioned(
                         left: 20,
                         top: MediaQuery.of(context).padding.top + 16 + 30 + 15,
@@ -117,11 +119,15 @@ class CreditScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      // start learning button
+
                       const Positioned(
                         bottom: -25,
                         left: 20,
                         child: StartLearningButton(),
                       ),
+                      // modal bottom button
+
                       Positioned(
                         bottom: -25,
                         right: 40,
@@ -182,6 +188,8 @@ class CreditScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
+                // developer icon
+
                 SizedBox(
                   width: size.width,
                   height: 80,
@@ -216,31 +224,27 @@ class CreditScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Center(
-                  child: SvgPicture.network(
-                    'https://drive.google.com/uc?id=16VEIhLUl9S9jMQr2DFr1YjD2JmN6LkcE',
-                    width: size.width * 0.8,
-                  ),
+                const Attribution(
+                  brandName: 'Royalty Free Music from Bensound',
+                  logoUrl:
+                      'https://drive.google.com/uc?id=1zJRJ1iK5xDTeFgojbzsBe1Gz0wc0ifjM',
                 ),
-                const Center(
-                  child: Text(
-                    'Oops no attribution yet',
-                    style: TextStyle(
-                      color: Colors.purple,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                )
+                const SizedBox(
+                  height: 30,
+                ),
               ],
             ),
           ),
         ),
+
+        // white containter as appbar to overlap lottie
         Container(
           color: Colors.white,
           width: size.width,
           height: MediaQuery.of(context).padding.top + 16 + 30 + 5,
         ),
+
+        // greatings + name in appbar
         Positioned(
           left: 56,
           top: MediaQuery.of(context).padding.top + 12,
@@ -253,6 +257,8 @@ class CreditScreen extends StatelessWidget {
             ),
           ),
         ),
+        // app bar icon
+
         Positioned(
           top: MediaQuery.of(context).padding.top,
           child: IconButton(
