@@ -16,18 +16,18 @@ class AudioPlayerController extends GetxController {
   final musicUrl =
       'https://drive.google.com/uc?id=1tZbpXNFuFkQzqy4v3UhwiObAYjeZhLqq';
 
-  Future<String> _localPath() async {
-    String? musicLocalPath;
+  Future<String> _fileLocation() async {
+    String? musicPath;
     final localDirectory = await getApplicationDocumentsDirectory();
     final musicDirectory = Directory('${localDirectory.path}/music');
-    if (await musicDirectory.exists()) {
-      musicLocalPath = musicDirectory.path;
+    File file = File(musicDirectory.path + musicFileName);
+    if (await musicDirectory.exists() && await file.exists()) {
+      musicPath = musicDirectory.path + musicFileName;
     } else {
-      musicDirectory.create(recursive: true);
-      musicLocalPath = musicDirectory.path;
+      musicPath = musicUrl;
     }
 
-    return musicLocalPath;
+    return musicPath;
   }
 
   String? _musicPath;
@@ -42,8 +42,8 @@ class AudioPlayerController extends GetxController {
         _audioPlayer!.onAudioPositionChanged.listen((duration) {
       _position = duration;
     });
-    _localPath().then((value) {
-      _musicPath = value + musicFileName;
+    _fileLocation().then((value) {
+      _musicPath = value;
       play();
     });
 
@@ -67,7 +67,7 @@ class AudioPlayerController extends GetxController {
 
     await _audioPlayer!.play(
       _musicPath!,
-      isLocal: true,
+      isLocal: _musicPath!.contains('https') ? false : true,
       position: playPosition,
       stayAwake: true,
     );

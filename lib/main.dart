@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ void writeMusicinLocal(String dirApp) async {
       var response = await request.close();
 
       if (response.statusCode == 200) {
-        var bytes = await consolidateHttpClientResponseBytes(response);
+        Uint8List bytes = await consolidateHttpClientResponseBytes(response);
         await file.writeAsBytes(bytes);
         debugPrint('writing success');
       } else {
@@ -63,7 +64,7 @@ void writeMusicinLocal(String dirApp) async {
       }
     }
   } catch (e) {
-    debugPrint('error to writing file:' + e.toString());
+    debugPrint('error when writing file:' + e.toString());
   }
 }
 
