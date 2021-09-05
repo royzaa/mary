@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 import '../play screen/widget/pop_up_volume.dart';
 import '../../../services/time_session.dart';
@@ -12,6 +12,7 @@ import '../../../data/developer_data.dart';
 import './widgets/developer_team_icon.dart';
 import './widgets/reference_modal_bottom.dart';
 import './widgets/attribution.dart';
+import '../../widget/cached_network_lottie.dart';
 
 class CreditScreen extends StatelessWidget {
   const CreditScreen({Key? key}) : super(key: key);
@@ -21,6 +22,9 @@ class CreditScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     final TimeSession timeSession = Get.find<TimeSession>();
     final String userName = DataSharedPreferences.getTitle();
+
+    const String lottieUrl =
+        'https://assets3.lottiefiles.com/packages/lf20_sk5h1kfn.json';
 
     return Stack(
       children: [
@@ -97,23 +101,45 @@ class CreditScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                LottieBuilder.network(
-                                  'https://assets3.lottiefiles.com/packages/lf20_sk5h1kfn.json',
-                                  animate: true,
-                                  height: constraint.maxHeight * 0.65,
-                                  width: size.width * 0.3,
-                                  fit: BoxFit.cover,
-                                  alignment: Alignment.center,
-                                  frameBuilder:
-                                      (context, child, lottieCompotition) {
-                                    if (!(lottieCompotition == null)) {
-                                      return child;
-                                    }
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  },
-                                )
+                                CachedNetworkLottie(
+                                    lottieUrl: lottieUrl,
+                                    height: constraint.maxHeight * 0.65,
+                                    width: size.width * 0.3),
+                                // cachedLottieStatus
+                                //     ? LottieBuilder.file(
+                                //         file,
+                                //         animate: true,
+                                //         height: constraint.maxHeight * 0.65,
+                                //         width: size.width * 0.3,
+                                //         fit: BoxFit.cover,
+                                //         alignment: Alignment.center,
+                                //         frameBuilder: (context, child,
+                                //             lottieCompotition) {
+                                //           if (!(lottieCompotition == null)) {
+                                //             return child;
+                                //           }
+                                //           return const Center(
+                                //             child: CircularProgressIndicator(),
+                                //           );
+                                //         },
+                                //       )
+                                //     : LottieBuilder.network(
+                                //         lottieUrl,
+                                //         animate: true,
+                                //         height: constraint.maxHeight * 0.65,
+                                //         width: size.width * 0.3,
+                                //         fit: BoxFit.cover,
+                                //         alignment: Alignment.center,
+                                //         frameBuilder: (context, child,
+                                //             lottieCompotition) {
+                                //           if (!(lottieCompotition == null)) {
+                                //             return child;
+                                //           }
+                                //           return const Center(
+                                //             child: CircularProgressIndicator(),
+                                //           );
+                                //         },
+                                //       )
                               ],
                             ),
                           ),

@@ -22,7 +22,7 @@ class AudioPlayerController extends GetxController {
     final musicDirectory = Directory('${localDirectory.path}/music');
     File file = File(musicDirectory.path + musicFileName);
     if (await musicDirectory.exists() && await file.exists()) {
-      musicPath = musicDirectory.path + musicFileName;
+      musicPath = file.path;
     } else {
       musicPath = musicUrl;
     }
@@ -48,7 +48,7 @@ class AudioPlayerController extends GetxController {
     });
 
     _audioPlayer!.onPlayerCompletion.listen((_) {
-      debugPrint('music compelte');
+      debugPrint('music complete');
       resume();
     });
 

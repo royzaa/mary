@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:path_provider/path_provider.dart';
@@ -12,6 +13,8 @@ import 'package:path_provider/path_provider.dart';
 import './interface/bottom_bar.dart';
 import './interface/screens/onboarding/onboarding_screen.dart';
 import './services/shared_preferences.dart';
+import './services/my_cache_manager.dart';
+import './services/time_session.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,6 +77,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.put(MyCacheManager());
+    Get.put(TimeSession());
+    final MyCacheManager _myCacheManager = Get.find<MyCacheManager>();
+
+    Future forCache() async {
+      await _myCacheManager.cacheForJpg(
+          'https://drive.google.com/uc?id=1FoA5L4NfOUjfJGbsaYcmOMoOm6BEQeEi');
+    }
+
+    forCache();
+
     return MaterialApp(
       title: 'MARY',
       theme: ThemeData(
@@ -98,7 +112,7 @@ class MyApp extends StatelessWidget {
 }
 
 Widget homeController() {
-  late Widget home;
+  Widget? home;
   if (DataSharedPreferences.getTitle() == '') {
     home = const OnBoardingScreen();
   } else if (DataSharedPreferences.getFinishShowCase()!) {
@@ -110,5 +124,5 @@ Widget homeController() {
       ),
     );
   }
-  return home;
+  return home!;
 }

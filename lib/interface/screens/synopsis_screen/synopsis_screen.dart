@@ -1,15 +1,17 @@
 import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../../services/shared_preferences.dart';
 import '../play screen/widget/pop_up_volume.dart';
 import './widgets/synopsis_modall_bottom.dart';
 import '../../../services/time_session.dart';
 import './widgets/chat_bubble.dart';
+import '../../widget/cached_network_lottie.dart';
 
 class SynopsisScreen extends StatefulWidget {
   const SynopsisScreen({Key? key}) : super(key: key);
@@ -24,6 +26,14 @@ class _SynopsisScreenState extends State<SynopsisScreen>
   AnimationController? _animationController_2;
   AnimationController? _bubbleController;
   Animation? _bubbleAnimation;
+
+  final List<String> _lottieDayNight = [
+    'https://assets1.lottiefiles.com/packages/lf20_boJRmE.json',
+    'https://assets9.lottiefiles.com/packages/lf20_HlhzUG.json'
+  ];
+
+  final String _lottieGirl =
+      'https://assets7.lottiefiles.com/private_files/lf30_e6aaw5jt.json';
 
   @override
   void initState() {
@@ -59,7 +69,7 @@ class _SynopsisScreenState extends State<SynopsisScreen>
         Future.delayed(
           Duration(
               milliseconds:
-                  messages == 'Hi, are you calling me?' ? 2500 : 5000),
+                  messages == 'Hi, are you calling me?' ? 2500 : 4000),
           () => _bubbleController!.reverse().then(
                 (_) => _bubbleController!.reset(),
               ),
@@ -103,175 +113,159 @@ class _SynopsisScreenState extends State<SynopsisScreen>
     final TimeSession timeSession = Get.find<TimeSession>();
 
     Size size = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTap: forwardAnimation,
-      child: Stack(
-        children: [
-          // lottie background
+    return Stack(
+      children: [
+        CachedNetworkLottie(
+          lottieUrl:
+              timeSession.isDay ? _lottieDayNight[0] : _lottieDayNight[1],
+          height: size.height,
+          width: size.width,
+          controller: _animationController_2,
+          onLoad: (_) {
+            _animationController_2!.repeat();
+          },
+        ),
 
-          LottieBuilder.network(
-            timeSession.isDay
-                ? 'https://assets1.lottiefiles.com/packages/lf20_boJRmE.json'
-                : 'https://assets9.lottiefiles.com/packages/lf20_HlhzUG.json',
-            controller: _animationController_2,
-            onLoaded: (_) {
-              _animationController_2!.repeat();
-            },
-            fit: BoxFit.cover,
-            width: size.width,
-            height: size.height,
-            frameBuilder: (context, child, composition) {
-              if (!(composition == null)) {
-                return child;
-              }
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
-          ),
-          // lottie girl
-
-          Positioned(
-            right: -40,
-            bottom: size.height * 0.35,
-            child: Transform(
-              transform: Matrix4.identity()..rotateY(math.pi),
-              alignment: Alignment.center,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Lottie.network(
-                    'https://assets7.lottiefiles.com/private_files/lf30_e6aaw5jt.json',
+        Positioned(
+          right: -40,
+          bottom: size.height * 0.35,
+          child: Transform(
+            transform: Matrix4.identity()..rotateY(math.pi),
+            alignment: Alignment.center,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                GestureDetector(
+                  onTap: forwardAnimation,
+                  child: CachedNetworkLottie(
+                    lottieUrl: _lottieGirl,
+                    height: size.width * 0.6,
+                    width: size.width * 0.6,
                     controller: _animationController,
-                    onLoaded: (compositions) {
+                    onLoad: (compositions) {
                       _animationController!.forward();
                     },
-                    fit: BoxFit.cover,
-                    height: size.width * 0.6,
                   ),
-                  // bubble dialog
-
-                  Positioned(
-                    top: -20,
-                    right: -20,
-                    child: AnimatedBuilder(
-                      animation: _bubbleAnimation!,
-                      builder: (context, _) => Transform(
-                        transform: Matrix4.identity()..rotateY(math.pi),
-                        alignment: Alignment.center,
-                        child: Transform.translate(
-                          offset: Offset(
-                            0,
-                            (-40 * _bubbleAnimation!.value).toDouble(),
-                          ),
-                          child: Transform.scale(
-                            scale: 0.35 + (_bubbleAnimation!.value * 0.65),
-                            child: Opacity(
-                              opacity: _bubbleAnimation!.value,
-                              child: ChatBubble(
-                                message: message(),
-                              ),
+                ),
+                Positioned(
+                  top: -20,
+                  right: -20,
+                  child: AnimatedBuilder(
+                    animation: _bubbleAnimation!,
+                    builder: (context, _) => Transform(
+                      transform: Matrix4.identity()..rotateY(math.pi),
+                      alignment: Alignment.center,
+                      child: Transform.translate(
+                        offset: Offset(
+                          0,
+                          (-40 * _bubbleAnimation!.value).toDouble(),
+                        ),
+                        child: Transform.scale(
+                          scale: 0.35 + (_bubbleAnimation!.value * 0.65),
+                          child: Opacity(
+                            opacity: _bubbleAnimation!.value,
+                            child: ChatBubble(
+                              message: message(),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            left: 20,
-            top: size.height < 600 ? size.height * 0.18 : size.height * 0.2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Synopsis',
-                  style: TextStyle(
-                    color: timeSession.isDay ? Colors.black : Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 28,
                   ),
-                ),
-                SizedBox(
-                  height: size.height < 600 ? 20 : 30,
-                ),
-                SizedBox(
-                  width:
-                      size.height < 600 ? size.width * 0.38 : size.width * 0.45,
-                  child: Text(
-                    'Let\'s read this beautiful synopsis for understanding more about our topic',
-                    style: TextStyle(
-                      color: timeSession.isDay ? Colors.black : Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: size.height < 600 ? 14 : 18,
-                    ),
-                    maxLines: 5,
-                    softWrap: true,
-                  ),
-                ),
+                )
               ],
             ),
           ),
-          // appbar
+        ),
+        Positioned(
+          left: 20,
+          top: size.height < 600 ? size.height * 0.18 : size.height * 0.2,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Synopsis',
+                style: TextStyle(
+                  color: timeSession.isDay ? Colors.black : Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 28,
+                ),
+              ),
+              SizedBox(
+                height: size.height < 600 ? 20 : 30,
+              ),
+              SizedBox(
+                width:
+                    size.height < 600 ? size.width * 0.38 : size.width * 0.45,
+                child: Text(
+                  'Let\'s read this beautiful synopsis for understanding more about our topic',
+                  style: TextStyle(
+                    color: timeSession.isDay ? Colors.black : Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: size.height < 600 ? 14 : 18,
+                  ),
+                  maxLines: 5,
+                  softWrap: true,
+                ),
+              ),
+            ],
+          ),
+        ),
+        // appbar
 
-          Positioned(
-            left: 56,
-            top: MediaQuery.of(context).padding.top + 12,
-            child: Text(
-              '${timeSession.getTimeSession()}, $userName',
-              style: TextStyle(
-                color: timeSession.isDay ? Colors.black : Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 18,
-              ),
+        Positioned(
+          left: 56,
+          top: MediaQuery.of(context).padding.top + 12,
+          child: Text(
+            '${timeSession.getTimeSession()}, $userName',
+            style: TextStyle(
+              color: timeSession.isDay ? Colors.black : Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
             ),
           ),
-          Positioned(
-            right: 0,
-            top: MediaQuery.of(context).padding.top,
-            child: const PopUpVolume(),
-          ),
-          Positioned(
-            top: MediaQuery.of(context).padding.top,
-            child: IconButton(
-              onPressed: () => Scaffold.of(context).openDrawer(),
-              icon: Icon(
-                Icons.filter_list,
-                size: 32,
-                color: timeSession.isDay ? Colors.black : Colors.white,
-              ),
+        ),
+        Positioned(
+          right: 0,
+          top: MediaQuery.of(context).padding.top,
+          child: const PopUpVolume(),
+        ),
+        Positioned(
+          top: MediaQuery.of(context).padding.top,
+          child: IconButton(
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            icon: Icon(
+              Icons.filter_list,
+              size: 32,
+              color: timeSession.isDay ? Colors.black : Colors.white,
             ),
           ),
-          // bottom sheet synopsis
+        ),
+        // bottom sheet synopsis
 
-          Positioned(
-            height: size.height,
-            width: size.width,
-            bottom: 0,
-            child: NotificationListener<ScrollNotification>(
-              onNotification: (scrollNotification) {
-                if (scrollNotification is ScrollStartNotification) {
-                  _animationController!.forward();
-                  setState(() {
-                    startScrolled = true;
-                  });
-                  _bubbleController!
-                      .forward()
-                      .then((_) => startScrolled = false);
-                }
-                return true;
-              },
-              child: GestureDetector(
-                onTap: forwardAnimation,
-                child: const SynopsisModalBottom(),
-              ),
+        Positioned(
+          height: size.height,
+          width: size.width,
+          bottom: 0,
+          child: NotificationListener<ScrollNotification>(
+            onNotification: (scrollNotification) {
+              if (scrollNotification is ScrollStartNotification) {
+                _animationController!.forward();
+                setState(() {
+                  startScrolled = true;
+                });
+                _bubbleController!.reset();
+                _bubbleController!.forward().then((_) => startScrolled = false);
+              }
+              return true;
+            },
+            child: GestureDetector(
+              onTap: forwardAnimation,
+              child: const SynopsisModalBottom(),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

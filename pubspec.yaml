@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  audioplayers: ^0.19.1
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
@@ -37,12 +38,11 @@ dependencies:
   get: ^4.3.8
   google_fonts: ^2.1.0
   lottie: ^1.1.0
+  path_provider: ^2.0.3
   shared_preferences: ^2.0.7
   showcaseview: ^1.1.0
   url_launcher: ^6.0.9
   volume_controller: ^2.0.2
-  audioplayers: ^0.19.1
-  path_provider: ^2.0.3
 
 dev_dependencies:
   flutter_lints: ^1.0.0

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import './dialog_exit.dart';
+import './cached_image.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -26,38 +26,25 @@ class MyDrawer extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(
+              children: const [
+                SizedBox(
                   height: 30,
                 ),
-                Image.network(
-                  'https://drive.google.com/uc?id=1FoA5L4NfOUjfJGbsaYcmOMoOm6BEQeEi',
-                  height: 100,
-                  loadingBuilder: (_, child, loadingProgress) {
-                    if (loadingProgress == null) {
-                      return child;
-                    }
-                    return const Center(
-                      child: PlaceholderLines(
-                        count: 3,
-                        animate: true,
-                      ),
-                    );
-                  },
+                CachedImage(
+                  imageUrl:
+                      'https://drive.google.com/uc?id=1FoA5L4NfOUjfJGbsaYcmOMoOm6BEQeEi',
+                  height: 150,
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
-                const Text(
+                Text(
                   'MARY - My wonderful city vehicle',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
-                    fontSize: 12,
+                    fontSize: 14,
                   ),
-                ),
-                const SizedBox(
-                  height: 0,
                 ),
               ],
             ),

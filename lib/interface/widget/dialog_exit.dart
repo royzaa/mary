@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
+import '../../services/audio_player_controller.dart';
 
 class DialogExit extends StatelessWidget {
   const DialogExit({Key? key}) : super(key: key);
@@ -7,7 +10,7 @@ class DialogExit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    final audioPlayer = Get.find<AudioPlayerController>();
     double seriesWidth = size.width < 330 ? 130 : 160;
     return Dialog(
       insetAnimationCurve: Curves.easeIn,
@@ -49,7 +52,10 @@ class DialogExit extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  onPressed: () => SystemNavigator.pop(),
+                  onPressed: () {
+                    audioPlayer.dispose();
+                    SystemNavigator.pop();
+                  },
                   child: const Text(
                     'Yes',
                     style: TextStyle(

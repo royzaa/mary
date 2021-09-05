@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
 import 'package:get/get.dart';
 
 import './widget/pop_up_volume.dart';
@@ -10,6 +9,7 @@ import '../../../data/quizes.dart';
 import '../../widget/my_show_case.dart';
 import '../../../services/shared_preferences.dart';
 import '../../../services/time_session.dart';
+import '../../widget/cached_image.dart';
 
 class PlayScreen extends StatefulWidget {
   static const routeName = '/player-screen';
@@ -30,13 +30,26 @@ class PlayScreen extends StatefulWidget {
 
 class _PlayScreenState extends State<PlayScreen> {
   Color drawerColor = Colors.white;
-  final ScrollController _scrollController = ScrollController();
+  ScrollController? _scrollController;
+  TimeSession? _timeSession;
+
+  @override
+  void initState() {
+    _timeSession = Get.find<TimeSession>();
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final String userName = DataSharedPreferences.getTitle();
-    final TimeSession timeSession = Get.put(TimeSession());
+    final String _userName = DataSharedPreferences.getTitle();
 
     String getImageSession() {
       String imageUrl = '';
@@ -62,7 +75,7 @@ class _PlayScreenState extends State<PlayScreen> {
 
     return NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
-          if (_scrollController.position.pixels > 120) {
+          if (_scrollController!.position.pixels > 120) {
             setState(() {
               drawerColor = Colors.black;
             });
@@ -75,7 +88,7 @@ class _PlayScreenState extends State<PlayScreen> {
         },
         child: NestedScrollView(
           floatHeaderSlivers: true,
-          controller: _scrollController,
+          controller: _scrollController!,
           physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
@@ -91,7 +104,7 @@ class _PlayScreenState extends State<PlayScreen> {
                     child: Icon(
                       Icons.filter_list,
                       size: 32,
-                      color: timeSession.isDay ? Colors.black : drawerColor,
+                      color: _timeSession!.isDay ? Colors.black : drawerColor,
                     ),
                   ),
                 ),
@@ -119,20 +132,8 @@ class _PlayScreenState extends State<PlayScreen> {
                     alignment: Alignment.bottomCenter,
                     fit: StackFit.expand,
                     children: [
-                      Image.network(
-                        getImageSession(),
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
-                          return const Center(
-                            child: PlaceholderLines(
-                              count: 3,
-                              animate: true,
-                            ),
-                          );
-                        },
-                        fit: BoxFit.cover,
+                      CachedImage(
+                        imageUrl: getImageSession(),
                       ),
                       Container(
                         decoration: const BoxDecoration(
@@ -149,7 +150,7 @@ class _PlayScreenState extends State<PlayScreen> {
                   ),
                   titlePadding: const EdgeInsets.only(left: 54, bottom: 16),
                   title: Text(
-                    '${timeSession.getTimeSession()}, ${userName.split(' ')[0]}',
+                    '${_timeSession!.getTimeSession()}, ${_userName.split(' ')[0]}',
                     style: const TextStyle(
                         fontSize: 18.0,
                         color: Colors.black,
@@ -180,9 +181,9 @@ class _PlayScreenState extends State<PlayScreen> {
                   Text(
                     'Find menu you want to explore',
                     style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.grey[400]!.withOpacity(0.7)),
+                        color: Colors.grey[400]!.withOpacity(0.8)),
                   ),
                   SizedBox(
                     height: size.width < 330 ? 30 : 10,

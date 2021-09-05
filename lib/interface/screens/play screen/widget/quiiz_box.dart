@@ -1,8 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../../widget/cached_svg.dart';
+// import 'package:get/get.dart';
+
+// import '../../../../services/my_cache_manager.dart';
 
 class QuizBox extends StatelessWidget {
   const QuizBox({
@@ -20,7 +26,14 @@ class QuizBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
+    // final MyCacheManager myCacheManager = Get.find<MyCacheManager>();
+    // Future forCache() async {
+    //   await myCacheManager.cacheForSvg(imageUrl!);
+    // }
+
+    // forCache();
+
     return GestureDetector(
       onTap: () {
         if (isOpen!) {
@@ -63,14 +76,10 @@ class QuizBox extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15),
-                          child: SvgPicture.network(imageUrl!,
-                              width: size.width < 330 ? 80 : 110,
-                              fit: BoxFit.cover,
-                              placeholderBuilder: (context) => const Center(
-                                    child: PlaceholderLines(
-                                      count: 2,
-                                    ),
-                                  )),
+                          child: CachedSvg(
+                            svgUrl: imageUrl!,
+                            width: size.width < 330 ? 80 : 110,
+                          ),
                         ),
                         Text(
                           quizTitle!,

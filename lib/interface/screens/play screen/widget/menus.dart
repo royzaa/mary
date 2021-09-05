@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
-import 'package:flutter_svg/svg.dart';
 
-// import '../../ar_screen.dart';
+import '../../../widget/cached_svg.dart';
 
 class Menus extends StatefulWidget {
   const Menus({
@@ -17,7 +17,10 @@ class Menus extends StatefulWidget {
 }
 
 class _MenusState extends State<Menus> {
+  //  MyCacheManager? _myCacheManager;
   PageController? _pageController;
+  final ScrollController _scrollController1 = ScrollController();
+  final ScrollController _scrollController2 = ScrollController();
 
   int _selectedMenu = 0;
 
@@ -53,6 +56,33 @@ class _MenusState extends State<Menus> {
     });
   }
 
+  List<IconData> iconMenus = [
+    Icons.ballot_outlined,
+    Icons.auto_awesome,
+    Icons.camera_alt,
+    Icons.border_color_sharp,
+  ];
+
+  List<String> menusTitle = const [
+    'Learning Guide',
+    'Goal',
+    'Augmented Reality',
+    'Learning Enrichment'
+  ];
+
+  List<String> menusDescription = const [
+    'Get started to learn with our guide',
+    'Know your learning goal for better learning',
+    'Display city vechicle in real world',
+    'Learn and practice more'
+  ];
+
+  List<String> imageUrl = const [
+    'https://drive.google.com/uc?id=1rpqeO5WdnIPIQZ5-1N9D6O9oEelS8mq0',
+    'https://drive.google.com/uc?id=1BCjZ57grYVjc2-IoshXqlg_w6zr82Gf9',
+    'https://drive.google.com/uc?id=15B5_58TpJhR6RKuRMUvBRqrfx3Bswm80',
+    'https://drive.google.com/uc?id=1bfqnxYFwjfJS-PtCCqeQfP_Ae3BOEeN4'
+  ];
   @override
   void initState() {
     _pageController = PageController(initialPage: 0);
@@ -66,6 +96,8 @@ class _MenusState extends State<Menus> {
   @override
   void dispose() {
     _pageController!.dispose();
+    _scrollController1.dispose();
+    _scrollController2.dispose();
     super.dispose();
   }
 
@@ -75,34 +107,6 @@ class _MenusState extends State<Menus> {
 
   @override
   Widget build(BuildContext context) {
-    List<IconData> iconMenus = [
-      Icons.ballot_outlined,
-      Icons.auto_awesome,
-      Icons.camera_alt,
-      Icons.border_color_sharp,
-    ];
-
-    List<String> menusTitle = const [
-      'Learning Guide',
-      'Goal',
-      'Augmented Reality',
-      'Learning Enrichment'
-    ];
-
-    List<String> menusDescription = const [
-      'Get started to learn with our guide',
-      'Know your learning goal for better learning',
-      'Display city vechicle in real world',
-      'Learn and practice more'
-    ];
-
-    List<String> imageUrl = const [
-      'https://drive.google.com/uc?id=1rpqeO5WdnIPIQZ5-1N9D6O9oEelS8mq0',
-      'https://drive.google.com/uc?id=1BCjZ57grYVjc2-IoshXqlg_w6zr82Gf9',
-      'https://drive.google.com/uc?id=15B5_58TpJhR6RKuRMUvBRqrfx3Bswm80',
-      'https://drive.google.com/uc?id=1bfqnxYFwjfJS-PtCCqeQfP_Ae3BOEeN4'
-    ];
-
     final Size size = MediaQuery.of(context).size;
 
     return SizedBox(
@@ -117,7 +121,7 @@ class _MenusState extends State<Menus> {
               width: 72,
               height: 320,
               child: ListView.separated(
-                  controller: ScrollController(),
+                  controller: _scrollController1,
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   physics: const BouncingScrollPhysics(
@@ -172,7 +176,7 @@ class _MenusState extends State<Menus> {
             child: SizedBox(
               height: 358,
               child: SingleChildScrollView(
-                controller: ScrollController(),
+                controller: _scrollController2,
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -244,19 +248,8 @@ class _MenusState extends State<Menus> {
                                   height: 12,
                                 ),
                                 Flexible(
-                                  flex: 2,
-                                  child: SvgPicture.network(
-                                    imageUrl[index],
-                                    fit: BoxFit.cover,
-                                    placeholderBuilder: (context) =>
-                                        const Center(
-                                      child: PlaceholderLines(
-                                        count: 3,
-                                        animate: true,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                    flex: 2,
+                                    child: CachedSvg(svgUrl: imageUrl[index])),
                               ],
                             ),
                           ),

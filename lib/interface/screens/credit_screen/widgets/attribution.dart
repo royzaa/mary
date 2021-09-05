@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../widget/cached_image.dart';
+
 class Attribution extends StatelessWidget {
   const Attribution({Key? key, required this.brandName, required this.logoUrl})
       : super(key: key);
@@ -13,8 +15,8 @@ class Attribution extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Center(
-          child: Image.network(
-            logoUrl,
+          child: CachedImage(
+            imageUrl: logoUrl,
             width: size.width * 0.8,
           ),
         ),
