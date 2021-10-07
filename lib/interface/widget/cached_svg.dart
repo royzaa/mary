@@ -46,24 +46,24 @@ class _CachedSvgState extends State<CachedSvg> {
             fit: BoxFit.cover,
             height: widget.height,
             width: widget.width,
-            placeholderBuilder: (context) => const Center(
-              child: PlaceholderLines(
-                count: 3,
-                animate: true,
-              ),
-            ),
+            // placeholderBuilder: (context) => const Center(
+            //   child: PlaceholderLines(
+            //     count: 1,
+            //     animate: true,
+            //   ),
+            // ),
           )
         : SvgPicture.network(
             widget.svgUrl,
             fit: BoxFit.cover,
             height: widget.height,
             width: widget.width,
-            placeholderBuilder: (context) => const Center(
-              child: PlaceholderLines(
-                count: 3,
-                animate: true,
-              ),
-            ),
+            // placeholderBuilder: (context) => const Center(
+            //   child: PlaceholderLines(
+            //     count: 1,
+            //     animate: true,
+            //   ),
+            // ),
           );
   }
 }

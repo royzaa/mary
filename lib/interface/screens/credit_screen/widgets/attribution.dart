@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../widget/cached_image.dart';
 
@@ -20,15 +21,15 @@ class Attribution extends StatelessWidget {
             width: size.width * 0.8,
           ),
         ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: 20.h,
         ),
         Center(
           child: Text(
             brandName,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.grey,
-              fontSize: 18,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w600,
             ),
           ),

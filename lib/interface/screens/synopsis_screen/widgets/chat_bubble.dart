@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({Key? key, required this.message}) : super(key: key);
@@ -22,8 +23,8 @@ class ChatBubble extends StatelessWidget {
           width: size.width * 0.5,
           child: Text(
             message,
-            style: const TextStyle(
-              fontSize: 14,
+            style: TextStyle(
+              fontSize: 14.sp,
               color: Colors.black,
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w500,
@@ -31,7 +32,7 @@ class ChatBubble extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(right: 20),
+          padding: EdgeInsets.only(right: 20.w),
           child: Transform.rotate(
             angle: math.pi / 2,
             child: const Icon(

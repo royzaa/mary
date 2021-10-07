@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import './start_learning_button.dart';
 
@@ -13,10 +14,10 @@ class SynopsisModalBottom extends StatelessWidget {
       maxChildSize: 1,
       initialChildSize: 0.4,
       builder: (contex, controller) => Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(60),
+            topLeft: Radius.circular(60.r),
           ),
         ),
         child: Stack(
@@ -24,35 +25,35 @@ class SynopsisModalBottom extends StatelessWidget {
           children: [
             Container(
               width: size.width,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60),
+                  topLeft: Radius.circular(60.r),
                 ),
               ),
-              padding: const EdgeInsets.only(left: 20, top: 45, right: 40),
+              padding: EdgeInsets.only(left: 20.w, top: 45.h, right: 40.w),
               child: SingleChildScrollView(
                 controller: controller,
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'My Wonderful City Vehicle',
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 22,
+                        fontSize: 22.sp,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 20.h,
                     ),
                     Text(
                       '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit, tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit, quia.''',
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: size.height < 600 ? 16 : 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -60,10 +61,10 @@ class SynopsisModalBottom extends StatelessWidget {
                 ),
               ),
             ),
-            const Positioned(
-              left: 20,
-              top: -30,
-              child: StartLearningButton(),
+            Positioned(
+              left: 20.w,
+              top: -30.h,
+              child: const StartLearningButton(),
             )
           ],
         ),

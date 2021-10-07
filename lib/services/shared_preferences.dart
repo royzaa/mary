@@ -7,6 +7,8 @@ class DataSharedPreferences {
 
   static const _keyShowCase = 'case';
 
+  static const _keyFirstLaunchAR = 'AR';
+
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
 
@@ -23,4 +25,11 @@ class DataSharedPreferences {
 
   static bool? getFinishShowCase() =>
       _preferences.getBool(_keyShowCase) ?? false;
+
+  static Future setFirstLaunchAR(bool status) async {
+    await _preferences.setBool(_keyFirstLaunchAR, status);
+  }
+
+  static bool? getFirstLaunchAR() =>
+      _preferences.getBool(_keyFirstLaunchAR) ?? false;
 }

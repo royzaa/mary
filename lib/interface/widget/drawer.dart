@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import './dialog_exit.dart';
 import './cached_image.dart';
@@ -12,72 +13,73 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    double drawerWidth = size.width < 330 ? 280 : 310;
+    double drawerWidth = 310.w;
     return Container(
       width: drawerWidth,
       color: Colors.white,
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
             //height: 140,
             width: drawerWidth,
             color: Theme.of(context).primaryColor,
             alignment: Alignment.bottomCenter,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 SizedBox(
-                  height: 30,
+                  height: 30.h,
                 ),
                 CachedImage(
                   imageUrl:
                       'https://drive.google.com/uc?id=1FoA5L4NfOUjfJGbsaYcmOMoOm6BEQeEi',
-                  height: 150,
+                  height: 150.h,
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Text(
                   'MARY - My wonderful city vehicle',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 Container(
-                  width: drawerWidth - 40,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 5,
-                    horizontal: 12,
+                  width: drawerWidth - 40.w,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 5.h,
+                    horizontal: 12.w,
                   ),
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.r),
                   ),
                   child: ListTile(
-                    leading: const Icon(
+                    leading: Icon(
                       Icons.open_in_browser,
                       color: Colors.white,
+                      size: 24.r,
                     ),
-                    title: const Text(
+                    title: Text(
                       'More apps',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp),
                     ),
                     onTap: () async {
                       await canLaunch(
@@ -88,20 +90,21 @@ class MyDrawer extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(
-                  height: 4,
+                SizedBox(
+                  height: 4.h,
                 ),
                 ListTile(
-                  leading: const Icon(
+                  leading: Icon(
                     Icons.logout,
                     color: Colors.grey,
+                    size: 24.r,
                   ),
-                  title: const Text(
+                  title: Text(
                     'Exit',
                     style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w600,
-                    ),
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14.sp),
                   ),
                   onTap: () {
                     HapticFeedback.mediumImpact();

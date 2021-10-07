@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../services/shared_preferences.dart';
 
-final formKey = GlobalKey<FormState>();
-
-class WelcomeDialog extends StatelessWidget {
+class WelcomeDialog extends StatefulWidget {
   const WelcomeDialog({Key? key}) : super(key: key);
 
+  @override
+  State<WelcomeDialog> createState() => _WelcomeDialogState();
+}
+
+class _WelcomeDialogState extends State<WelcomeDialog> {
+  final formKey = GlobalKey<FormState>();
   bool validate() {
     bool status = false;
     final form = formKey.currentState;
@@ -23,35 +28,38 @@ class WelcomeDialog extends StatelessWidget {
     return status;
   }
 
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
     Size size = MediaQuery.of(context).size;
-    return Dialog(
-      insetAnimationCurve: Curves.easeInCirc,
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 30,
-            vertical: 30,
-          ),
-          height: size.width < 330 ? size.height * 0.8 : size.height * 0.6,
-          // width: size.width * 0.7,
-          child: SizedBox(
+    return GestureDetector(
+      onTap: () {},
+      behavior: HitTestBehavior.opaque,
+      child: Dialog(
+        insetAnimationCurve: Curves.easeInCirc,
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.r),
+        ),
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 30.w,
+              vertical: 30.h,
+            ),
+            // width: size.width * 0.7,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  height: size.height * 0.15,
+                  height: size.height * 0.15.h,
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(25.r),
                   ),
-                  padding: const EdgeInsets.all(15),
+                  padding: EdgeInsets.all(15.r),
                   child: SvgPicture.network(
                     'https://drive.google.com/uc?id=1oRPlh_GlRFhR4FcT9i1jBhWsqF6-jXQz',
                     fit: BoxFit.cover,
@@ -63,22 +71,31 @@ class WelcomeDialog extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Text(
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
                   'Hi, what\'s your name?',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const Text(
+                SizedBox(
+                  height: 12.5.h,
+                ),
+                Text(
                   'Would you like to introduce your self to us? I am very happy to meet you',
                   maxLines: 2,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                   ),
+                ),
+                SizedBox(
+                  height: 15.h,
                 ),
                 Form(
                   key: formKey,
@@ -93,24 +110,28 @@ class WelcomeDialog extends StatelessWidget {
                     },
                     controller: controller,
                     cursorColor: Colors.black,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.person,
                         color: Colors.grey,
+                        size: 24.r,
                       ),
                       labelText: 'Your name',
-                      labelStyle: TextStyle(color: Colors.black),
+                      labelStyle: const TextStyle(color: Colors.black),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
-                      enabledBorder: UnderlineInputBorder(
+                      enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.black),
                       ),
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 25.h,
+                ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Theme.of(context).primaryColor,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
                   ),
                   onPressed: () {
                     if (validate()) {
@@ -119,27 +140,31 @@ class WelcomeDialog extends StatelessWidget {
                     }
                   },
                   child: SizedBox(
-                    width: size.width * 0.5,
-                    child: const Text(
+                    width: size.width * 0.5.w,
+                    child: Text(
                       'Let\'s go!',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
+                        fontSize: 14.r,
                       ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 8.h,
                 ),
                 TextButton(
                   onPressed: () {
                     SystemNavigator.pop();
                   },
-                  child: const Text(
+                  child: Text(
                     'Exit, I\'ll try later',
                     style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500,
-                    ),
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14.r),
                   ),
                 )
               ],

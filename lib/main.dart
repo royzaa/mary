@@ -5,23 +5,22 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:showcaseview/showcaseview.dart';
-import 'package:path_provider/path_provider.dart';
 
 import './interface/bottom_bar.dart';
 import './interface/screens/onboarding/onboarding_screen.dart';
 import './services/shared_preferences.dart';
 import './services/my_cache_manager.dart';
 import './services/time_session.dart';
+import './services/audio_player_controller.dart';
+// import './services/unity_controller.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await Future.delayed(
-    const Duration(milliseconds: 750),
-  );
   await DataSharedPreferences.init();
   await _localPath().then((dirApp) async {
     await compute(writeMusicinLocal, dirApp);
@@ -32,8 +31,8 @@ Future main() async {
 
 Future<String> _localPath() async {
   String? musicLocalPath;
-  final localDirectory = await getApplicationDocumentsDirectory();
-  final musicDirectory = Directory('${localDirectory.path}/music');
+  final localDirectory = Directory.systemTemp.path;
+  final musicDirectory = Directory('$localDirectory/music');
   if (await musicDirectory.exists()) {
     musicLocalPath = musicDirectory.path;
   } else {
@@ -75,39 +74,38 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
+    Get.put(AudioPlayerController());
     Get.put(MyCacheManager());
     Get.put(TimeSession());
-    final MyCacheManager _myCacheManager = Get.find<MyCacheManager>();
+    // Get.put(UnityController());
 
-    Future forCache() async {
-      await _myCacheManager.cacheForJpg(
-          'https://drive.google.com/uc?id=1FoA5L4NfOUjfJGbsaYcmOMoOm6BEQeEi');
-    }
-
-    forCache();
-
-    return MaterialApp(
-      title: 'MARY',
-      theme: ThemeData(
-        primaryColor: const Color.fromRGBO(102, 117, 255, 1),
-        fontFamily: GoogleFonts.poppins().fontFamily,
-      ),
-      home: homeController(),
-      routes: {
-        BottomNavBar.routeName: (context) => ShowCaseWidget(
-              onFinish: () {
-                DataSharedPreferences.setFinishShowCase(true);
-              },
-              builder: Builder(
-                builder: (context) {
-                  return const BottomNavBar();
-                },
-              ),
-            )
-      },
-    );
+    return ScreenUtilInit(
+        designSize: const Size(360, 700),
+        builder: () {
+          return MaterialApp(
+            title: 'MARY',
+            theme: ThemeData(
+              primaryColor: const Color.fromRGBO(102, 117, 255, 1),
+              fontFamily: GoogleFonts.poppins().fontFamily,
+            ),
+            home: homeController(),
+            routes: {
+              BottomNavBar.routeName: (context) => ShowCaseWidget(
+                    onFinish: () {
+                      DataSharedPreferences.setFinishShowCase(true);
+                    },
+                    builder: Builder(
+                      builder: (context) {
+                        return const BottomNavBar();
+                      },
+                    ),
+                  )
+            },
+          );
+        });
   }
 }
 
@@ -123,6 +121,8 @@ Widget homeController() {
         },
       ),
     );
+  } else {
+    home = const OnBoardingScreen();
   }
-  return home!;
+  return home;
 }

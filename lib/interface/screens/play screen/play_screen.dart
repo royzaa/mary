@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import './widget/pop_up_volume.dart';
 import './widget/menus.dart';
@@ -48,7 +49,6 @@ class _PlayScreenState extends State<PlayScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     final String _userName = DataSharedPreferences.getTitle();
 
     String getImageSession() {
@@ -74,161 +74,164 @@ class _PlayScreenState extends State<PlayScreen> {
     }
 
     return NotificationListener<ScrollNotification>(
-        onNotification: (scrollNotification) {
-          if (_scrollController!.position.pixels > 120) {
-            setState(() {
-              drawerColor = Colors.black;
-            });
-          } else {
-            setState(() {
-              drawerColor = Colors.white;
-            });
-          }
-          return true;
-        },
-        child: NestedScrollView(
-          floatHeaderSlivers: true,
-          controller: _scrollController!,
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                leading: IconButton(
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                  icon: MyShowCase(
-                    showCaseKey: widget.secondShowCaseKey,
-                    title: 'Drawer',
-                    desc: 'Here you can find other specific menu',
-                    child: Icon(
-                      Icons.filter_list,
-                      size: 32,
-                      color: _timeSession!.isDay ? Colors.black : drawerColor,
-                    ),
+      onNotification: (scrollNotification) {
+        if (_scrollController!.position.pixels > 120) {
+          setState(() {
+            drawerColor = Colors.black;
+          });
+        } else {
+          setState(() {
+            drawerColor = Colors.white;
+          });
+        }
+        return true;
+      },
+      child: NestedScrollView(
+        floatHeaderSlivers: true,
+        controller: _scrollController!,
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              leading: IconButton(
+                onPressed: () => Scaffold.of(context).openDrawer(),
+                icon: MyShowCase(
+                  showCaseKey: widget.secondShowCaseKey,
+                  title: 'Drawer',
+                  desc: 'Here you can find other specific menu',
+                  child: Icon(
+                    Icons.filter_list,
+                    size: 32.r,
+                    color: _timeSession!.isDay ? Colors.black : drawerColor,
                   ),
                 ),
-                expandedHeight: 180.0,
-                backgroundColor: Colors.white,
-
-                actions: [
-                  MyShowCase(
-                    title: "Settings",
-                    desc: "Tap here to adjust app setting",
-                    showCaseKey: widget.thirdShowCaseKey,
-                    child: PopUpVolume(
-                      iconColor: drawerColor,
-                    ),
-                  ),
-                ],
-                iconTheme: const IconThemeData(color: Colors.black),
-                elevation: 0,
-                pinned: true,
-                //snap: true,
-                floating: true,
-                stretch: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Stack(
-                    alignment: Alignment.bottomCenter,
-                    fit: StackFit.expand,
-                    children: [
-                      CachedImage(
-                        imageUrl: getImageSession(),
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [
-                                Colors.white,
-                                Colors.transparent,
-                              ],
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter),
-                        ),
-                      ),
-                    ],
-                  ),
-                  titlePadding: const EdgeInsets.only(left: 54, bottom: 16),
-                  title: Text(
-                    '${_timeSession!.getTimeSession()}, ${_userName.split(' ')[0]}',
-                    style: const TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-              )
-            ];
-          },
-          body: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    'Select menu',
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'Find menu you want to explore',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey[400]!.withOpacity(0.8)),
-                  ),
-                  SizedBox(
-                    height: size.width < 330 ? 30 : 10,
-                  ),
-                  MyShowCase(
-                    title: 'Menu',
-                    desc: "You can select menu icon to start your learning",
-                    showCaseKey: widget.fourthShowCaseKey,
-                    child: const Menus(),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    'Quizes',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      QuizBox(
-                          isOpen: firstQuiz.isOpen,
-                          numQuiz: firstQuiz.quizNum,
-                          imageUrl: firstQuiz.imageUrl,
-                          quizTitle: firstQuiz.title),
-                      const SizedBox(
-                        width: 25,
-                      ),
-                      QuizBox(
-                        isOpen: secondQuiz.isOpen,
-                        numQuiz: secondQuiz.quizNum,
-                        imageUrl: secondQuiz.imageUrl,
-                        quizTitle: secondQuiz.title,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                ],
               ),
+              expandedHeight: 180.0.h,
+              backgroundColor: Colors.white,
+
+              actions: [
+                MyShowCase(
+                  title: "Settings",
+                  desc: "Tap here to adjust app setting",
+                  showCaseKey: widget.thirdShowCaseKey,
+                  child: PopUpVolume(
+                    iconColor: drawerColor,
+                  ),
+                ),
+              ],
+              iconTheme: const IconThemeData(color: Colors.black),
+              elevation: 0,
+              pinned: true,
+              //snap: true,
+              floating: true,
+              stretch: true,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Stack(
+                  alignment: Alignment.bottomCenter,
+                  fit: StackFit.expand,
+                  children: [
+                    CachedImage(
+                      imageUrl: getImageSession(),
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              Colors.white,
+                              Colors.transparent,
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter),
+                      ),
+                    ),
+                  ],
+                ),
+                titlePadding: EdgeInsets.only(left: 54.w, bottom: 16.h),
+                title: Text(
+                  '${_timeSession!.getTimeSession()}, ${_userName.split(' ')[0]}',
+                  style: TextStyle(
+                      fontSize: 18.0.sp,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            )
+          ];
+        },
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  'Select menu',
+                  style:
+                      TextStyle(fontSize: 28.sp, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Text(
+                  'Find menu you want to explore',
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[400]!.withOpacity(0.8)),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                MyShowCase(
+                  title: 'Menu',
+                  desc: "You can select menu icon to start your learning",
+                  showCaseKey: widget.fourthShowCaseKey,
+                  child: const Menus(),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  'Quizes',
+                  style:
+                      TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Row(
+                  children: [
+                    QuizBox(
+                        isOpen: firstQuiz.isOpen,
+                        numQuiz: firstQuiz.quizNum,
+                        imageUrl: firstQuiz.imageUrl,
+                        quizTitle: firstQuiz.title),
+                    SizedBox(
+                      width: 25.w,
+                    ),
+                    QuizBox(
+                      isOpen: secondQuiz.isOpen,
+                      numQuiz: secondQuiz.quizNum,
+                      imageUrl: secondQuiz.imageUrl,
+                      quizTitle: secondQuiz.title,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

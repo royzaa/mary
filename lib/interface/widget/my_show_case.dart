@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyShowCase extends StatelessWidget {
   const MyShowCase({
@@ -24,15 +25,15 @@ class MyShowCase extends StatelessWidget {
       animationDuration: const Duration(
         milliseconds: 3000,
       ),
-      contentPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 12),
-      titleTextStyle: const TextStyle(
+      contentPadding: EdgeInsets.symmetric(vertical: 7.w, horizontal: 12.h),
+      titleTextStyle: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 14,
+        fontSize: 14.sp,
         color: Colors.white,
       ),
-      descTextStyle: const TextStyle(
+      descTextStyle: TextStyle(
         fontWeight: FontWeight.w400,
-        fontSize: 14,
+        fontSize: 14.sp,
         color: Colors.white,
       ),
       child: child,

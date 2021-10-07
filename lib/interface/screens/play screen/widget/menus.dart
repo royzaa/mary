@@ -4,8 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../widget/cached_svg.dart';
+import '../../learning_guide_screen/learning_guide_screen.dart';
+// import '../../ar_screen.dart';
 
 class Menus extends StatefulWidget {
   const Menus({
@@ -21,6 +24,7 @@ class _MenusState extends State<Menus> {
   PageController? _pageController;
   final ScrollController _scrollController1 = ScrollController();
   final ScrollController _scrollController2 = ScrollController();
+  Timer? timer;
 
   int _selectedMenu = 0;
 
@@ -34,27 +38,9 @@ class _MenusState extends State<Menus> {
         curve: Curves.elasticInOut);
   }
 
-  void autoMoveMenu() {
-    Timer.periodic(const Duration(milliseconds: 6500), (timer) {
-      if (!_recentlyPressed) {
-        _selectedMenu < 3 ? _selectedMenu++ : _selectedMenu = 0;
-        _pageController!.animateToPage(_selectedMenu,
-            duration: const Duration(milliseconds: 2500),
-            curve: Curves.easeInCubic);
-      }
-    });
-  }
+  Timer? autoMoveMenu;
 
-  void delayAfterClick() {
-    Timer.periodic(const Duration(microseconds: 1000), (timer) {
-      //  debugPrint('recentlypressed value: $_recentlyPressed');
-      if (_recentlyPressed) {
-        Future.delayed(const Duration(milliseconds: 4000), () {
-          _recentlyPressed = false;
-        });
-      }
-    });
-  }
+  Timer? delayAfterClick;
 
   List<IconData> iconMenus = [
     Icons.ballot_outlined,
@@ -87,8 +73,23 @@ class _MenusState extends State<Menus> {
   void initState() {
     _pageController = PageController(initialPage: 0);
 
-    autoMoveMenu();
-    delayAfterClick();
+    autoMoveMenu = Timer.periodic(const Duration(milliseconds: 6500), (timer) {
+      if (!_recentlyPressed) {
+        _selectedMenu < 3 ? _selectedMenu++ : _selectedMenu = 0;
+        _pageController!.animateToPage(_selectedMenu,
+            duration: const Duration(milliseconds: 2500),
+            curve: Curves.easeInCubic);
+      }
+    });
+    delayAfterClick =
+        Timer.periodic(const Duration(microseconds: 1000), (timer) {
+      //  debugPrint('recentlypressed value: $_recentlyPressed');
+      if (_recentlyPressed) {
+        Future.delayed(const Duration(milliseconds: 4000), () {
+          _recentlyPressed = false;
+        });
+      }
+    });
 
     super.initState();
   }
@@ -98,10 +99,12 @@ class _MenusState extends State<Menus> {
     _pageController!.dispose();
     _scrollController1.dispose();
     _scrollController2.dispose();
+    autoMoveMenu!.cancel();
+    delayAfterClick!.cancel();
     super.dispose();
   }
 
-  final double _iconSize = 32;
+  final double _iconSize = 32.r;
 
   final Color _iconColor = Colors.brown.shade900;
 
@@ -110,7 +113,7 @@ class _MenusState extends State<Menus> {
     final Size size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: 350,
+      height: 350.h,
       width: size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,8 +121,8 @@ class _MenusState extends State<Menus> {
         children: [
           Flexible(
             child: SizedBox(
-              width: 72,
-              height: 320,
+              width: 72.w,
+              height: 320.h,
               child: ListView.separated(
                   controller: _scrollController1,
                   shrinkWrap: true,
@@ -142,7 +145,7 @@ class _MenusState extends State<Menus> {
                         child: AnimatedContainer(
                           curve: Curves.elasticInOut,
                           padding: EdgeInsets.all(
-                              indexMenuIcon == _selectedMenu ? 14.0 : 10.0),
+                              indexMenuIcon == _selectedMenu ? 14.0.r : 10.0.r),
                           duration: const Duration(milliseconds: 750),
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
@@ -165,8 +168,8 @@ class _MenusState extends State<Menus> {
                           ),
                         ),
                       ),
-                  separatorBuilder: (context, _) => const SizedBox(
-                        height: 15,
+                  separatorBuilder: (context, _) => SizedBox(
+                        height: 15.h,
                       ),
                   itemCount: 4),
             ),
@@ -174,7 +177,7 @@ class _MenusState extends State<Menus> {
           Flexible(
             flex: 2,
             child: SizedBox(
-              height: 358,
+              height: 358.h,
               child: SingleChildScrollView(
                 controller: _scrollController2,
                 physics: const BouncingScrollPhysics(),
@@ -193,8 +196,8 @@ class _MenusState extends State<Menus> {
                               offset: Offset(0, 20),
                             ),
                           ]),
-                      height: 260,
-                      width: size.width < 330 ? 200 : 250,
+                      height: 260.h,
+                      width: 250.w,
                       child: PageView.builder(
                         onPageChanged: (index) {
                           setState(() {
@@ -209,12 +212,12 @@ class _MenusState extends State<Menus> {
                         itemBuilder: (context, index) => GestureDetector(
                           onTap: () {},
                           child: Container(
-                            margin: const EdgeInsets.only(top: 20),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 25),
+                            margin: EdgeInsets.only(top: 20.h),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 20.h, horizontal: 25.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(30.r),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,13 +228,13 @@ class _MenusState extends State<Menus> {
                                     maxLines: 1,
                                     style: TextStyle(
                                       color: Theme.of(context).primaryColor,
-                                      fontSize: size.width < 330 ? 16 : 18,
+                                      fontSize: 18.sp,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 4,
+                                SizedBox(
+                                  height: 4.h,
                                 ),
                                 Flexible(
                                   child: Text(
@@ -239,13 +242,13 @@ class _MenusState extends State<Menus> {
                                     maxLines: 2,
                                     style: TextStyle(
                                       color: Colors.grey[400],
-                                      fontSize: size.width < 330 ? 13 : 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 12,
+                                SizedBox(
+                                  height: 12.h,
                                 ),
                                 Flexible(
                                     flex: 2,
@@ -256,22 +259,36 @@ class _MenusState extends State<Menus> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 20.h,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        fixedSize: Size(size.width < 330 ? 200 : 235, 68),
+                        fixedSize: Size(235.w, 68.h),
                         primary: Theme.of(context).primaryColor,
                         onPrimary: Colors.red,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(30.r),
                         ),
-                        padding: const EdgeInsets.all(0),
                       ),
-                      onPressed: () {
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //     builder: (contest) => ArScreen()));
+                      onPressed: () async {
+                        switch (_selectedMenu) {
+                          case 0:
+                            await Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const LearningGuideScreen()));
+                            break;
+                          default:
+                        }
+                        // await Navigator.of(context)
+                        //     .push(
+                        //   MaterialPageRoute(
+                        //     builder: (contest) => const ArScreen(),
+                        //   ),
+                        // )
+                        //     .then((_) {
+                        //   setState(() {});
+                        // });
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -285,11 +302,11 @@ class _MenusState extends State<Menus> {
                                   spreadRadius: 5,
                                   blurRadius: 20),
                             ]),
-                        child: const Text(
+                        child: Text(
                           'Select menu',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 22,
+                              fontSize: 22.sp,
                               fontWeight: FontWeight.w600),
                         ),
                       ),

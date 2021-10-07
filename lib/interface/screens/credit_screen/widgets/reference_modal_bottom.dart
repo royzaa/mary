@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ReferencModalBottom extends StatelessWidget {
   const ReferencModalBottom({Key? key}) : super(key: key);
@@ -31,48 +32,48 @@ class ReferencModalBottom extends StatelessWidget {
             child: Container(
               height: size.height,
               width: size.width,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
+                  topLeft: Radius.circular(40.r),
+                  topRight: Radius.circular(40.r),
                 ),
               ),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 15,
+                  SizedBox(
+                    height: 15.h,
                   ),
                   Container(
-                    height: 8,
-                    width: 180,
+                    height: 8.h,
+                    width: 180.w,
                     decoration: BoxDecoration(
                       color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15.r),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: 20.h,
                   ),
-                  const Text(
+                  Text(
                     'References',
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: 20.h,
                   ),
                   Flexible(
                     child: SizedBox(
-                      height: size.height * 0.45,
+                      height: size.height,
                       child: ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.all(20),
+                        padding: EdgeInsets.all(20.r),
                         itemCount: references.length,
                         itemBuilder: (context, index) => Container(
-                          margin: const EdgeInsets.only(bottom: 10),
+                          margin: EdgeInsets.only(bottom: 10.h),
                           child: Text(
                             references[index],
                           ),

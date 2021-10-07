@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../services/volume_controller.dart';
 import '../../../../services/time_session.dart';
@@ -19,12 +20,12 @@ class PopUpVolume extends StatelessWidget {
     final soundController = Get.put(SoundController());
     final TimeSession timeSession = Get.find<TimeSession>();
     final AudioPlayerController audioPlayerController =
-        Get.put(AudioPlayerController());
+        Get.find<AudioPlayerController>();
 
     RxDouble val = soundController.volume;
     return PopupMenuButton(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
       ),
       icon: Icon(Icons.tune_outlined,
           color: isInCreditScreen
@@ -34,45 +35,45 @@ class PopUpVolume extends StatelessWidget {
                   : iconColor),
       itemBuilder: (context) => [
         PopupMenuItem(
-          child: Padding(
-            padding: const EdgeInsets.all(0),
-            child: SizedBox(
-              width: 230,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.volume_down_outlined),
+          child: SizedBox(
+            width: 230.w,
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.volume_down_outlined,
+                    size: 24.r,
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Flexible(
-                    child: SizedBox(
-                      width: 200,
-                      child: Obx(
-                        () => Slider(
-                          activeColor: Theme.of(context).primaryColor,
-                          inactiveColor: Colors.indigo[200],
-                          thumbColor: const Color.fromRGBO(67, 86, 255, 1.0),
-                          max: 1,
-                          min: 0,
-                          value: val.value,
-                          onChanged: (value) {
-                            soundController.volumeController.setVolume(value);
-                            debugPrint('value: ${val.value}');
-                            if (value == 0) {
-                              audioPlayerController.pause();
-                            } else {
-                              audioPlayerController.resume();
-                            }
-                          },
-                        ),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Flexible(
+                  child: SizedBox(
+                    width: 200.w,
+                    child: Obx(
+                      () => Slider(
+                        activeColor: Theme.of(context).primaryColor,
+                        inactiveColor: Colors.indigo[200],
+                        thumbColor: const Color.fromRGBO(67, 86, 255, 1.0),
+                        max: 1,
+                        min: 0,
+                        value: val.value,
+                        onChanged: (value) {
+                          soundController.volumeController.setVolume(value);
+                          debugPrint('value: ${val.value}');
+                          if (value == 0) {
+                            audioPlayerController.pause();
+                          } else {
+                            audioPlayerController.resume();
+                          }
+                        },
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

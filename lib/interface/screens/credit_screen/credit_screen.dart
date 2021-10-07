@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../play screen/widget/pop_up_volume.dart';
 import '../../../services/time_session.dart';
@@ -37,7 +38,7 @@ class CreditScreen extends StatelessWidget {
               children: [
                 Container(
                   clipBehavior: Clip.none,
-                  height: size.height * 0.55,
+                  height: size.height * 0.55.h,
                   width: size.width,
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -59,11 +60,14 @@ class CreditScreen extends StatelessWidget {
                       // container: lottie, title, and subtitle
 
                       Positioned(
-                        left: 20,
-                        top: MediaQuery.of(context).padding.top + 16 + 30 + 15,
+                        left: 20.w,
+                        top: MediaQuery.of(context).padding.top +
+                            16.h +
+                            30.h +
+                            15.h,
                         child: ConstrainedBox(
                           constraints: BoxConstraints(
-                            maxHeight: size.height * 0.4,
+                            maxHeight: size.height * 0.4.h,
                             maxWidth: size.width,
                           ),
                           child: LayoutBuilder(
@@ -73,13 +77,13 @@ class CreditScreen extends StatelessWidget {
                               children: [
                                 SizedBox(
                                   height: constraint.maxHeight * 0.1,
-                                  child: const FittedBox(
+                                  child: FittedBox(
                                     fit: BoxFit.contain,
                                     child: Text(
                                       'Thanks for hard work',
                                       style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 22,
+                                        fontSize: 22.sp,
                                         fontWeight: FontWeight.w600,
                                       ),
                                       textAlign: TextAlign.start,
@@ -88,13 +92,13 @@ class CreditScreen extends StatelessWidget {
                                 ),
                                 SizedBox(
                                   height: constraint.maxHeight * 0.15,
-                                  child: const FittedBox(
+                                  child: FittedBox(
                                     fit: BoxFit.scaleDown,
                                     child: Text(
                                       'Your contributions give significant\nother in this project',
                                       style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 16,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       textAlign: TextAlign.start,
@@ -104,42 +108,7 @@ class CreditScreen extends StatelessWidget {
                                 CachedNetworkLottie(
                                     lottieUrl: lottieUrl,
                                     height: constraint.maxHeight * 0.65,
-                                    width: size.width * 0.3),
-                                // cachedLottieStatus
-                                //     ? LottieBuilder.file(
-                                //         file,
-                                //         animate: true,
-                                //         height: constraint.maxHeight * 0.65,
-                                //         width: size.width * 0.3,
-                                //         fit: BoxFit.cover,
-                                //         alignment: Alignment.center,
-                                //         frameBuilder: (context, child,
-                                //             lottieCompotition) {
-                                //           if (!(lottieCompotition == null)) {
-                                //             return child;
-                                //           }
-                                //           return const Center(
-                                //             child: CircularProgressIndicator(),
-                                //           );
-                                //         },
-                                //       )
-                                //     : LottieBuilder.network(
-                                //         lottieUrl,
-                                //         animate: true,
-                                //         height: constraint.maxHeight * 0.65,
-                                //         width: size.width * 0.3,
-                                //         fit: BoxFit.cover,
-                                //         alignment: Alignment.center,
-                                //         frameBuilder: (context, child,
-                                //             lottieCompotition) {
-                                //           if (!(lottieCompotition == null)) {
-                                //             return child;
-                                //           }
-                                //           return const Center(
-                                //             child: CircularProgressIndicator(),
-                                //           );
-                                //         },
-                                //       )
+                                    width: size.width * 0.3.w),
                               ],
                             ),
                           ),
@@ -147,16 +116,16 @@ class CreditScreen extends StatelessWidget {
                       ),
                       // start learning button
 
-                      const Positioned(
-                        bottom: -25,
-                        left: 20,
-                        child: StartLearningButton(),
+                      Positioned(
+                        bottom: -25.h,
+                        left: 20.w,
+                        child: const StartLearningButton(),
                       ),
                       // modal bottom button
 
                       Positioned(
-                        bottom: -25,
-                        right: 40,
+                        bottom: -25.h,
+                        right: 40.w,
                         child: GestureDetector(
                           onTap: () {
                             HapticFeedback.mediumImpact();
@@ -184,15 +153,15 @@ class CreditScreen extends StatelessWidget {
                                       spreadRadius: 3,
                                       offset: Offset(0, 5)),
                                 ]),
-                            child: const Icon(
+                            child: Icon(
                               Icons.book,
-                              color: Color.fromRGBO(
+                              color: const Color.fromRGBO(
                                 255,
                                 135,
                                 127,
                                 1,
                               ),
-                              size: 36,
+                              size: 36.r,
                             ),
                           ),
                         ),
@@ -200,25 +169,25 @@ class CreditScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 20, top: 40),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w, top: 40.h),
                   child: Text(
                     'Our team',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 // developer icon
 
                 SizedBox(
                   width: size.width,
-                  height: 80,
+                  height: 80.h,
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.horizontal,
@@ -233,30 +202,38 @@ class CreditScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 20),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w),
                   child: Text(
                     'Attribution',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                SizedBox(
+                  height: 15.h,
                 ),
                 const Attribution(
                   brandName: 'Royalty Free Music from Bensound',
                   logoUrl:
                       'https://drive.google.com/uc?id=1zJRJ1iK5xDTeFgojbzsBe1Gz0wc0ifjM',
                 ),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: 15.h,
+                ),
+                const Attribution(
+                  brandName: 'Pray illustration by Storyset',
+                  logoUrl:
+                      'https://drive.google.com/uc?id=1WLyBmvjCFZVlbVpzZV7x4nYtysJk0QwC',
+                ),
+                SizedBox(
+                  height: 30.h,
                 ),
               ],
             ),
@@ -267,19 +244,19 @@ class CreditScreen extends StatelessWidget {
         Container(
           color: Colors.white,
           width: size.width,
-          height: MediaQuery.of(context).padding.top + 16 + 30 + 5,
+          height: MediaQuery.of(context).padding.top + 16.h + 30.h + 5.h,
         ),
 
         // greatings + name in appbar
         Positioned(
-          left: 56,
-          top: MediaQuery.of(context).padding.top + 12,
+          left: 56.w,
+          top: MediaQuery.of(context).padding.top + 12.h,
           child: Text(
             '${timeSession.getTimeSession()}, $userName',
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w500,
-              fontSize: 18,
+              fontSize: 18.sp,
             ),
           ),
         ),
@@ -289,9 +266,9 @@ class CreditScreen extends StatelessWidget {
           top: MediaQuery.of(context).padding.top,
           child: IconButton(
             onPressed: () => Scaffold.of(context).openDrawer(),
-            icon: const Icon(
+            icon: Icon(
               Icons.filter_list,
-              size: 32,
+              size: 32.r,
               color: Colors.black,
             ),
           ),

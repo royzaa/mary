@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LabelMenu extends StatelessWidget {
   const LabelMenu({Key? key, required this.title}) : super(key: key);
@@ -6,17 +7,15 @@ class LabelMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15.r),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
       child: Text(
         title,
-        style:
-            TextStyle(color: Colors.white, fontSize: size.width < 330 ? 9 : 12),
+        style: TextStyle(color: Colors.white, fontSize: 12.sp),
       ),
     );
   }

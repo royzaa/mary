@@ -1,14 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_placeholder_textlines/flutter_placeholder_textlines.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../widget/cached_svg.dart';
-// import 'package:get/get.dart';
-
-// import '../../../../services/my_cache_manager.dart';
 
 class QuizBox extends StatelessWidget {
   const QuizBox({
@@ -26,26 +22,20 @@ class QuizBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    // final MyCacheManager myCacheManager = Get.find<MyCacheManager>();
-    // Future forCache() async {
-    //   await myCacheManager.cacheForSvg(imageUrl!);
-    // }
-
-    // forCache();
-
     return GestureDetector(
       onTap: () {
         if (isOpen!) {
           Fluttertoast.showToast(
             msg: 'Quiz currently unavailable',
             gravity: ToastGravity.BOTTOM,
+            fontSize: 18.sp,
           );
         } else {
           HapticFeedback.mediumImpact();
           Fluttertoast.showToast(
             msg: 'Complete previous quiz, please',
             gravity: ToastGravity.BOTTOM,
+            fontSize: 18.sp,
           );
         }
       },
@@ -53,9 +43,9 @@ class QuizBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-              height: size.width < 330 ? 90 : 120,
-              width: size.width < 330 ? 110 : 140,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              height: 120.h,
+              width: 140.w,
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 color: Colors.white,
@@ -75,17 +65,17 @@ class QuizBox extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(15.r),
                           child: CachedSvg(
                             svgUrl: imageUrl!,
-                            width: size.width < 330 ? 80 : 110,
+                            width: 110.w,
                           ),
                         ),
                         Text(
                           quizTitle!,
                           style: TextStyle(
                               color: Theme.of(context).primaryColor.withRed(20),
-                              fontSize: size.width < 330 ? 9 : 12),
+                              fontSize: 12.sp),
                         )
                       ],
                     )
@@ -93,11 +83,11 @@ class QuizBox extends StatelessWidget {
                       child: Icon(
                         Icons.lock,
                         color: Colors.grey[400]!.withOpacity(0.7),
-                        size: 36,
+                        size: 36.r,
                       ),
                     )),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: 8.h,
           ),
           Text('Quiz $numQuiz'),
         ],

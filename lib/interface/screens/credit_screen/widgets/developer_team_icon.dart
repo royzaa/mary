@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeveloperTeamIcon extends StatelessWidget {
   const DeveloperTeamIcon({
@@ -27,29 +28,29 @@ class DeveloperTeamIcon extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
       color: Colors.white,
       elevation: 20,
       offset: const Offset(0, -32),
       child: imageUrl == ''
           ? Container(
-              height: 120,
-              width: 60,
-              margin: EdgeInsets.only(right: 20, left: index == 0 ? 20 : 0),
-              padding: const EdgeInsets.all(4),
+              height: 120.h,
+              width: 60.w,
+              margin: EdgeInsets.only(right: 20.w, left: index == 0 ? 20.w : 0),
+              padding: EdgeInsets.all(4.r),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Theme.of(context).primaryColor),
               child: Icon(
                 Icons.person,
                 color: Colors.grey[200],
-                size: 36,
+                size: 36.r,
               ),
             )
           : Container(
-              height: 120,
-              width: 60,
-              margin: EdgeInsets.only(right: 20, left: index == 0 ? 20 : 0),
+              height: 120.h,
+              width: 60.w,
+              margin: EdgeInsets.only(right: 20.w, left: index == 0 ? 20.w : 0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
@@ -60,27 +61,27 @@ class DeveloperTeamIcon extends StatelessWidget {
             ),
       itemBuilder: (context) => [
         PopupMenuItem(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
                 leading: imageUrl == ''
                     ? Container(
-                        height: 80,
-                        width: 40,
+                        height: 80.h,
+                        width: 40.w,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Theme.of(context).primaryColor),
                         child: Icon(
                           Icons.person,
                           color: Colors.grey[200],
-                          size: 36,
+                          size: 36.r,
                         ),
                       )
                     : Container(
-                        height: 80,
-                        width: 40,
+                        height: 80.h,
+                        width: 40.w,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
@@ -91,35 +92,35 @@ class DeveloperTeamIcon extends StatelessWidget {
                       ),
                 title: Text(
                   name,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                   ),
                 ),
               ),
               const Divider(
                 color: Colors.grey,
               ),
-              const SizedBox(
-                height: 5,
+              SizedBox(
+                height: 5.h,
               ),
-              const Text(
+              Text(
                 'Roles:',
-                style: TextStyle(color: Colors.grey),
+                style: TextStyle(color: Colors.grey, fontSize: 14.sp),
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               ...roles.map(
                 (role) => Container(
-                  margin: const EdgeInsets.only(bottom: 5),
+                  margin: EdgeInsets.only(bottom: 5.h),
                   child: Text(
                     role,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ),
@@ -127,13 +128,14 @@ class DeveloperTeamIcon extends StatelessWidget {
               const Divider(
                 color: Colors.grey,
               ),
-              const SizedBox(
-                height: 5,
+              SizedBox(
+                height: 5.h,
               ),
               ListTile(
                 title: Text(
                   '@' + sosmed,
-                  style: const TextStyle(fontWeight: FontWeight.w500),
+                  style:
+                      TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
                 ),
                 leading: const Icon(Icons.location_history_rounded),
                 onTap: () async {
