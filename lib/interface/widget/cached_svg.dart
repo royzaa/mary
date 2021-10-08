@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_placeholder_textlines/placeholder_lines.dart';
+// import 'package:flutter_placeholder_textlines/placeholder_lines.dart';
 
 import '../../services/my_cache_manager.dart';
 

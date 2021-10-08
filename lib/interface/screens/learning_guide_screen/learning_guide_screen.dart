@@ -105,53 +105,59 @@ class _LearningGuideScreenState extends State<LearningGuideScreen> {
                 height: 25.h,
               ),
               SizedBox(
-                  height: 320.h,
-                  width: 285.w,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    clipBehavior: Clip.none,
-                    children: [
-                      _currentIndex != 0
-                          ? Positioned(
-                              left: -35.w,
-                              child: Icon(
-                                Icons.arrow_back_ios_new,
-                                size: 32.r,
-                                color: Colors.grey[400],
-                              ),
-                            )
-                          : const SizedBox(),
-                      _currentIndex != 4
-                          ? Positioned(
-                              right: -35.w,
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 32.r,
-                                color: Colors.grey[400],
-                              ),
-                            )
-                          : const SizedBox(),
-                      PageView.builder(
-                        allowImplicitScrolling: true,
-                        onPageChanged: (index) {
-                          setState(() {
-                            _currentIndex = index;
-                            _pageController.animateToPage(_currentIndex,
-                                duration: const Duration(milliseconds: 350),
-                                curve: Curves.easeInSine);
-                          });
-                        },
-                        itemCount: learningGuides.length,
-                        itemBuilder: (context, index) {
-                          return LearningGuideCard(
+                height: 320.h,
+                width: MediaQuery.of(context).size.width,
+                child: Stack(
+                  alignment: Alignment.center,
+                  clipBehavior: Clip.none,
+                  children: [
+                    _currentIndex != 0
+                        ? Positioned(
+                            left: 0.w,
+                            child: Icon(
+                              Icons.arrow_back_ios_new,
+                              size: 32.r,
+                              color: Colors.grey[400],
+                            ),
+                          )
+                        : const SizedBox(),
+                    _currentIndex != 4
+                        ? Positioned(
+                            right: 0.w,
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 32.r,
+                              color: Colors.grey[400],
+                            ),
+                          )
+                        : const SizedBox(),
+                    PageView.builder(
+                      clipBehavior: Clip.none,
+                      allowImplicitScrolling: true,
+                      controller: PageController(viewportFraction: 0.8),
+                      onPageChanged: (index) {
+                        setState(() {
+                          _currentIndex = index;
+                          _pageController.animateToPage(_currentIndex,
+                              duration: const Duration(milliseconds: 350),
+                              curve: Curves.easeInSine);
+                        });
+                      },
+                      itemCount: learningGuides.length,
+                      itemBuilder: (context, index) {
+                        return Transform.scale(
+                          scale: index == _currentIndex ? 1 : 0.8,
+                          child: LearningGuideCard(
                             num: index + 1,
                             svgUrl: learningGuides[index].svgUrl,
                             title: learningGuides[index].title,
-                          );
-                        },
-                      ),
-                    ],
-                  )),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(
                 height: 25.h,
               ),

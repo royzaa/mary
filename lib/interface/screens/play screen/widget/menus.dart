@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../widget/cached_svg.dart';
 import '../../learning_guide_screen/learning_guide_screen.dart';
 import '../../../widget/learning_goal.dart';
+import '../../learning_enrichment_screen/learning_enrichement_screen.dart';
 // import '../../ar_screen.dart';
 
 class Menus extends StatefulWidget {
@@ -114,7 +115,7 @@ class _MenusState extends State<Menus> {
     final Size size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: 350.h,
+      height: 320.h,
       width: size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -286,6 +287,11 @@ class _MenusState extends State<Menus> {
                                 elevation: 40,
                                 backgroundColor: Colors.transparent,
                                 builder: (context) => const LearningGoal());
+                            break;
+                          case 3:
+                            await Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const LearningEnrichmentScreen()));
                             break;
                           default:
                         }

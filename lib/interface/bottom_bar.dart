@@ -21,6 +21,7 @@ import './widget/drawer.dart';
 import '../services/audio_player_controller.dart';
 import './widget/learning_goal.dart';
 import './screens/learning_guide_screen/learning_guide_screen.dart';
+import './screens/learning_enrichment_screen/learning_enrichement_screen.dart';
 // import '../services/unity_controller.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -211,6 +212,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
             ),
             SpeedDialChild(
+              onTap: () async {
+                await Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const LearningEnrichmentScreen()));
+              },
               elevation: 20,
               labelWidget: const LabelMenu(
                 title: 'Learning Enrichment',
