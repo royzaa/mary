@@ -38,7 +38,7 @@ class _LearningGuideDescState extends State<LearningGuideDesc> {
           Text(
             'Tips',
             style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 17.sp,
               color: Colors.grey[700],
               fontWeight: FontWeight.bold,
             ),
@@ -70,9 +70,10 @@ class _LearningGuideDescState extends State<LearningGuideDesc> {
                   child: Text(
                     widget.desc,
                     key: textKey,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.grey,
+                      fontSize: 13.sp,
+                      color: Colors.grey[600],
                     ),
                   ),
                 ),

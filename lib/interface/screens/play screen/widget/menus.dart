@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../widget/cached_svg.dart';
 import '../../learning_guide_screen/learning_guide_screen.dart';
+import '../../../widget/learning_goal.dart';
 // import '../../ar_screen.dart';
 
 class Menus extends StatefulWidget {
@@ -104,7 +105,7 @@ class _MenusState extends State<Menus> {
     super.dispose();
   }
 
-  final double _iconSize = 32.r;
+  final double _iconSize = 30.r;
 
   final Color _iconColor = Colors.brown.shade900;
 
@@ -122,7 +123,7 @@ class _MenusState extends State<Menus> {
           Flexible(
             child: SizedBox(
               width: 72.w,
-              height: 320.h,
+              height: 290.h,
               child: ListView.separated(
                   controller: _scrollController1,
                   shrinkWrap: true,
@@ -177,7 +178,7 @@ class _MenusState extends State<Menus> {
           Flexible(
             flex: 2,
             child: SizedBox(
-              height: 358.h,
+              height: 320.h,
               child: SingleChildScrollView(
                 controller: _scrollController2,
                 physics: const BouncingScrollPhysics(),
@@ -196,7 +197,7 @@ class _MenusState extends State<Menus> {
                               offset: Offset(0, 20),
                             ),
                           ]),
-                      height: 260.h,
+                      height: 230.h,
                       width: 250.w,
                       child: PageView.builder(
                         onPageChanged: (index) {
@@ -264,7 +265,7 @@ class _MenusState extends State<Menus> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        fixedSize: Size(235.w, 68.h),
+                        fixedSize: Size(235.w, 65.h),
                         primary: Theme.of(context).primaryColor,
                         onPrimary: Colors.red,
                         shape: RoundedRectangleBorder(
@@ -277,6 +278,14 @@ class _MenusState extends State<Menus> {
                             await Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
                                     const LearningGuideScreen()));
+                            break;
+                          case 1:
+                            showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                elevation: 40,
+                                backgroundColor: Colors.transparent,
+                                builder: (context) => const LearningGoal());
                             break;
                           default:
                         }

@@ -108,9 +108,8 @@ class _PlayScreenState extends State<PlayScreen> {
                   ),
                 ),
               ),
-              expandedHeight: 180.0.h,
+              expandedHeight: 160.0.h,
               backgroundColor: Colors.white,
-
               actions: [
                 MyShowCase(
                   title: "Settings",
@@ -124,7 +123,6 @@ class _PlayScreenState extends State<PlayScreen> {
               iconTheme: const IconThemeData(color: Colors.black),
               elevation: 0,
               pinned: true,
-              //snap: true,
               floating: true,
               stretch: true,
               flexibleSpace: FlexibleSpaceBar(

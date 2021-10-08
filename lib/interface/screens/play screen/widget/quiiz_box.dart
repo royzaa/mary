@@ -62,7 +62,7 @@ class QuizBox extends StatelessWidget {
               ),
               child: isOpen!
                   ? Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15.r),
@@ -75,7 +75,7 @@ class QuizBox extends StatelessWidget {
                           quizTitle!,
                           style: TextStyle(
                               color: Theme.of(context).primaryColor.withRed(20),
-                              fontSize: 12.sp),
+                              fontSize: 14.sp),
                         )
                       ],
                     )
@@ -89,7 +89,10 @@ class QuizBox extends StatelessWidget {
           SizedBox(
             height: 8.h,
           ),
-          Text('Quiz $numQuiz'),
+          Text(
+            'Quiz $numQuiz',
+            style: TextStyle(fontSize: 14.sp),
+          ),
         ],
       ),
     );

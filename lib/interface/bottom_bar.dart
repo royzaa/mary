@@ -19,6 +19,8 @@ import './widget/my_show_case.dart';
 import '../services/shared_preferences.dart';
 import './widget/drawer.dart';
 import '../services/audio_player_controller.dart';
+import './widget/learning_goal.dart';
+import './screens/learning_guide_screen/learning_guide_screen.dart';
 // import '../services/unity_controller.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -166,27 +168,37 @@ class _BottomNavBarState extends State<BottomNavBar> {
           },
           children: [
             SpeedDialChild(
-              labelWidget: const LabelMenu(
-                title: 'Learning Guide',
-              ),
-              elevation: 20,
-              child: Icon(
-                Icons.ballot_outlined,
-                color: Theme.of(context).primaryColor,
-                size: 24.r,
-              ),
-            ),
+                labelWidget: const LabelMenu(
+                  title: 'Learning Guide',
+                ),
+                elevation: 20,
+                child: Icon(
+                  Icons.ballot_outlined,
+                  color: Theme.of(context).primaryColor,
+                  size: 24.r,
+                ),
+                onTap: () async {
+                  await Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const LearningGuideScreen()));
+                }),
             SpeedDialChild(
-              labelWidget: const LabelMenu(
-                title: 'Goal',
-              ),
-              elevation: 20,
-              child: Icon(
-                Icons.auto_awesome,
-                color: Theme.of(context).primaryColor,
-                size: 24.r,
-              ),
-            ),
+                labelWidget: const LabelMenu(
+                  title: 'Goal',
+                ),
+                elevation: 20,
+                child: Icon(
+                  Icons.auto_awesome,
+                  color: Theme.of(context).primaryColor,
+                  size: 24.r,
+                ),
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      elevation: 40,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => const LearningGoal());
+                }),
             SpeedDialChild(
               elevation: 20,
               labelWidget: const LabelMenu(

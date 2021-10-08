@@ -10,7 +10,7 @@ class SynopsisModalBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return DraggableScrollableSheet(
-      minChildSize: 0.3,
+      minChildSize: 0.4,
       maxChildSize: 1,
       initialChildSize: 0.4,
       builder: (contex, controller) => Container(
@@ -25,13 +25,14 @@ class SynopsisModalBottom extends StatelessWidget {
           children: [
             Container(
               width: size.width,
+              height: size.height,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(60.r),
                 ),
               ),
-              padding: EdgeInsets.only(left: 20.w, top: 45.h, right: 40.w),
+              padding: EdgeInsets.only(left: 25.w, top: 55.h, right: 40.w),
               child: SingleChildScrollView(
                 controller: controller,
                 physics: const BouncingScrollPhysics(),
@@ -39,7 +40,7 @@ class SynopsisModalBottom extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'My Wonderful City Vehicle',
+                      'My Wonderful City Vehicles',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 22.sp,
@@ -47,15 +48,18 @@ class SynopsisModalBottom extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 20.h,
+                      height: 10.h,
                     ),
                     Text(
-                      '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit, tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit, quia.''',
+                      '''        I have a car, a city car. The car is very helpful for my family. It transports the family members to the workplaces and schools or to somewhere we want to go.
+        My car is white just like snow. That is why I call it Snow White.  What makes the specific of the snow white is the interior of it. The seats are covered with cream and black leather. There is the “VS” logo in the head of the seats. Not only about the seat cover, I also put two accessories behind the front seats. I hang two cream accessories to put bottles and tissue in. They make us tide. Besides, I put three little dash bins in my Snow White, in front, in the middle, and I the back. The bins make my car clean. I always throw the trash after getting out of the car.
+''',
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.w500,
                       ),
+                      textAlign: TextAlign.justify,
                     ),
                   ],
                 ),

@@ -32,12 +32,9 @@ class _LearningGuideScreenState extends State<LearningGuideScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).padding.top,
-              ),
-              SizedBox(
                 width: double.infinity,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Wrap(
                       children: [
@@ -88,11 +85,11 @@ class _LearningGuideScreenState extends State<LearningGuideScreen> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25.r),
+                  borderRadius: BorderRadius.circular(20.r),
                   color: Theme.of(context).primaryColor,
                 ),
                 padding: EdgeInsets.symmetric(
-                  horizontal: 15.w,
+                  horizontal: 25.w,
                   vertical: 8.h,
                 ),
                 child: Text(
@@ -108,28 +105,53 @@ class _LearningGuideScreenState extends State<LearningGuideScreen> {
                 height: 25.h,
               ),
               SizedBox(
-                height: 320.h,
-                width: 250.w,
-                child: PageView.builder(
-                  allowImplicitScrolling: true,
-                  onPageChanged: (index) {
-                    setState(() {
-                      _currentIndex = index;
-                      _pageController.animateToPage(_currentIndex,
-                          duration: const Duration(milliseconds: 350),
-                          curve: Curves.easeInSine);
-                    });
-                  },
-                  itemCount: learningGuides.length,
-                  itemBuilder: (context, index) {
-                    return LearningGuideCard(
-                      num: index + 1,
-                      svgUrl: learningGuides[index].svgUrl,
-                      title: learningGuides[index].title,
-                    );
-                  },
-                ),
-              ),
+                  height: 320.h,
+                  width: 285.w,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    clipBehavior: Clip.none,
+                    children: [
+                      _currentIndex != 0
+                          ? Positioned(
+                              left: -35.w,
+                              child: Icon(
+                                Icons.arrow_back_ios_new,
+                                size: 32.r,
+                                color: Colors.grey[400],
+                              ),
+                            )
+                          : const SizedBox(),
+                      _currentIndex != 4
+                          ? Positioned(
+                              right: -35.w,
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 32.r,
+                                color: Colors.grey[400],
+                              ),
+                            )
+                          : const SizedBox(),
+                      PageView.builder(
+                        allowImplicitScrolling: true,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentIndex = index;
+                            _pageController.animateToPage(_currentIndex,
+                                duration: const Duration(milliseconds: 350),
+                                curve: Curves.easeInSine);
+                          });
+                        },
+                        itemCount: learningGuides.length,
+                        itemBuilder: (context, index) {
+                          return LearningGuideCard(
+                            num: index + 1,
+                            svgUrl: learningGuides[index].svgUrl,
+                            title: learningGuides[index].title,
+                          );
+                        },
+                      ),
+                    ],
+                  )),
               SizedBox(
                 height: 25.h,
               ),

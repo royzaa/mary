@@ -194,7 +194,7 @@ class _SynopsisScreenState extends State<SynopsisScreen>
 
           Positioned(
             right: -40.w,
-            bottom: 270.h,
+            bottom: 235.h,
             child: Transform(
               transform: Matrix4.identity()..rotateY(math.pi),
               alignment: Alignment.center,
@@ -205,8 +205,8 @@ class _SynopsisScreenState extends State<SynopsisScreen>
                     onTap: forwardAnimation,
                     child: CachedNetworkLottie(
                       lottieUrl: _lottieGirl,
-                      height: size.width * 0.6.h,
-                      width: size.width * 0.6.w,
+                      height: size.width * 0.65.w,
+                      width: size.width * 0.65.w,
                       controller: _animationController,
                       onLoad: (compositions) {
                         _animationController!.forward();
