@@ -12,10 +12,16 @@ class CachedImage extends StatefulWidget {
     required this.imageUrl,
     this.height,
     this.width,
+    this.blendMode,
+    this.color,
+    this.opacity,
   }) : super(key: key);
   final String imageUrl;
   final double? height;
   final double? width;
+  final Animation<double>? opacity;
+  final Color? color;
+  final BlendMode? blendMode;
 
   @override
   _CachedImageState createState() => _CachedImageState();
@@ -27,7 +33,8 @@ class _CachedImageState extends State<CachedImage> {
 
   @override
   void initState() {
-    _myCacheManager.cacheForSvg(widget.imageUrl).then((value) {
+    debugPrint('image url jpg: ${widget.imageUrl}');
+    _myCacheManager.cacheForJpg(widget.imageUrl).then((value) {
       setState(() {
         imageFile = value;
         debugPrint('imageFile : ${imageFile.path}');
@@ -45,12 +52,18 @@ class _CachedImageState extends State<CachedImage> {
             fit: BoxFit.cover,
             height: widget.height,
             width: widget.width,
+            opacity: widget.opacity,
+            color: widget.color,
+            colorBlendMode: widget.blendMode,
           )
         : Image.network(
             widget.imageUrl,
             fit: BoxFit.cover,
             height: widget.height,
             width: widget.width,
+            opacity: widget.opacity,
+            color: widget.color,
+            colorBlendMode: widget.blendMode,
             loadingBuilder: (BuildContext context, Widget child,
                 ImageChunkEvent? loadingProgress) {
               if (loadingProgress == null) {
@@ -58,7 +71,7 @@ class _CachedImageState extends State<CachedImage> {
               }
               return const Center(
                 child: PlaceholderLines(
-                  count: 3,
+                  count: 1,
                   animate: true,
                 ),
               );

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../widget/cached_image.dart';
-
 class SubjectBox extends StatelessWidget {
   const SubjectBox({
     Key? key,
@@ -28,27 +26,27 @@ class SubjectBox extends StatelessWidget {
         padding: EdgeInsets.all(15.r),
         margin: EdgeInsets.only(right: 20.w),
         decoration: BoxDecoration(
-            color:
-                isSelected ? Theme.of(context).primaryColor : Colors.grey[200],
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30.r),
-              bottomRight: Radius.circular(30.r),
-            ),
-            boxShadow: [
-              isSelected
-                  ? BoxShadow(
-                      color: Theme.of(context).primaryColor.withOpacity(0.5),
-                      blurRadius: 50,
-                      spreadRadius: 2,
-                      offset: const Offset(0, 20),
-                    )
-                  : const BoxShadow(
-                      color: Color.fromRGBO(137, 137, 137, 0.25),
-                      blurRadius: 50,
-                      spreadRadius: 5,
-                      offset: Offset(0, 20),
-                    ),
-            ]),
+          color: isSelected ? Theme.of(context).primaryColor : Colors.grey[200],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.r),
+            bottomRight: Radius.circular(30.r),
+          ),
+          boxShadow: [
+            isSelected
+                ? BoxShadow(
+                    color: Theme.of(context).primaryColor.withOpacity(0.5),
+                    blurRadius: 50,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 20),
+                  )
+                : const BoxShadow(
+                    color: Color.fromRGBO(137, 137, 137, 0.25),
+                    blurRadius: 50,
+                    spreadRadius: 5,
+                    offset: Offset(0, 20),
+                  ),
+          ],
+        ),
         child: Column(
           children: [
             if (icon != null)

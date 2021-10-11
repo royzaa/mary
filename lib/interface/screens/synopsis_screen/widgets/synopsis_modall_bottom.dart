@@ -10,9 +10,9 @@ class SynopsisModalBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return DraggableScrollableSheet(
-      minChildSize: 0.4,
+      minChildSize: 0.4.h,
       maxChildSize: 1,
-      initialChildSize: 0.4,
+      initialChildSize: 0.4.h,
       builder: (contex, controller) => Container(
         decoration: BoxDecoration(
           color: Colors.white,

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './widgets/subject_box.dart';
 import './widgets/action_box.dart';
 import './widgets/lesson_box.dart';
+import '../youtube_player_screen/youtube_player_screen.dart';
 
 class LearningEnrichmentScreen extends StatefulWidget {
   const LearningEnrichmentScreen({Key? key}) : super(key: key);
@@ -40,145 +41,174 @@ class _LearningEnrichmentScreenState extends State<LearningEnrichmentScreen> {
     },
   ];
 
-  final List<List<Map<String, dynamic>>> _actions = [
-    [
-      {
-        'title': 'Transportation Vocabulary',
-        'imageUrl':
-            'https://drive.google.com/uc?id=1D4rfclrFBHhHAlyl9IdpP19bvG4FJRiF',
-        'function': () {},
-      },
-      {
-        'title': 'Describing a Place',
-        'imageUrl':
-            'https://drive.google.com/uc?id=1cMlAGEmnGMpwSuzif6Vcj2SZDsQcO8rW',
-        'function': () {},
-      }
-    ],
-    [
-      {
-        'title': 'First Low of Newton',
-        'imageUrl':
-            'https://drive.google.com/uc?id=1lMGFdH0i9ZZ05oF2eyTqmM64mwCRfKjA',
-        'function': () {},
-      },
-      {
-        'title': 'Second Low of Newton',
-        'imageUrl':
-            'https://drive.google.com/uc?id=1ugYSOBwc4ZlqG8mnBbY8ne-BkiBurSIg',
-        'function': () {},
-      },
-      {
-        'title': 'Third law of Newton',
-        'imageUrl':
-            'https://drive.google.com/uc?id=1yJXQQL8pYQMIz-IqPjt6cM-v46rZW1gI',
-        'function': () {},
-      }
-    ],
-    [
-      {
-        'title': 'Areas and Volume',
-        'imageUrl':
-            'https://drive.google.com/uc?id=172cVDai-YgBq5GZyveVlYYrEFFkuEEuR',
-        'function': null,
-      },
-    ],
-  ];
-
-  final List<List<Map<String, dynamic>>> _lessons = [
-    [
-      {
-        'title': 'Vocabulary',
-        'icon': Icons.collections_bookmark_sharp,
-        'function': () {},
-      },
-      {
-        'title': 'Characteristics',
-        'icon': Icons.pattern,
-        'function': () {},
-      },
-      {
-        'title': 'Structure',
-        'icon': Icons.account_tree_outlined,
-        'function': () {},
-      },
-      {
-        'title': 'Example sentences',
-        'icon': Icons.short_text_rounded,
-        'function': () {},
-      },
-      {
-        'title': 'Example Text',
-        'icon': Icons.article_rounded,
-        'function': () {},
-      },
-    ],
-    [
-      {
-        'title': '1st Law of Newton',
-        'icon': Icons.looks_one,
-        'function': () {},
-      },
-      {
-        'title': '2nd Law of Newton',
-        'icon': Icons.looks_two,
-        'function': () {},
-      },
-      {
-        'title': '3rd Law of Newton',
-        'icon': Icons.looks_3,
-        'function': () {},
-      },
-    ],
-    [
-      {
-        'title': 'Cube',
-        'icon': CupertinoIcons.cube_fill,
-        'function': () {},
-      },
-      {
-        'title': 'Beam',
-        'icon': CupertinoIcons.cube_box,
-        'function': () {},
-      },
-      {
-        'title': 'triangular prism',
-        'icon': CupertinoIcons.add,
-        'function': () {},
-      },
-      {
-        'title': 'Square pyramid',
-        'icon': CupertinoIcons.add,
-        'function': () {},
-      },
-      {
-        'title': 'Pentagon pyramid',
-        'icon': CupertinoIcons.add,
-        'function': () {},
-      },
-      {
-        'title': 'Tube',
-        'icon': CupertinoIcons.add,
-        'function': () {},
-      },
-      {
-        'title': 'Cone',
-        'icon': CupertinoIcons.add,
-        'function': () {},
-      },
-      {
-        'title': 'Ball',
-        'icon': CupertinoIcons.globe,
-        'function': () {},
-      },
-    ],
-  ];
-
   int _currentSubjectIndex = 0;
   int _currentActionIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final List<List<Map<String, dynamic>>> _lessons = [
+      [
+        {
+          'title': 'Vocabulary',
+          'icon': Icons.collections_bookmark_sharp,
+          'function': () {},
+        },
+        {
+          'title': 'Characteristics',
+          'icon': Icons.pattern,
+          'function': () {},
+        },
+        {
+          'title': 'Structure',
+          'icon': Icons.account_tree_outlined,
+          'function': () {},
+        },
+        {
+          'title': 'Example sentences',
+          'icon': Icons.short_text_rounded,
+          'function': () {},
+        },
+        {
+          'title': 'Example Text',
+          'icon': Icons.article_rounded,
+          'function': () {},
+        },
+      ],
+      [
+        {
+          'title': '1st Law of Newton',
+          'icon': Icons.looks_one,
+          'function': () {},
+        },
+        {
+          'title': '2nd Law of Newton',
+          'icon': Icons.looks_two,
+          'function': () {},
+        },
+        {
+          'title': '3rd Law of Newton',
+          'icon': Icons.looks_3,
+          'function': () {},
+        },
+      ],
+      [
+        {
+          'title': 'Cube',
+          'icon': CupertinoIcons.cube_fill,
+          'function': () {},
+        },
+        {
+          'title': 'Beam',
+          'icon': CupertinoIcons.cube_box,
+          'function': () {},
+        },
+        {
+          'title': 'triangular prism',
+          'icon': CupertinoIcons.add,
+          'function': () {},
+        },
+        {
+          'title': 'Square pyramid',
+          'icon': CupertinoIcons.add,
+          'function': () {},
+        },
+        {
+          'title': 'Pentagon pyramid',
+          'icon': CupertinoIcons.add,
+          'function': () {},
+        },
+        {
+          'title': 'Tube',
+          'icon': CupertinoIcons.add,
+          'function': () {},
+        },
+        {
+          'title': 'Cone',
+          'icon': CupertinoIcons.add,
+          'function': () {},
+        },
+        {
+          'title': 'Ball',
+          'icon': CupertinoIcons.globe,
+          'function': () {},
+        },
+      ],
+    ];
+
+    final List<List<Map<String, dynamic>>> _actions = [
+      [
+        {
+          'title': 'Transportation Vocabulary',
+          'imageUrl':
+              'https://drive.google.com/uc?id=1D4rfclrFBHhHAlyl9IdpP19bvG4FJRiF',
+          'function': () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const YoutubePlayerScreen(videoId: 'kSa-F4eXkwc')));
+          },
+        },
+        {
+          'title': 'Describing a Place',
+          'imageUrl':
+              'https://drive.google.com/uc?id=1cMlAGEmnGMpwSuzif6Vcj2SZDsQcO8rW',
+          'function': () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const YoutubePlayerScreen(videoId: 'WKUZVA4agoQ')));
+          },
+        }
+      ],
+      [
+        {
+          'title': 'First Low of Newton',
+          'imageUrl':
+              'https://drive.google.com/uc?id=1lMGFdH0i9ZZ05oF2eyTqmM64mwCRfKjA',
+          'function': () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const YoutubePlayerScreen(videoId: '5oi5j11FkQg')));
+          },
+        },
+        {
+          'title': 'Second Low of Newton',
+          'imageUrl':
+              'https://drive.google.com/uc?id=1ugYSOBwc4ZlqG8mnBbY8ne-BkiBurSIg',
+          'function': () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const YoutubePlayerScreen(videoId: '8YhYqN9BwB4')));
+          },
+        },
+        {
+          'title': 'Third law of Newton',
+          'imageUrl':
+              'https://drive.google.com/uc?id=1yJXQQL8pYQMIz-IqPjt6cM-v46rZW1gI',
+          'function': () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const YoutubePlayerScreen(videoId: 'TVAxASr0iUY')));
+          },
+        }
+      ],
+      [
+        {
+          'title': 'Areas and Volume',
+          'imageUrl':
+              'https://drive.google.com/uc?id=172cVDai-YgBq5GZyveVlYYrEFFkuEEuR',
+          'function': null,
+        },
+      ],
+    ];
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -296,6 +326,8 @@ class _LearningEnrichmentScreenState extends State<LearningEnrichmentScreen> {
                         setState(() {
                           _currentActionIndex = index;
                         });
+                        debugPrint(
+                            _actions[_currentSubjectIndex][index]['imageUrl']);
                       },
                       itemCount: _actions[_currentSubjectIndex].length,
                       itemBuilder: (context, index) {
