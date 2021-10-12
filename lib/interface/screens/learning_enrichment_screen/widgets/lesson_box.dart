@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class LessonBox extends StatelessWidget {
   const LessonBox({
@@ -16,9 +15,7 @@ class LessonBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Fluttertoast.showToast(msg: 'Belum terimplementasi');
-      },
+      onTap: onTap,
       child: Container(
         height: 115.h,
         width: 100.w,
@@ -38,7 +35,7 @@ class LessonBox extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Icon(
                 icon,
                 color: Colors.white,

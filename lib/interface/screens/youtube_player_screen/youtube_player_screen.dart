@@ -123,8 +123,6 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen>
     final size = MediaQuery.of(context).size;
     double maxScrollExtent = size.height.h * 0.7;
     const bottomSheetHeight = 0.436;
-    // final ValueNotifier<double> scrollViewPort =
-    //     ValueNotifier(size.height.h * bottomSheetHeight);
     RxDouble scrollViewPort = (size.height.h * bottomSheetHeight).obs;
     RxDouble videoPosiiton =
         controller!.value.position.inMilliseconds.toDouble().obs;
@@ -275,11 +273,13 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen>
                       return NotificationListener<ScrollNotification>(
                         onNotification: (notif) {
                           if (notif is ScrollStartNotification) {
-                            controller!.pause();
-                            _animationController!.forward();
+                            setState(() {
+                              togglePlayIcon = !togglePlayIcon;
+                            });
                           } else if (notif is ScrollEndNotification) {
-                            controller!.play();
-                            _animationController!.reverse();
+                            setState(() {
+                              togglePlayIcon = !togglePlayIcon;
+                            });
                           }
 
                           return true;

@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:device_apps/device_apps.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../widget/cached_svg.dart';
 import '../../learning_guide_screen/learning_guide_screen.dart';
@@ -287,6 +289,35 @@ class _MenusState extends State<Menus> {
                                 elevation: 40,
                                 backgroundColor: Colors.transparent,
                                 builder: (context) => const LearningGoal());
+                            break;
+                          case 2:
+                            final isArCoreInstalled =
+                                await DeviceApps.isAppInstalled(
+                                    'com.google.ar.core');
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: isArCoreInstalled
+                                      ? const Text(
+                                          'Your device have compatibility with AR')
+                                      : const Text(
+                                          'You need to install Google AR Service to enjoy this feature. If you can not, then your device does not heve compitiability with ARCOre.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () async {
+                                        await canLaunch(
+                                                'https://play.google.com/store/apps/details?id=com.google.ar.core')
+                                            ? await launch(
+                                                'https://play.google.com/store/apps/details?id=com.google.ar.core')
+                                            : throw 'Couldn\'t launch';
+                                      },
+                                      child: const Text('Install ARCore'),
+                                    )
+                                  ],
+                                );
+                              },
+                            );
                             break;
                           case 3:
                             await Navigator.of(context).push(MaterialPageRoute(

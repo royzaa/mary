@@ -48,6 +48,7 @@ dependencies:
   youtube_player_flutter: ^8.0.0
   avatar_glow: ^2.0.1
   share_plus: ^3.0.2
+  device_apps: ^2.1.1
 
 dev_dependencies:
   flutter_lints: ^1.0.0

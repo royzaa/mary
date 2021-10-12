@@ -7,6 +7,8 @@ import './widgets/subject_box.dart';
 import './widgets/action_box.dart';
 import './widgets/lesson_box.dart';
 import '../youtube_player_screen/youtube_player_screen.dart';
+import '../../../data/lessons_data.dart';
+import '../lesson_screen/lessons_screen.dart';
 
 class LearningEnrichmentScreen extends StatefulWidget {
   const LearningEnrichmentScreen({Key? key}) : super(key: key);
@@ -19,7 +21,7 @@ class LearningEnrichmentScreen extends StatefulWidget {
 class _LearningEnrichmentScreenState extends State<LearningEnrichmentScreen> {
   final List<Map<String, dynamic>> _subjects = [
     {
-      'title': 'Text Description',
+      'title': 'Descriptive Text',
       'icon': Icons.description_outlined,
       'lightIcon': null,
       'asset': null,
@@ -369,7 +371,20 @@ class _LearningEnrichmentScreenState extends State<LearningEnrichmentScreen> {
                   itemBuilder: (_, index) {
                     return LessonBox(
                       icon: _lessons[_currentSubjectIndex][index]['icon'],
-                      onTap: _lessons[_currentSubjectIndex][index]['function'],
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LessonScreen(
+                            lessonData: _currentSubjectIndex == 0
+                                ? lessonData.english
+                                : _currentSubjectIndex == 1
+                                    ? lessonData.physics
+                                    : lessonData.math,
+                            subjectIndex: _currentSubjectIndex,
+                            lessonIndex: index,
+                          ),
+                        ),
+                      ),
                       title: _lessons[_currentSubjectIndex][index]['title'],
                     );
                   },
