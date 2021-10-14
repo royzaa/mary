@@ -56,6 +56,9 @@ class _QuizCardState extends State<QuizCard>
     debugPrint('wrong ans:' + quizController.wrongAnswer.value.toString());
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
+        isCorrectAnswer.value
+            ? quizController.correctAnswer.value += 1
+            : quizController.wrongAnswer.value += 1;
         quizController.nextQuestion();
 
         _animationController.reset();
@@ -79,20 +82,6 @@ class _QuizCardState extends State<QuizCard>
     });
 
     super.initState();
-  }
-
-  @override
-  void deactivate() {
-    if (isAnswered.value) {
-      debugPrint(
-        'answered? xx: ' + isAnswered.value.toString(),
-      );
-      isCorrectAnswer.value
-          ? quizController.correctAnswer.value++
-          : quizController.wrongAnswer.value++;
-    }
-
-    super.deactivate();
   }
 
   @override
@@ -192,20 +181,20 @@ class _QuizCardState extends State<QuizCard>
                                 result.toLowerCase() == widget.rightAnswer;
 
                             isAnswered.value = true;
-                            Future.delayed(
-                              const Duration(milliseconds: 500),
-                              () {
-                                if (quizController.questionNumber.value == 1) {
-                                  debugPrint(
-                                    'answered? no 1: ' +
-                                        isAnswered.value.toString(),
-                                  );
-                                  isCorrectAnswer.value
-                                      ? quizController.correctAnswer.value++
-                                      : quizController.wrongAnswer.value++;
-                                }
-                              },
-                            );
+                            // Future.delayed(
+                            //   const Duration(milliseconds: 500),
+                            //   () {
+                            //     if (quizController.questionNumber.value == 1) {
+                            //       debugPrint(
+                            //         'answered? no 1: ' +
+                            //             isAnswered.value.toString(),
+                            //       );
+                            //       isCorrectAnswer.value
+                            //           ? quizController.correctAnswer.value++
+                            //           : quizController.wrongAnswer.value++;
+                            //     }
+                            //   },
+                            // );
 
                             _animationController.forward();
                             debugPrint('hasil: $result');

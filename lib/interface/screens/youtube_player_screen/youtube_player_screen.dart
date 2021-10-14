@@ -275,11 +275,26 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen>
                           if (notif is ScrollStartNotification) {
                             setState(() {
                               togglePlayIcon = !togglePlayIcon;
+                              debugPrint('toggle start');
                             });
+                            togglePlayIcon
+                                ? _animationController!.forward()
+                                : _animationController!.reverse();
+                            togglePlayIcon
+                                ? controller!.pause()
+                                : controller!.play();
                           } else if (notif is ScrollEndNotification) {
                             setState(() {
                               togglePlayIcon = !togglePlayIcon;
+
+                              debugPrint('toggle end');
                             });
+                            togglePlayIcon
+                                ? _animationController!.forward()
+                                : _animationController!.reverse();
+                            togglePlayIcon
+                                ? controller!.pause()
+                                : controller!.play();
                           }
 
                           return true;
@@ -567,13 +582,14 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen>
                                 onPressed: () {
                                   setState(() {
                                     togglePlayIcon = !togglePlayIcon;
-                                    togglePlayIcon
-                                        ? _animationController!.forward()
-                                        : _animationController!.reverse();
                                   });
+                                  togglePlayIcon
+                                      ? _animationController!.forward()
+                                      : _animationController!.reverse();
                                   togglePlayIcon
                                       ? controller!.pause()
                                       : controller!.play();
+                                  debugPrint('manual toggle: $togglePlayIcon');
                                 },
                                 icon: AnimatedIcon(
                                   progress: _animationController!,

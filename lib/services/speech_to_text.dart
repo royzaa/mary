@@ -22,6 +22,7 @@ class SpeechToTextApi {
     required void Function(String text) onResult,
   }) {
     _speech.listen(
+      partialResults: false,
       onResult: (speechRecognition) =>
           onResult(speechRecognition.recognizedWords),
       // pauseFor: const Duration(milliseconds: 900),
