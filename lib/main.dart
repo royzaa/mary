@@ -128,7 +128,8 @@ class MyApp extends StatelessWidget {
 
 Widget homeController() {
   Widget? home;
-  if (DataSharedPreferences.getTitle() == '') {
+  debugPrint('title xx: ' + DataSharedPreferences.getTitle());
+  if (DataSharedPreferences.getTitle().isEmpty) {
     home = const OnBoardingScreen();
   } else if (DataSharedPreferences.getFinishShowCase()!) {
     home = ShowCaseWidget(

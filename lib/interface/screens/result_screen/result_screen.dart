@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../services/quiz_controller.dart';
 import './widgets/result_statistic.dart';
 import './widgets/result_card.dart';
+import '../../bottom_bar.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({Key? key, required this.quizIndex}) : super(key: key);
@@ -90,8 +92,21 @@ class ResultScreen extends StatelessWidget {
                     //       )
                     //       .toList(),
                     // );
-
-                    Get.offNamed('/');
+                    debugPrint('correct:' +
+                        quizController.correctAnswer.value.toString());
+                    debugPrint(
+                        'wrong:' + quizController.wrongAnswer.value.toString());
+                    Get.off(
+                      ShowCaseWidget(
+                        builder: Builder(
+                          builder: (context) {
+                            return const BottomNavBar();
+                          },
+                        ),
+                      ),
+                      curve: Curves.easeInCubic,
+                      transition: Transition.cupertino,
+                    );
                   },
                 ),
               ],

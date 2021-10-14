@@ -83,13 +83,68 @@ class QuizBox extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             );
           } else {
-            Navigator.of(context).pushNamed(
-              QuizScreen.routeName,
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 28.w,
+                  vertical: 22.h,
+                ),
+                buttonPadding: EdgeInsets.all(24.r),
+                title: Text(
+                  '😊 Hi, are you ready?',
+                  style: TextStyle(
+                    fontSize: 19.sp,
+                  ),
+                ),
+                content: Text(
+                  'Pray first before you try to practice. Ensure you have already all set. After you click ready, you cannot go back until you finish the quiz.',
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                  ),
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.of(context).pushNamed(
+                        QuizScreen.routeName,
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 18.w,
+                        vertical: 9.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(15.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.4),
+                            offset: const Offset(0, 10),
+                            blurRadius: 30,
+                            spreadRadius: 4,
+                          )
+                        ],
+                      ),
+                      child: Text(
+                        'I am ready',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             );
           }
         } else {
