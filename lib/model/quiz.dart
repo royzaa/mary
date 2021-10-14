@@ -1,26 +1,27 @@
+import './quiz_item.dart';
+
 abstract class Quiz {
   final String? title;
   final String? imageUrl;
   final int? quizNum;
-  bool? isOpen;
+  bool isOpen;
 
-  Quiz(
-      {required this.imageUrl,
-      required this.quizNum,
-      required this.title,
-      this.isOpen});
+  Quiz({
+    required this.imageUrl,
+    required this.quizNum,
+    required this.title,
+    required this.isOpen,
+  });
 }
 
 class FirstQuiz extends Quiz {
-  final List<String>? qustions;
-  final List<String>? rightAnswers;
-  FirstQuiz(
-      {String? title,
-      String? imageUrl,
-      bool? isOpen,
-      this.qustions,
-      this.rightAnswers})
-      : super(
+  final List<FirstQuizItem> quizItemData;
+  FirstQuiz({
+    String? title,
+    String? imageUrl,
+    required bool isOpen,
+    required this.quizItemData,
+  }) : super(
           isOpen: isOpen,
           imageUrl: imageUrl,
           quizNum: 1,
@@ -29,12 +30,12 @@ class FirstQuiz extends Quiz {
 }
 
 class SecondQuiz extends Quiz {
-  final List<Map<String, dynamic>>? quizData;
+  final List<SecondQuizItem> quizItemData;
   SecondQuiz({
     String? title,
     String? imageUrl,
-    bool? isOpen,
-    this.quizData,
+    required bool isOpen,
+    required this.quizItemData,
   }) : super(
           isOpen: isOpen,
           imageUrl: imageUrl,

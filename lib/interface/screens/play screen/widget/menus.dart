@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart' as getx;
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../widget/cached_svg.dart';
@@ -85,15 +86,20 @@ class _MenusState extends State<Menus> {
             curve: Curves.easeInCubic);
       }
     });
-    delayAfterClick =
-        Timer.periodic(const Duration(microseconds: 1000), (timer) {
-      //  debugPrint('recentlypressed value: $_recentlyPressed');
-      if (_recentlyPressed) {
-        Future.delayed(const Duration(milliseconds: 4000), () {
-          _recentlyPressed = false;
-        });
-      }
-    });
+    delayAfterClick = Timer.periodic(
+      const Duration(microseconds: 1000),
+      (timer) {
+        //  debugPrint('recentlypressed value: $_recentlyPressed');
+        if (_recentlyPressed) {
+          Future.delayed(
+            const Duration(milliseconds: 4000),
+            () {
+              _recentlyPressed = false;
+            },
+          );
+        }
+      },
+    );
 
     super.initState();
   }
@@ -278,17 +284,20 @@ class _MenusState extends State<Menus> {
                       onPressed: () async {
                         switch (_selectedMenu) {
                           case 0:
-                            await Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    const LearningGuideScreen()));
+                            getx.Get.to(
+                              const LearningGuideScreen(),
+                              transition: getx.Transition.leftToRightWithFade,
+                            );
+
                             break;
                           case 1:
                             showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                elevation: 40,
-                                backgroundColor: Colors.transparent,
-                                builder: (context) => const LearningGoal());
+                              context: context,
+                              isScrollControlled: true,
+                              elevation: 40,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) => const LearningGoal(),
+                            );
                             break;
                           case 2:
                             final isArCoreInstalled =
@@ -320,9 +329,11 @@ class _MenusState extends State<Menus> {
                             );
                             break;
                           case 3:
-                            await Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    const LearningEnrichmentScreen()));
+                            getx.Get.to(
+                              const LearningEnrichmentScreen(),
+                              transition: getx.Transition.leftToRightWithFade,
+                            );
+
                             break;
                           default:
                         }

@@ -9,6 +9,8 @@ class DataSharedPreferences {
 
   static const _keyFirstLaunchAR = 'AR';
 
+  static const _keyQuizCase = 'quiz case';
+
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
 
@@ -32,4 +34,10 @@ class DataSharedPreferences {
 
   static bool? getFirstLaunchAR() =>
       _preferences.getBool(_keyFirstLaunchAR) ?? false;
+
+  static Future setFirstTimeQuiz(bool status) async {
+    await _preferences.setBool(_keyQuizCase, status);
+  }
+
+  static bool? getFirstTimeQuiz() => _preferences.getBool(_keyQuizCase) ?? true;
 }

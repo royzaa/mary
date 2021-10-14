@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="306.94mm" height="213.19mm" version="1.1" viewBox="0 0 1087.5818 755.41024" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(168.39 -123.16)">
+  <rect x="-168.39" y="123.16" width="1087.6" height="755.41" ry=".023732" color="#000000" color-rendering="auto" fill="#fff" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+  <g transform="translate(38.386 -169.71)">
+   <rect x="-47.477" y="498.8" width="22.223" height="147.48" ry="3.7446" color="#000000" color-rendering="auto" fill="#333" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <path d="m400.83 816.47 206.54-35.462 8.4271 62.676-220.15 28.05z" fill="#ffa000" fill-rule="evenodd"/>
+   <path d="m388.29 675.27 229.39 138.86c4.4438 2.521 2.2019 13.694-4.4424 11.338l-236.66-141.4z" fill="#ffc107" fill-rule="evenodd"/>
+   <path d="m386.06 671.01 143.1 85.26c1.3763 8.6898-2.1447 14.251-13.431 14.852l-147.82-89.502z" fill="#ff8f00" fill-rule="evenodd"/>
+   <path d="m615.04 746.34 22.036 25.228c-19.757 43.525-7.476 81.968 33.348 115.88l-59.265-14.868c-4.6981-34.778-16.285-65.833-14.094-104.33z" fill="#ff8f00" fill-rule="evenodd"/>
+   <path d="m679.23 764.3c-3.4824 0.61099-57.716 18.844-57.716 18.844l-0.68538 91.181 75.774 26.119z" fill="#ffa000" fill-rule="evenodd"/>
+   <path d="m238.5 582.92 238.9 18.688-18.688 104.05 46.467 154.55h-504.07l-69.701-160.61v-75.761l77.782-30.81 126.77-7.5761 57.579 82.327z" fill="#ffca28" fill-rule="evenodd"/>
+   <path d="m238.5 582.92-20.613 38.91 42.111 0.53321 198.89 82.301 2.5312-14.094-222.52-107.62-0.40235-0.0312zm-102.53 2.5254-126.77 7.5762-15.307 6.0625 490.46 191.84-9.1934-30.578-269.88-114.7l-11.725 22.133-26.984-38.584-19.422-8.2539 13.771 0.17383-24.943-35.664z" fill="#ffc107" fill-rule="evenodd"/>
+   <path d="m238.5 582.92-22.062 41.645h256.84l4.123-22.957-238.9-18.688zm-102.53 2.5254-126.77 7.5762-77.783 30.809v0.73438h231.92l-27.359-39.119z" fill="#ffb300" fill-rule="evenodd"/>
+   <path d="m-55.578 618.68-13.008 5.1523v75.762l69.701 160.62h463.88l-520.57-241.53z" fill="#ffc107" fill-rule="evenodd"/>
+   <path d="m-28.571 458.59h243.57c-1.7734-9.0287-10.253-18.803-18.214-26.071h-246.07c3.6777 8.921 4.3767 18.055 20.714 26.071z" fill="#ffca28" fill-rule="evenodd"/>
+   <path d="m-8.4811 450.08h205.57l52.023 135.36-21.718 91.924h-80.307l-33.335-78.792h-117.68z" fill="#333" fill-rule="evenodd"/>
+   <path d="m679.23 764.3c-1.1137 0.19539-7.9196 2.3748-15.98 5.002-0.87075 35.222 6.5306 65.974 12.934 97.266l17.895 2.8125-14.848-105.08z" fill="#ff8f00" fill-rule="evenodd"/>
+   <path d="m692.66 732.71 29.517 33.793c-26.465 58.302-10.014 109.8 44.67 155.23l-79.387-19.916c-6.2932-46.585-21.814-88.184-18.88-139.76z" fill="#ffc107" fill-rule="evenodd"/>
+   <path d="m387.24 665.25 237.86 143.99c4.6078 2.6141 2.2832 14.2-4.6064 11.757l-245.4-146.62z" fill="#ffd54f" fill-rule="evenodd"/>
+   <path d="m449.82 824.55 206.54-35.462 8.4271 62.676-220.15 28.05z" fill="#ffc107" fill-rule="evenodd"/>
+   <path d="m423.69 827.59 266.71-78.587c5.0373-1.6406 12.027 7.8876 5.5771 11.328l-273.73 82.384z" fill="#ffb300" fill-rule="evenodd"/>
+   <path d="m32.935 716.51c13.79-9.3569 21.602-13.363 36.871-14.9 10.147 0.91316 20.221 1.8803 27.732 4.7705l386.75 103.63c17.842 8.3981 36.926 36.882 25.714 68.393-12.48 29.193-35.251 33.983-64.464 34.821l-438.75 0.89286c-34.224-3.1901-61.593-13.281-76.429-43.214-11.439-53.825 60.424-105.91 102.58-154.4z" fill="#ff8f00" fill-rule="evenodd"/>
+   <path d="m466.8 600.78-21.32 104.09 14.428 4.7383-1.1895-3.957 18.688-104.04-10.605-0.83008z" fill="#ffc107" fill-rule="evenodd"/>
+   <path d="m384.93 660.83 148.38 88.408c1.4271 9.0106-2.2239 14.777-13.926 15.401l-147.35-89.397c1.0922-6.8643 2.5628-13.485 12.893-14.411z" fill="#ffa000" fill-rule="evenodd"/>
+   <path d="m38.174 727.22c13.265-8.5197 20.781-12.168 35.468-13.567 9.7608 0.83145 19.452 1.7121 26.677 4.3437l366.5 99.183c20.378 6.3966 41.057 28.76 30.272 57.452-12.005 26.581-33.91 26.121-62.013 26.884l-421.05-1.4367c-32.923-2.9047-54.904-7.5213-69.175-34.777-11.004-49.009 52.769-93.934 93.319-138.08z" fill="#ffc107" fill-rule="evenodd"/>
+   <path d="m92.857 461.09h94.821l48.393 123.21-20.357 80.393-56.642-0.10461-36.456-80.162-25.537-0.53572z" fill="#d7ccc8" fill-rule="evenodd"/>
+   <path d="m82.685 584.18-3.0664-123.81-73.726 1.6071 3.3929 122.14z" fill="#d7ccc8" fill-rule="evenodd"/>
+   <g transform="matrix(.5 .86603 -.86603 .5 -167.67 647.35)" fill="#ff6f00">
+    <path d="m230.14-208.48c-1.6933 3.9552-3.7807 8.0299-7.39 10.568 3.935 0.2365 8.7774 1.8803 11.847 2.7121-2.1837-3.8496-1.6175-8.6966-1.8385-12.688-0.84337-0.0934-1.8601-0.60391-2.6182-0.59182zm-29.298 1.1746c-1.0374 0.90441-3.7106 0.0631-2.3055 2.1331 0.88999 3.7126 0.27277 8.3657-0.72563 11.432 3.3733-1.6908 8.4306-2.8367 11.203-3.7774-4.0683-1.955-6.2459-6.156-8.1723-9.7882zm57.31 13.71c-3.1818 3.0994-8.1808 4.7965-12.181 5.0575 3.2878 2.6805 6.4138 5.7102 8.9558 9.0548-0.0225-4.6364 3.3805-8.6609 5.2582-12.228-0.69916-0.5841-1.4995-1.212-2.0328-1.8848zm-84.449 4.1492c-0.5059 1.0992-2.542 1.9444-0.68574 2.7687 2.7071 2.8392 4.8324 6.3771 5.4821 10.286 1.9276-3.2791 4.7895-6.5361 7.1623-9.0626-4.2993 0.1265-8.454-1.6754-11.959-3.9922zm87.843 22.027c1.4788 3.3635 2.1059 8.3195 2.8356 11.001 2.5751-3.4049 6.6908-5.3466 10.603-6.5396-0.67065-1.1471-0.29878-3.6932-2.2772-2.5796-3.9022 0.0142-8.0062-0.45306-11.417-2.5538l0.23465 0.61551 0.0213 0.056zm-89.046 5.0047c-3.5191 2.6145-8.2209 3.3511-12.351 3.3155-1.3694 2.888 2.5515 2.127 4.1505 3.1534 2.5823 0.95705 5.0623 2.3439 6.9668 4.3614-0.0996-3.5513 0.74185-7.876 1.2338-10.83zm90.848 20.437c-0.90469 3.8463-2.2206 7.6032-4.0488 11.111 4.0717-1.8131 8.7967-1.0343 12.806 0-0.12664-1.2362 1.9497-2.6828-0.28948-2.9179-3.4248-1.9752-6.5574-4.7061-8.4682-8.1928zm-89.234 6.7815c-1.3994 4.0217-5.3537 6.9245-8.1658 9.2967 0.85137 2.4723 3.4386-0.33681 5.2337-0.13123 2.4959-0.51669 5.1091-0.67293 7.6113-0.10936-1.9021-2.816-3.4826-5.9324-4.6792-9.0561zm75.636 17.134c-2.3322 2.3578-5.5276 4.584-7.9304 6.2849 4.2942 0.68234 7.9018 3.8881 10.624 6.7339 2.8697-1.2723-0.52545-3.7421-0.66002-5.8037-0.88568-2.5814-1.4013-5.3322-1.1708-8.0668l-0.46892 0.46263-0.39437 0.38907zm-59.025 4.4078c0.95778 4.0809-0.44469 8.4634-1.9016 12.022 1.8426 2.0191 2.6598-1.9625 4.1955-2.7018 1.9033-1.9354 4.2403-3.6192 6.7364-4.5493-3.2095-1.3756-6.2655-3.1053-9.1089-5.1321l0.0785 0.36153zm35.144 7.9484c-3.2002 0.53694-6.459 0.71139-9.6994 0.55708 3.1566 2.984 4.5472 7.5177 5.0742 11.552 2.9251 0.43455 1.3503-3.4551 2.3081-5.1566 0.55586-2.5146 1.4869-4.9842 3.008-7.08l-0.6478 0.11943-0.0431 8e-3z"/>
+    <path d="m244.58-203.23c-2.6593 3.3822-5.7301 6.7777-9.8734 8.2951 3.7397 1.2469 7.9917 4.088 10.741 5.6858-1.1129-4.2836 0.68848-8.8189 1.5081-12.732-0.79046-0.3085-1.6404-1.0648-2.3758-1.2493zm-28.603-6.4482c-1.2361 0.60511-3.6005-0.89942-2.7791 1.4637-0.10123 3.8165-1.9017 8.1512-3.6598 10.855 3.696-0.76015 8.8775-0.55802 11.799-0.74899-3.4237-2.9413-4.4398-7.5628-5.3604-11.57zm51.809 28.075c-3.8756 2.1702-9.1435 2.5157-13.075 1.7324 2.482 3.4401 4.7173 7.1756 6.3071 11.064 1.1783-4.4842 5.507-7.4909 8.2437-10.45-0.52416-0.74515-1.1347-1.5587-1.4757-2.3467zm-82.645-17.849c-0.77316 0.93083-2.9586 1.2202-1.379 2.4969 1.88 3.4431 3.0172 7.4105 2.633 11.354 2.7106-2.6684 6.3179-5.0738 9.2638-6.9-4.1856-0.99056-7.7323-3.8064-10.518-6.9513zm79.149 44.012c0.55783 3.6316-0.11905 8.581-0.10841 11.36 3.3686-2.6224 7.8467-3.4327 11.934-3.5726-0.35091-1.2816 0.66728-3.6447-1.532-3.081-3.7729-0.99625-7.6162-2.5098-10.367-5.4217l0.0673 0.65527 6e-3 0.0596zm-87.307-18.213c-4.0759 1.6146-8.8081 1.1092-12.788 6e-3 -2.0702 2.4351 1.9141 2.7149 3.1929 4.1202 2.2466 1.5928 4.2832 3.5742 5.6005 6.016 0.82293-3.4561 2.755-7.4157 3.9949-10.142zm82.463 43.254c-1.8694 3.4811-4.1128 6.7694-6.7865 9.6843 4.4022-0.69745 8.7647 1.2777 12.37 3.3146 0.19763-1.2268 2.5776-2.0868 0.4756-2.8934-2.7969-2.7944-5.1159-6.2429-6.0592-10.105zm-87.948-16.545c-2.3926 3.5225-6.9634 5.3029-10.294 6.8665 0.18249 2.6084 3.4086 0.56464 5.0894 1.2278 2.5446 0.14691 5.1092 0.67234 7.3803 1.8643-1.1084-3.2123-1.8285-6.6316-2.1759-9.9586zm68.624 36.127c-2.8629 1.6738-6.5256 2.9972-9.2868 4.0182 3.9713 1.7705 6.6263 5.8008 8.5196 9.2542 3.1012-0.48622 0.46097-3.7506 0.86457-5.7768-0.18737-2.7227 0.0265-5.5132 0.95696-8.0949l-0.57268 0.3255-0.48163 0.27374zm-58.155-11.019c-0.13107 4.1897-2.62 8.0599-4.9482 11.12 1.2572 2.4272 3.0771-1.2073 4.7518-1.5239 2.3394-1.3769 5.0326-2.3984 7.6844-2.6508-2.7441-2.1594-5.2483-4.6212-7.4702-7.3148l-0.0177 0.36953zm31.889 16.773c-3.2302-0.30964-6.423-0.98456-9.5131-1.9723 2.2767 3.6993 2.4466 8.4384 1.9114 12.472 2.713 1.1768 2.1985-2.9879 3.5641-4.3835 1.1877-2.285 2.7262-4.4296 4.7379-6.0602l-0.65664-0.0523-0.0437-3e-3z"/>
+   </g>
+   <circle cx="72.63" cy="760.32" r="43.962" color="#000000" color-rendering="auto" fill="#ff6f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="-14.416" cy="852.5" r="42.13" color="#000000" color-rendering="auto" fill="#ffa000" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stroke="#ff6f00" stroke-width="2.8356" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="458.75" cy="858.23" r="42.13" color="#000000" color-rendering="auto" fill="#ffa000" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stroke="#ff6f00" stroke-width="2.8356" style="isolation:auto;mix-blend-mode:normal"/>
+   <path d="m6.8084 822.87h455.58c0.0124 0 0.0224 0.01 0.0224 0.0224l16.162 40.063-16.162 37.213c-5e-3 0.0114-0.01 0.0224-0.0224 0.0224h-455.58c-0.012396 0-0.022375-0.01-0.022375-0.0224v-77.277c0-0.0124 0.00998-0.0224 0.022375-0.0224z" color="#000000" color-rendering="auto" fill="#333" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="-14.416" cy="852.5" r="21.845" color="#000000" color-rendering="auto" fill="#ff6f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <path d="m6.9773 900.12-41.596-9.2316 45.078-39.27z" fill="#333" fill-rule="evenodd"/>
+   <path d="m-13.393 872.16-23.258-13.075 43.972-35.854 3.1784 60.352z" fill="#333" fill-rule="evenodd"/>
+   <path d="m408.65 775.55-4.9527 12.921 6.7407 1.6713 0.98923-14.169z" fill="#ffa000" fill-rule="evenodd"/>
+   <path d="m436.87 783.04-4.9527 12.921 6.7407 1.6713 0.98923-14.169z" fill="#ffa000" fill-rule="evenodd"/>
+   <path d="m465.07 790.6-4.9527 12.921 6.7407 1.6713 0.98923-14.169z" fill="#ffa000" fill-rule="evenodd"/>
+   <path d="m498.62 802.55-10.036 9.5272 5.3633 4.4119 6.9963-12.361z" fill="#ffa000" fill-rule="evenodd"/>
+   <path d="m522.1 833.05-13.339 3.6798 2.6542 6.4176 11.992-7.6107z" fill="#ffa000" fill-rule="evenodd"/>
+   <path d="m527.04 863.68-13.597-2.5693-0.4425 6.9307 14.118-1.5532z" fill="#ffa000" fill-rule="evenodd"/>
+   <g fill="#ffa000" fill-rule="evenodd">
+    <path d="m516.65 894.75-10.543-8.9622-3.8148 5.8032 13.036 5.6381z"/>
+    <path d="m489.77 918.95-4.2414-13.172-6.2994 2.9236 8.1118 11.659z"/>
+    <path d="m456.54 926.42 0.59515-13.825-6.9226 0.55481 3.5595 13.75z"/>
+    <path d="m427.73 926.97 1.3858-13.768-6.943 0.1575 2.7663 13.931z"/>
+    <path d="m396.75 927.08 1.3858-13.768-6.943 0.1575 2.7663 13.931z"/>
+    <path d="m366.49 927.04 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m335.57 927.24 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m306.4 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m276.09 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m276.09 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m247.05 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m217.76 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m188.46 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m158.92 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m129.37 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m101.34 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m71.537 927.35 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m44.39 927.72 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m14.211 927.85 1.3858-13.768-6.943 0.15751 2.7663 13.931z"/>
+    <path d="m-16.687 924.33 4.5657-13.063-6.7875-1.4698-0.56677 14.192z"/>
+   </g>
+   <g fill="#ffa000" fill-rule="evenodd">
+    <path d="m-46.029 913.95 7.9113-11.353-6.1419-3.2414-4.3636 13.517z"/>
+    <path d="m-71.089 894.03 11.765-7.2851-4.353-5.4113-9.3658 10.678z"/>
+    <path d="m-84.718 862.48 13.755 1.5071-0.0963-6.9441-13.955 2.6434z"/>
+    <path d="m-77.249 826.18 11.934 7.0051 2.7543-6.3753-13.815-3.3z"/>
+    <path d="m-58.302 794.83 9.8957 9.6724 4.2084-5.5245-12.614-6.5293z"/>
+   </g>
+   <g fill="#ffa000" fill-rule="evenodd">
+    <path d="m90 689.84-4.0178 13.839 6.875 0.98215-0.44644-14.196z"/>
+    <path d="m122.35 698.15-5.3946 13.363 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m151.69 706.8-4.9527 12.921 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m179.46 713.92-4.9527 12.921 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m206.6 721.42-4.9527 12.921 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m236.75 729.38-4.9527 12.921 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m263.27 736.7-4.9527 12.921 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m294.59 744.66-4.9527 12.921 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m324.37 752.86-4.9527 12.921 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m351.69 760.36-4.9527 12.921 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m381.16 768.04-4.9527 12.921 6.7407 1.6713 0.98923-14.169z"/>
+    <path d="m-39.962 772.88 9.0925 10.431 4.6357-5.1712-12.053-7.5147z"/>
+    <path d="m-20.648 752.17 8.4548 10.954 4.9356-4.8858-11.583-8.2196z"/>
+    <path d="m-0.86959 732.68 8.2499 11.109 5.0255-4.7932-11.429-8.4333z"/>
+    <path d="m21.241 708.75 8.3234 11.054 4.9936-4.8265-11.484-8.3573z"/>
+    <path d="m50.76 691.67 2.4588 13.617 6.6313-2.0632-6.4954-12.631z"/>
+   </g>
+   <path d="m79.619 460.37-73.727 1.6074 0.44727 16.096h73.717l-0.4375-17.703z" color="#000000" color-rendering="auto" fill="#bcaaa4" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <path d="m42.426 493.24-0.40234 90.906 31.387 0.0234-9.2391-62.434-0.61965-4.1873-0.48083-3.2492-2.967-20.05c-5.1999-1.8604-10.178-4.2098-17.678-1.0098z" fill="#bcaaa4" fill-rule="evenodd"/>
+   <rect x="12.227" y="421.8" width="36.871" height="190.92" ry="3.7446" color="#000000" color-rendering="auto" fill="#ff8f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <ellipse cx="690.5" cy="755.57" rx="3.7249" ry="3.8512" color="#000000" color-rendering="auto" fill="#ff6f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <ellipse cx="648.52" cy="801.28" rx="4.7982" ry="4.8614" color="#000000" color-rendering="auto" fill="#ff8f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <ellipse cx="650.16" cy="815.54" rx="4.7982" ry="4.8614" color="#000000" color-rendering="auto" fill="#ff8f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <ellipse cx="652.05" cy="829.31" rx="4.7982" ry="4.8614" color="#000000" color-rendering="auto" fill="#ff8f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <ellipse cx="654.45" cy="842.31" rx="4.7982" ry="4.8614" color="#000000" color-rendering="auto" fill="#ff8f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <path d="m264.82 584.98 10.449 19.889 198.7 15.895 3.4394-19.154-212.59-16.629z" fill="#333" fill-rule="evenodd"/>
+   <path d="m-56.072 618.87-1.7852 0.70703v104.73l1.7852 4.1133v-109.55z" color="#000000" color-rendering="auto" fill="#ffa000" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <rect x="-63.929" y="685.76" width="43.214" height="14.464" ry="4.3081" color="#000000" color-rendering="auto" fill="#ffa000" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <path d="m136.65 461.09 0.37305 8.5254 52.082 30.07 11.059-6.8066-3.6484-9.2891-10.564 8.1328l-40.953-23.645v-6.9883h-8.3477z" fill="#bcaaa4" fill-rule="evenodd"/>
+   <path d="m92.857 461.09 0.58398 16.988h100.91l-6.6719-16.988h-94.822z" color="#000000" color-rendering="auto" fill="#bcaaa4" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="72.63" cy="737.72" r="14.643" color="#000000" color-rendering="auto" fill="#ffa000" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stroke="#ff6f00" stroke-width="3.1" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="72.63" cy="779.86" r="14.643" color="#000000" color-rendering="auto" fill="#ffa000" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stroke="#ff6f00" stroke-width="3.1" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle transform="rotate(90)" cx="758.79" cy="-93.701" r="14.643" color="#000000" color-rendering="auto" fill="#ffa000" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stroke="#ff6f00" stroke-width="3.1" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle transform="rotate(90)" cx="758.79" cy="-51.558" r="14.643" color="#000000" color-rendering="auto" fill="#ffa000" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stroke="#ff6f00" stroke-width="3.1" style="isolation:auto;mix-blend-mode:normal"/>
+   <path d="m216.46 534.36-20.488 18.988-16.162 40.91 15.152 50.508-5.5547 13.637h-33.146l2.8145 6.1875 56.643 0.10547 20.357-80.395-19.615-49.941z" fill="#bcaaa4" fill-rule="evenodd"/>
+   <path d="m216.74 535.08-23.801 61.705 13.131 57.578-7.5762 6.5664-40.904 0.40235 1.4824 3.2598 56.643 0.10547 20.357-80.395-19.332-49.223z" fill="#a1887f" fill-rule="evenodd"/>
+   <path d="m107.08 473.04-7.5762 1.0117 4.8027 109.99 9.4824 0.19727-6.709-111.2z" fill="#bcaaa4" fill-rule="evenodd"/>
+   <path d="m388.14 690.12c-10.33 0.92583-11.8 7.5478-12.893 14.412l53.887 32.693c10.142-0.33405 13.863-5.7002 11.547-15.799z" fill="#ffa000" fill-rule="evenodd"/>
+   <circle cx="382.91" cy="671.22" r="5.4927" color="#000000" color-rendering="auto" fill="#ff8f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="382.91" cy="671.22" r="5.4927" color="#000000" color-rendering="auto" fill="#ff6f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="386.66" cy="701.75" r="5.4927" color="#000000" color-rendering="auto" fill="#ff6f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="430.41" cy="726.04" r="5.4927" color="#000000" color-rendering="auto" fill="#ff6f00" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <path d="m-38.929 737.36h20.357l61.964-61.964h86.25l-8.2143-16.964h-88.929l-57.321 57.321h-24.464z" fill="#ffa000" fill-rule="evenodd"/>
+   <circle transform="rotate(90)" cx="618.89" cy="-447.11" r="15.536" color="#000000" color-rendering="auto" fill="#333" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <rect x="-68.438" y="498.67" width="38.638" height="23.234" ry="9.5529" color="#000000" color-rendering="auto" fill="#333" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="62.629" cy="875.59" r="14.142" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="143.44" cy="845.28" r="14.142" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="306.08" cy="875.59" r="14.142" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="386.89" cy="845.28" r="14.142" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <rect transform="matrix(1 0 .33333 .94281 0 0)" x="-142.75" y="857.81" width="250" height="12.122" ry=".023732" color="#000000" color-rendering="auto" fill="#333" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="453.53" cy="834.06" r="6.0736" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="461.21" cy="853.89" r="6.0736" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="460.49" cy="872.1" r="6.0736" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="453.35" cy="889.24" r="6.0736" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="-12.627" cy="855.38" r="6.0736" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="6.3135" cy="842" r="6.0736" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+   <circle cx="-8.5863" cy="884.68" r="6.0736" color="#000000" color-rendering="auto" fill="#424242" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+  </g>
+  <rect x="-168.39" y="123.16" width="1087.6" height="42.242" ry=".0013271" color="#000000" color-rendering="auto" fill="#ffca28" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+  <rect x="-168.39" y="836.32" width="1087.6" height="42.242" ry=".0013271" color="#000000" color-rendering="auto" fill="#ffc107" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+  <path d="m-168.39 836.32v42.242h857.99l-26.807-42.242h-831.18z" fill="#ffb300" fill-rule="evenodd"/>
+  <path d="m-168.39 123.16v42.242h405.4l-26.807-42.242h-378.59z" fill="#ffb300" fill-rule="evenodd"/>
+ </g>
+</svg>

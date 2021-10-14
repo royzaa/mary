@@ -4,13 +4,15 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
     <uses-permission android:name="android.permission.INTERNET"/> 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/> 
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   
 
     <queries>
+
       <!-- If your app opens https URLs -->
       <intent>
         <action android:name="android.intent.action.VIEW" />
@@ -26,7 +28,12 @@
         <action android:name="android.intent.action.SEND" />
         <data android:mimeType="*/*" />
       </intent>
+      <!-- for speech to text -->
+      <intent>
+        <action android:name="android.speech.RecognitionService" />
+      </intent>
     </queries>
+    
 
    <application
         android:label="MARY"

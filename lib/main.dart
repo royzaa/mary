@@ -16,6 +16,8 @@ import './services/shared_preferences.dart';
 import './services/my_cache_manager.dart';
 import './services/time_session.dart';
 import './services/audio_player_controller.dart';
+import './interface/screens/quiz_screen/quiz_screen.dart';
+import './services/quiz_controller.dart';
 // import './services/unity_controller.dart';
 
 Future main() async {
@@ -80,32 +82,47 @@ class MyApp extends StatelessWidget {
     Get.put(AudioPlayerController());
     Get.put(MyCacheManager());
     Get.put(TimeSession());
+    final quizController = Get.put(QuizController());
     // Get.put(UnityController());
 
     return ScreenUtilInit(
-        designSize: const Size(360, 700),
-        builder: () {
-          return MaterialApp(
-            title: 'MARY',
-            theme: ThemeData(
-              primaryColor: const Color.fromRGBO(102, 117, 255, 1),
-              fontFamily: GoogleFonts.poppins().fontFamily,
-            ),
-            home: homeController(),
-            routes: {
-              BottomNavBar.routeName: (context) => ShowCaseWidget(
-                    onFinish: () {
-                      DataSharedPreferences.setFinishShowCase(true);
+      designSize: const Size(360, 700),
+      builder: () {
+        return GetMaterialApp(
+          title: 'MARY',
+          theme: ThemeData(
+            primaryColor: const Color.fromRGBO(102, 117, 255, 1),
+            fontFamily: GoogleFonts.poppins().fontFamily,
+          ),
+          home: homeController(),
+          routes: {
+            BottomNavBar.routeName: (context) => ShowCaseWidget(
+                  onFinish: () {
+                    DataSharedPreferences.setFinishShowCase(true);
+                  },
+                  builder: Builder(
+                    builder: (context) {
+                      return const BottomNavBar();
                     },
-                    builder: Builder(
-                      builder: (context) {
-                        return const BottomNavBar();
-                      },
-                    ),
-                  )
-            },
-          );
-        });
+                  ),
+                ),
+            QuizScreen.routeName: (context) => ShowCaseWidget(
+                  onFinish: () async {
+                    await DataSharedPreferences.setFirstTimeQuiz(false);
+                    quizController.animationController
+                        .forward()
+                        .whenComplete(() => quizController.nextQuestion());
+                  },
+                  builder: Builder(
+                    builder: (context) {
+                      return const QuizScreen();
+                    },
+                  ),
+                ),
+          },
+        );
+      },
+    );
   }
 }
 
@@ -122,7 +139,13 @@ Widget homeController() {
       ),
     );
   } else {
-    home = const OnBoardingScreen();
+    home = ShowCaseWidget(
+      builder: Builder(
+        builder: (context) {
+          return const BottomNavBar();
+        },
+      ),
+    );
   }
   return home;
 }

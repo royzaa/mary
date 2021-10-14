@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../widget/cached_svg.dart';
+import '../../quiz_screen/quiz_screen.dart';
+import '../../../../services/audio_player_controller.dart';
 
 class QuizBox extends StatelessWidget {
   const QuizBox({
@@ -22,14 +26,72 @@ class QuizBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioPlayer = Get.find<AudioPlayerController>();
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (isOpen!) {
-          Fluttertoast.showToast(
-            msg: 'Quiz currently unavailable',
-            gravity: ToastGravity.BOTTOM,
-            fontSize: 18.sp,
-          );
+          audioPlayer.pause();
+          final status = await Permission.microphone.status;
+          debugPrint('mic status: $status');
+          if (status.isDenied) {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.r),
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 28.w,
+                  vertical: 22.h,
+                ),
+                buttonPadding: EdgeInsets.all(24.r),
+                content: Text(
+                  'Hi, we need to access your microphone, thus you can practice this vocabulary quiz.',
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                  ),
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: () async {
+                      Permission.microphone.request();
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 18.w,
+                        vertical: 9.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(15.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.4),
+                            offset: const Offset(0, 10),
+                            blurRadius: 30,
+                            spreadRadius: 4,
+                          )
+                        ],
+                      ),
+                      child: Text(
+                        'I understand',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          } else {
+            Navigator.of(context).pushNamed(
+              QuizScreen.routeName,
+            );
+          }
         } else {
           HapticFeedback.mediumImpact();
           Fluttertoast.showToast(
