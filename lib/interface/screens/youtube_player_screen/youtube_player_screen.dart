@@ -7,7 +7,6 @@ import 'package:mary/model/youtube_video.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../data/youtube_videos_data.dart';
-import '../../../services/audio_player_controller.dart';
 
 class YoutubePlayerScreen extends StatefulWidget {
   const YoutubePlayerScreen({
@@ -28,13 +27,11 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen>
   late YoutubeVideo youtubeVideo;
   late List<YoutubeVideo> otherVideos;
   bool togglePlayIcon = false;
-  final audioController = Get.find<AudioPlayerController>();
   late int currentVideoIndex;
   late String currentVideoId;
 
   @override
   void initState() {
-    audioController.pause();
     controller = YoutubePlayerController(
       initialVideoId: widget.videoId,
     );
@@ -73,7 +70,6 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen>
 
   @override
   void dispose() {
-    audioController.play();
     controller!.dispose();
     _animationController!.dispose();
     super.dispose();

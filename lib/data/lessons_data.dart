@@ -128,6 +128,12 @@ I have a car. It is my means of transportation. Almost everybody I go to work by
       imageAsset: 'assets/images/tabung.png',
     ),
     MathLesson(
+      volume: 'V = 1/3 x π x r2 x t',
+      areas: 'L = ( π x r2 ) + ( π x r x s)',
+      name: 'Kerucut',
+      imageAsset: 'assets/images/kerucut.png',
+    ),
+    MathLesson(
       volume: 'V = 4/3 x π x r3',
       areas: 'L = 4 x π x r2',
       name: 'Bola',

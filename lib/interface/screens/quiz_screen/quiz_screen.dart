@@ -9,6 +9,7 @@ import './widgets/quiz_card.dart';
 import '../../../services/quiz_controller.dart';
 import '../../../data/quizes.dart';
 import '../../../services/shared_preferences.dart';
+import '../../../model/quiz_item.dart';
 
 class QuizScreen extends StatefulWidget {
   static const routeName = '/quiz-screen';
@@ -21,14 +22,17 @@ class QuizScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuizScreen> {
   final PageController controller = PageController();
   final QuizController quizController = Get.find<QuizController>();
-  late List displayedQuiz;
+  late List<FirstQuizItem> displayedQuizOne;
+  late List<SecondQuizItem> displayedQuizTwo;
   final _five = GlobalKey();
+  int currentIndex = 0;
   @override
   void initState() {
     firstQuiz.quizItemData.shuffle();
-    displayedQuiz = firstQuiz.quizItemData.sublist(0, 5);
+    displayedQuizOne = firstQuiz.quizItemData.sublist(0, 5);
+    secondQuiz.quizItemData.shuffle();
+    displayedQuizTwo = secondQuiz.quizItemData.sublist(0, 5);
     quizController.controller = controller;
-    quizController.pageIndex = 1;
     quizController.correctAnswer.value = 0;
     quizController.wrongAnswer.value = 0;
 
@@ -57,6 +61,7 @@ class _QuestionScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final quizNum = ModalRoute.of(context)?.settings.arguments as int;
     final mediaQUery = MediaQuery.of(context).size;
 
     return WillPopScope(
@@ -110,13 +115,14 @@ class _QuestionScreenState extends State<QuizScreen> {
                       Container(
                         width: mediaQUery.width *
                             0.45 *
-                            quizController.pageIndex *
+                            (currentIndex + 1) *
                             1 /
                             5,
                         height: 9.h,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.white),
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -128,23 +134,39 @@ class _QuestionScreenState extends State<QuizScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       controller: controller,
                       onPageChanged: (index) {
-                        setState(() {
-                          index = quizController.pageIndex;
-                        });
-                        quizController.questionNumber.value = index;
+                        currentIndex = index;
                       },
-                      itemCount: displayedQuiz.length,
+                      itemCount: quizNum == 1
+                          ? displayedQuizOne.length
+                          : displayedQuizTwo.length,
                       itemBuilder: (context, index) => QuizCard(
-                        showCaseKey: index == 0 ? _five : null,
+                        index: index,
+                        showCaseKey: quizNum == 1
+                            ? index == 0
+                                ? _five
+                                : null
+                            : null,
                         mediaQuery: mediaQUery,
                         textStyle: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                         ),
-                        question: displayedQuiz[index].quizQuestion,
-                        rightAnswer: displayedQuiz[index].rightAnswer,
-                        svgUrl: displayedQuiz[index].svgUrl,
+                        question: quizNum == 1
+                            ? displayedQuizOne[index].quizQuestion
+                            : displayedQuizTwo[index].quizQuestion,
+                        option: quizNum == 2
+                            ? displayedQuizTwo[index].choices
+                            : null,
+                        descriptiveText: quizNum == 2
+                            ? displayedQuizTwo[index].descriptiveText
+                            : null,
+                        rightAnswer: quizNum == 1
+                            ? displayedQuizOne[index].rightAnswer
+                            : null,
+                        svgUrl: quizNum == 1
+                            ? displayedQuizOne[index].svgUrl
+                            : null,
                         controller: controller,
                       ),
                     ),

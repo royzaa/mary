@@ -42,7 +42,7 @@ class _ResultCardState extends State<ResultCard>
 
   @override
   Widget build(BuildContext context) {
-    final Size mediaQuery = MediaQuery.of(context).size;
+    // final Size mediaQuery = MediaQuery.of(context).size;
     return Container(
       width: widget.mediaQuery.width.w,
       height: widget.mediaQuery.height * 0.6,
@@ -93,10 +93,9 @@ class _ResultCardState extends State<ResultCard>
             ),
           ),
           Container(
-            height: widget.mediaQuery.width * 0.45,
+            height: widget.mediaQuery.width.w * 0.45,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              // color: Colors.white,
             ),
             child: Stack(
               alignment: Alignment.center,
@@ -110,19 +109,24 @@ class _ResultCardState extends State<ResultCard>
                       endAngle: 0,
                       showLabels: false,
                       showTicks: false,
-                      axisLineStyle:
-                          AxisLineStyle(thickness: 4.r, color: Colors.white),
+                      axisLineStyle: AxisLineStyle(
+                        thickness: 4.w,
+                        color: Colors.white,
+                      ),
                       pointers: [
                         RangePointer(
+                          onValueChanged: (value) {
+                            debugPrint(value.toString());
+                          },
                           enableDragging: true,
                           enableAnimation: true,
                           animationDuration: 2000,
                           animationType: AnimationType.bounceOut,
                           cornerStyle: CornerStyle.bothCurve,
-                          width: 8.w,
+                          width: 10.w,
                           color: Theme.of(context).primaryColor,
                           value: widget.score.toDouble(),
-                          pointerOffset: -1,
+                          pointerOffset: -3,
                         ),
                       ],
                     ),

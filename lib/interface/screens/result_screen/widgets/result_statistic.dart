@@ -20,6 +20,7 @@ class ResultStatistic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const int totalQuestions = 5;
     return Container(
       height: mediaQuery.height * 0.25 - 20,
       padding: const EdgeInsets.all(15),
@@ -129,7 +130,7 @@ class ResultStatistic extends StatelessWidget {
                     height: 10.h,
                   ),
                   Text(
-                    '${5 - quizController.correctAnswer.value - quizController.wrongAnswer.value} questions',
+                    '${totalQuestions - quizController.correctAnswer.value - quizController.wrongAnswer.value} questions',
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontSize: 24.sp,

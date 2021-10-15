@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import './widgets/subject_box.dart';
 import './widgets/action_box.dart';
@@ -9,6 +10,7 @@ import './widgets/lesson_box.dart';
 import '../youtube_player_screen/youtube_player_screen.dart';
 import '../../../data/lessons_data.dart';
 import '../lesson_screen/lessons_screen.dart';
+import '../../../services/audio_player_controller.dart';
 
 class LearningEnrichmentScreen extends StatefulWidget {
   const LearningEnrichmentScreen({Key? key}) : super(key: key);
@@ -19,6 +21,8 @@ class LearningEnrichmentScreen extends StatefulWidget {
 }
 
 class _LearningEnrichmentScreenState extends State<LearningEnrichmentScreen> {
+  final audioPlayer = Get.find<AudioPlayerController>();
+
   final List<Map<String, dynamic>> _subjects = [
     {
       'title': 'Descriptive Text',
@@ -45,6 +49,18 @@ class _LearningEnrichmentScreenState extends State<LearningEnrichmentScreen> {
 
   int _currentSubjectIndex = 0;
   int _currentActionIndex = 0;
+
+  @override
+  void initState() {
+    audioPlayer.pause();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.resume();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

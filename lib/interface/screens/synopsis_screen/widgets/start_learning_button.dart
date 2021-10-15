@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+import '../../learning_enrichment_screen/learning_enrichement_screen.dart';
 
 class StartLearningButton extends StatelessWidget {
   const StartLearningButton({
@@ -21,6 +24,10 @@ class StartLearningButton extends StatelessWidget {
         builder: (context, constraints) => ElevatedButton(
           onPressed: () {
             HapticFeedback.mediumImpact();
+            Get.to(
+              const LearningEnrichmentScreen(),
+              transition: Transition.rightToLeftWithFade,
+            );
           },
           style: ElevatedButton.styleFrom(
             maximumSize: Size(constraints.maxWidth, constraints.maxHeight),

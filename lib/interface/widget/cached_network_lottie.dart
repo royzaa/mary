@@ -14,10 +14,12 @@ class CachedNetworkLottie extends StatefulWidget {
     required this.width,
     this.controller,
     this.onLoad,
+    this.fit,
   }) : super(key: key);
   final String lottieUrl;
   final double height;
   final double width;
+  final BoxFit? fit;
   final AnimationController? controller;
   final void Function(LottieComposition)? onLoad;
 
@@ -52,7 +54,7 @@ class _CachedNetworkLottieState extends State<CachedNetworkLottie>
             animate: true,
             height: widget.height,
             width: widget.width,
-            fit: BoxFit.cover,
+            fit: widget.fit ?? BoxFit.cover,
             alignment: Alignment.center,
           )
         : LottieBuilder.network(
@@ -62,7 +64,7 @@ class _CachedNetworkLottieState extends State<CachedNetworkLottie>
             animate: true,
             height: widget.height,
             width: widget.width,
-            fit: BoxFit.cover,
+            fit: widget.fit ?? BoxFit.cover,
             alignment: Alignment.center,
             frameBuilder: (context, child, lottieCompotition) {
               if (!(lottieCompotition == null)) {

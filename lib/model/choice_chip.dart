@@ -8,8 +8,8 @@ class ChoiceChip {
 
   const ChoiceChip({
     required this.choice,
-    required this.color,
-    required this.isRightChoice,
+    this.color = const Color.fromRGBO(187, 191, 222, 1),
+    this.isRightChoice = false,
     this.isSelected = false,
   });
 

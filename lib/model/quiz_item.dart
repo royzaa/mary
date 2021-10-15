@@ -20,9 +20,13 @@ class FirstQuizItem extends QuizItem {
 }
 
 class SecondQuizItem extends QuizItem {
+  final String descriptiveText;
   final List<ChoiceChip> choices;
-  const SecondQuizItem({required String quizQuestion, required this.choices})
-      : super(
+  const SecondQuizItem({
+    required String quizQuestion,
+    required this.choices,
+    required this.descriptiveText,
+  }) : super(
           quizQuestion: quizQuestion,
         );
 }

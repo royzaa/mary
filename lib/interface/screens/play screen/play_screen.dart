@@ -11,6 +11,7 @@ import '../../widget/my_show_case.dart';
 import '../../../services/shared_preferences.dart';
 import '../../../services/time_session.dart';
 import '../../widget/cached_image.dart';
+import './widget/statistics.dart';
 
 class PlayScreen extends StatefulWidget {
   static const routeName = '/player-screen';
@@ -223,7 +224,21 @@ class _PlayScreenState extends State<PlayScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 30.h,
+                  height: 25.h,
+                ),
+                Text(
+                  'Statistics',
+                  style: TextStyle(
+                    fontSize: 22.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Statistics(),
+                SizedBox(
+                  height: 40.h,
                 ),
               ],
             ),

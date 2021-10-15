@@ -13,10 +13,12 @@ class CachedSvg extends StatefulWidget {
     required this.svgUrl,
     this.height,
     this.width,
+    this.fit,
   }) : super(key: key);
   final String svgUrl;
   final double? height;
   final double? width;
+  final BoxFit? fit;
 
   @override
   _CachedSvgState createState() => _CachedSvgState();
@@ -43,7 +45,7 @@ class _CachedSvgState extends State<CachedSvg> {
     return svgFile.path.isNotEmpty
         ? SvgPicture.file(
             svgFile,
-            fit: BoxFit.cover,
+            fit: widget.fit ?? BoxFit.cover,
             height: widget.height,
             width: widget.width,
             // placeholderBuilder: (context) => const Center(
@@ -55,7 +57,7 @@ class _CachedSvgState extends State<CachedSvg> {
           )
         : SvgPicture.network(
             widget.svgUrl,
-            fit: BoxFit.cover,
+            fit: widget.fit ?? BoxFit.cover,
             height: widget.height,
             width: widget.width,
             // placeholderBuilder: (context) => const Center(

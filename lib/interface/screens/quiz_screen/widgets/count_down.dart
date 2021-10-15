@@ -9,9 +9,11 @@ class CountDown extends StatelessWidget {
   const CountDown({
     Key? key,
     required this.mediaQuery,
+    required this.duration,
   }) : super(key: key);
 
   final Size mediaQuery;
+  final int duration;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class CountDown extends StatelessWidget {
         builder: (controller) {
           double countDownValue = controller.animation.value;
           // this controller actually for count
-          //  debugPrint(controller.animation.value.toString());
+          debugPrint(controller.animation.value.toString());
           return Stack(
             children: [
               Positioned(
@@ -58,16 +60,16 @@ class CountDown extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.timer,
-                      color: countDownValue * 30 < 20
+                      color: countDownValue * duration < duration - 10
                           ? Colors.white
                           : Colors.transparent,
                     ),
                     SizedBox(
                       width: 5.h,
                     ),
-                    countDownValue * 30 < 20
+                    countDownValue * duration < duration - 10
                         ? Text(
-                            '${(30 - countDownValue * 30).round()} sec',
+                            '${(duration - countDownValue * duration).round()} sec',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 22.sp,
@@ -83,7 +85,7 @@ class CountDown extends StatelessWidget {
                               pause: const Duration(milliseconds: 200),
                               animatedTexts: [
                                 ScaleAnimatedText(
-                                  '${(30 - countDownValue * 30).round()} sec',
+                                  '${(duration - countDownValue * duration).round()} sec',
                                   duration: const Duration(
                                     milliseconds: 800,
                                   ),

@@ -7,16 +7,18 @@ import '../../../services/quiz_controller.dart';
 import './widgets/result_statistic.dart';
 import './widgets/result_card.dart';
 import '../../bottom_bar.dart';
+import '../../../services/audio_player_controller.dart';
+import '../../../data/quizes.dart';
+import '../../../services/shared_preferences.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({Key? key, required this.quizIndex}) : super(key: key);
+  const ResultScreen({Key? key}) : super(key: key);
   static const routeName = 'Result-Screen';
-
-  final int quizIndex;
 
   @override
   Widget build(BuildContext context) {
     QuizController quizController = Get.find<QuizController>();
+    final audioPlayer = Get.find<AudioPlayerController>();
     final mediaQuery = MediaQuery.of(context).size;
     RxString rating = ''.obs;
     int score = 0;
@@ -96,6 +98,12 @@ class ResultScreen extends StatelessWidget {
                         quizController.correctAnswer.value.toString());
                     debugPrint(
                         'wrong:' + quizController.wrongAnswer.value.toString());
+                    secondQuiz.isOpen = true;
+                    DataSharedPreferences.setQuizTwoUnlocked(true);
+                    final tempQuizData =
+                        DataSharedPreferences.getQuizTracking();
+                    tempQuizData.add(score);
+                    DataSharedPreferences.setQuizTracking(tempQuizData);
                     Get.off(
                       ShowCaseWidget(
                         builder: Builder(
@@ -107,6 +115,7 @@ class ResultScreen extends StatelessWidget {
                       curve: Curves.easeInCubic,
                       transition: Transition.cupertino,
                     );
+                    audioPlayer.resume();
                   },
                 ),
               ],

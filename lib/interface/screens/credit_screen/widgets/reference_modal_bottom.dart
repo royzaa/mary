@@ -14,6 +14,7 @@ class ReferencModalBottom extends StatelessWidget {
       'https://www.youtube.com/watch?v=TVAxASr0iUY',
       'https://www.youtube.com/watch?v=8YhYqN9BwB4',
       'http://math2.org/math/geometry/areasvols.html',
+      'http://englishclass.com'
     ];
     Size size = MediaQuery.of(context).size;
     return GestureDetector(

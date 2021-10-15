@@ -204,9 +204,10 @@ class _SynopsisScreenState extends State<SynopsisScreen>
                   GestureDetector(
                     onTap: forwardAnimation,
                     child: CachedNetworkLottie(
+                      fit: BoxFit.scaleDown,
                       lottieUrl: _lottieGirl,
-                      height: size.width * 0.65.w,
-                      width: size.width * 0.65.w,
+                      height: size.height.h * 0.38,
+                      width: size.height.h * 0.38,
                       controller: _animationController,
                       onLoad: (compositions) {
                         _animationController!.forward();

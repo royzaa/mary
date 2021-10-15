@@ -56,7 +56,7 @@ class _LessonScreenState extends State<LessonScreen> {
                         ),
                       )
                     : const SizedBox(),
-                _currentIndex != 4
+                _currentIndex != widget.lessonData.length - 1
                     ? Positioned(
                         right: 0.w,
                         child: Icon(

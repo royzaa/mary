@@ -50,7 +50,7 @@ dependencies:
   share_plus: ^3.0.2
   device_apps: ^2.1.1
   animated_text_kit: ^4.2.1
-  syncfusion_flutter_gauges: ^19.3.45
+  syncfusion_flutter_gauges: ^19.1.66
   permission_handler: ^8.2.5
 
 dev_dependencies:

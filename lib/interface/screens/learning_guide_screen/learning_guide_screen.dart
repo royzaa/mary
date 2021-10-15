@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../data/learning_guide_data.dart';
 import './widgets/learning_guide_card.dart';
 import './widgets/learning_guide_desc.dart';
+
+import '../../../services/audio_player_controller.dart';
 
 class LearningGuideScreen extends StatefulWidget {
   const LearningGuideScreen({Key? key}) : super(key: key);
@@ -15,11 +18,20 @@ class LearningGuideScreen extends StatefulWidget {
 
 class _LearningGuideScreenState extends State<LearningGuideScreen> {
   final PageController _pageController = PageController(initialPage: 0);
+  final audioPlayer = Get.find<AudioPlayerController>();
+
   int _currentIndex = 0;
 
   @override
   void initState() {
+    audioPlayer.pause();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.resume();
+    super.dispose();
   }
 
   @override
