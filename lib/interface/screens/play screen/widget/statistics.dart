@@ -79,9 +79,12 @@ class _StatisticsState extends State<Statistics>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 15.h,
+                ),
                 CachedSvg(
                   svgUrl:
-                      'https://drive.google.com/uc?id=1_HNwq3v80pFZKOpI3R5iiNjZ0oxjyHgI',
+                      'https://drive.google.com/uc?id=1_HNwq3v80pFZKOpI7R5iiNjZ0oxjyHgI',
                   fit: BoxFit.contain,
                   width: 250.w,
                 ),
@@ -172,7 +175,7 @@ class _StatisticsState extends State<Statistics>
                                     '${animation.value} %',
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 25.sp,
+                                      fontSize: 22.sp,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   );

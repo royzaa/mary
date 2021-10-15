@@ -131,7 +131,6 @@ class _LessonScreenState extends State<LessonScreen> {
                           ),
                           child: SingleChildScrollView(
                             child: Column(
-                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
                                   lessonData[index].name,
