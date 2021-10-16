@@ -30,21 +30,28 @@ class PlayScreen extends StatefulWidget {
   State<PlayScreen> createState() => _PlayScreenState();
 }
 
-class _PlayScreenState extends State<PlayScreen> {
+class _PlayScreenState extends State<PlayScreen>
+    with SingleTickerProviderStateMixin {
   Color drawerColor = Colors.white;
   ScrollController? _scrollController;
   TimeSession? _timeSession;
+  late AnimationController _animationController;
 
   @override
   void initState() {
     _timeSession = Get.find<TimeSession>();
     _scrollController = ScrollController();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    );
     super.initState();
   }
 
   @override
   void dispose() {
     _scrollController!.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -80,6 +87,10 @@ class _PlayScreenState extends State<PlayScreen> {
           setState(() {
             drawerColor = Colors.black;
           });
+
+          if (_scrollController!.position.pixels > 210) {
+            _animationController.forward();
+          }
         } else {
           setState(() {
             drawerColor = Colors.white;
@@ -236,7 +247,9 @@ class _PlayScreenState extends State<PlayScreen> {
                 SizedBox(
                   height: 10.h,
                 ),
-                const Statistics(),
+                Statistics(
+                  animationController: _animationController,
+                ),
                 SizedBox(
                   height: 40.h,
                 ),

@@ -22,13 +22,13 @@ import './services/quiz_controller.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   await DataSharedPreferences.init();
   await _localPath().then((dirApp) async {
     await compute(writeMusicinLocal, dirApp);
   });
-
-  runApp(const MyApp());
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) => runApp(const MyApp()));
 }
 
 Future<String> _localPath() async {

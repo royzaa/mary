@@ -12,15 +12,10 @@ import './cached_image.dart';
 
 final globalKey = GlobalKey();
 
-class ShareCard extends StatefulWidget {
+class ShareCard extends StatelessWidget {
   const ShareCard({Key? key, required this.score}) : super(key: key);
   final int score;
 
-  @override
-  State<ShareCard> createState() => _ShareCardState();
-}
-
-class _ShareCardState extends State<ShareCard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -111,7 +106,7 @@ class _ShareCardState extends State<ShareCard> {
                                 cornerStyle: CornerStyle.bothCurve,
                                 width: 10.w,
                                 color: Theme.of(context).primaryColor,
-                                value: widget.score.toDouble(),
+                                value: score.toDouble(),
                                 pointerOffset: -3,
                               ),
                             ],
@@ -148,7 +143,7 @@ class _ShareCardState extends State<ShareCard> {
                               ),
                             ),
                             Text(
-                              '${widget.score}',
+                              '$score',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 26.sp,
