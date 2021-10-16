@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_placeholder_textlines/placeholder_lines.dart';
 
 import '../../services/my_cache_manager.dart';
 
@@ -69,12 +68,10 @@ class _CachedImageState extends State<CachedImage> {
               if (loadingProgress == null) {
                 return child;
               }
-              return const Center(
-                child: PlaceholderLines(
-                  count: 1,
-                  animate: true,
-                ),
-              );
+              return Center(
+                  child: CircularProgressIndicator(
+                color: Theme.of(context).primaryColor,
+              ));
             },
           );
   }

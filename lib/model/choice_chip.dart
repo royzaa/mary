@@ -6,7 +6,7 @@ class ChoiceChip {
   final bool isSelected;
   final bool isRightChoice;
 
-  const ChoiceChip({
+   ChoiceChip({
     required this.choice,
     this.color = const Color.fromRGBO(187, 191, 222, 1),
     this.isRightChoice = false,
