@@ -16,8 +16,7 @@ class Statistics extends StatefulWidget {
   State<Statistics> createState() => _StatisticsState();
 }
 
-class _StatisticsState extends State<Statistics>
-    with SingleTickerProviderStateMixin {
+class _StatisticsState extends State<Statistics> {
   late Animation animation;
   late List<int> allQuizTrack;
   int totalMark = 0;
@@ -167,7 +166,7 @@ class _StatisticsState extends State<Statistics>
                                   '${animation.value} %',
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 22.sp,
+                                    fontSize: 21.sp,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 );
@@ -177,7 +176,7 @@ class _StatisticsState extends State<Statistics>
                               'Accuracy',
                               style: TextStyle(
                                 color: Colors.grey.shade400,
-                                fontSize: 12.sp,
+                                fontSize: 10.sp,
                               ),
                             )
                           ],

@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../interface/screens/result_screen/result_screen.dart';
+import './shared_preferences.dart';
 
 // this is get package for state management
 
@@ -126,7 +128,13 @@ class QuizController extends GetxController with SingleGetTickerProviderMixin {
       _animationController.forward().whenComplete(() => nextQuestion());
     } else if (questionNumber.value == 5) {
       Get.off(
-        () => const ResultScreen(),
+        () => ShowCaseWidget(
+          onFinish: () async =>
+              await DataSharedPreferences.setFirstTimeResult(false),
+          builder: Builder(builder: (context) {
+            return const ResultScreen();
+          }),
+        ),
         transition: Transition.fade,
       );
       resetQuestionNumber();

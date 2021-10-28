@@ -134,7 +134,9 @@ class _QuestionScreenState extends State<QuizScreen> {
                       physics: const NeverScrollableScrollPhysics(),
                       controller: controller,
                       onPageChanged: (index) {
-                        currentIndex = index;
+                        setState(() {
+                          currentIndex = index;
+                        });
                       },
                       itemCount: quizNum == 1
                           ? displayedQuizOne.length

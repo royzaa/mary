@@ -29,8 +29,8 @@ final FirstQuiz firstQuiz = FirstQuiz(
       svgUrl: 'assets/images/taxi.svg',
     ),
     const FirstQuizItem(
-      quizQuestion: 'Digger',
-      rightAnswer: 'digger',
+      quizQuestion: 'Excavator',
+      rightAnswer: 'excavator',
       svgUrl: 'assets/images/digger.svg',
     ),
     const FirstQuizItem(
@@ -44,8 +44,8 @@ final FirstQuiz firstQuiz = FirstQuiz(
       svgUrl: 'assets/images/sport car.svg',
     ),
     const FirstQuizItem(
-      quizQuestion: 'Crane',
-      rightAnswer: 'crane',
+      quizQuestion: 'Derrick',
+      rightAnswer: 'derrick',
       svgUrl: 'assets/images/crane.svg',
     ),
     const FirstQuizItem(

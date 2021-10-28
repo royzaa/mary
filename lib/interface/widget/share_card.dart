@@ -146,7 +146,7 @@ class ShareCard extends StatelessWidget {
                               '$score',
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 26.sp,
+                                fontSize: 24.sp,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
