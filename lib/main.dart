@@ -18,7 +18,7 @@ import './services/time_session.dart';
 import './services/audio_player_controller.dart';
 import './interface/screens/quiz_screen/quiz_screen.dart';
 import './services/quiz_controller.dart';
-// import './services/unity_controller.dart';
+import './services/unity_controller.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,10 +72,17 @@ void writeMusicinLocal(String dirApp) async {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with WidgetsBindingObserver {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.detached) {
+      DataSharedPreferences.setArUiDuration(5);
+    }
+    super.didChangeAppLifecycleState(state);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +90,7 @@ class MyApp extends StatelessWidget {
     Get.put(MyCacheManager());
     Get.put(TimeSession());
     final quizController = Get.put(QuizController());
-    // Get.put(UnityController());
+    Get.put(UnityController());
 
     return ScreenUtilInit(
       designSize: const Size(360, 700),

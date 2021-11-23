@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO"/> 
     <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
   
 
     <queries>
@@ -73,7 +73,7 @@
             </intent-filter>
         </activity>
         
-        <!-- <activity
+        <activity
             android:name="com.xraph.plugins.flutterunitywidget.ExtendedUnityActivity"
             android:theme="@style/UnityThemeSelector"
             android:screenOrientation="fullSensor"
@@ -83,7 +83,7 @@
             android:process=":Unity"
         >
             <meta-data android:name="com.xraph.plugins.flutterunitywidget.ExtendedUnityActivity" android:value="true" />
-        </activity> -->
+        </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

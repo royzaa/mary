@@ -62,15 +62,15 @@ android {
             signingConfig signingConfigs.debug
             
         }
-        // debug {
-        //     signingConfig signingConfigs.debug
-        // }
-        // profile {
-        //     signingConfig signingConfigs.debug
-        // }
-        // innerTest {
-        //     matchingFallbacks = ['debug', 'release']
-        // }
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        profile {
+            signingConfig signingConfigs.debug
+        }
+        innerTest {
+            matchingFallbacks = ['debug', 'release']
+        }
 
     }
 }
@@ -81,6 +81,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-   // implementation project(':unityLibrary')
+    implementation project(':unityLibrary')
     
 }

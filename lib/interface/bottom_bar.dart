@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:device_apps/device_apps.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -10,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import './screens/credit_screen/credit_screen.dart';
 import './screens/synopsis_screen/synopsis_screen.dart';
@@ -22,7 +24,7 @@ import '../services/audio_player_controller.dart';
 import './widget/learning_goal.dart';
 import './screens/learning_guide_screen/learning_guide_screen.dart';
 import './screens/learning_enrichment_screen/learning_enrichement_screen.dart';
-// import '../services/unity_controller.dart';
+import '../interface/screens/ar_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -40,7 +42,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final _four = GlobalKey();
   final AudioPlayerController _audioPlayerController =
       Get.find<AudioPlayerController>();
-  // final UnityController _unityController = Get.find<UnityController>();
 
   late List<Widget> _pages;
 
@@ -210,6 +211,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 color: Theme.of(context).primaryColor,
                 size: 24.r,
               ),
+              onTap: goToArScreen,
             ),
             SpeedDialChild(
               onTap: () async {
@@ -229,6 +231,57 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ],
         ),
       ),
+    );
+  }
+
+  void goToArScreen() async {
+    final isArCoreInstalled =
+        await DeviceApps.isAppInstalled('com.google.ar.core');
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: isArCoreInstalled
+              ? Text(
+                  'Gawaimu mendukung markerless AR, kamu dapat menikmati fitur ini',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                  ),
+                )
+              : const Text(
+                  'You need to install Google AR Service to enjoy this feature. If you can not, then your device does not heve compitiability with ARCOre.'),
+          actions: [
+            isArCoreInstalled
+                ? TextButton(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      Get.find<AudioPlayerController>().pause();
+                      await Get.to(
+                        () => const ArScreen(),
+                        transition: Transition.zoom,
+                      );
+                    },
+                    child: Text(
+                      'Mainkan',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  )
+                : TextButton(
+                    onPressed: () async {
+                      await canLaunch(
+                              'https://play.google.com/store/apps/details?id=com.google.ar.core')
+                          ? await launch(
+                              'https://play.google.com/store/apps/details?id=com.google.ar.core')
+                          : throw 'Couldn\'t launch';
+                    },
+                    child: const Text('Install ARCore'),
+                  ),
+          ],
+        );
+      },
     );
   }
 }

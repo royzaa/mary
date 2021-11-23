@@ -13,12 +13,12 @@ buildscript {
 
 allprojects {
     repositories {
-        // flatDir {
-        //     dirs "${project(':unityLibrary').projectDir}/libs"
-        // }
+        flatDir {
+            dirs "${project(':unityLibrary').projectDir}/libs"
+        }
 
         google()
-        // jcenter()
+        jcenter()
         mavenCentral()
     }
 }

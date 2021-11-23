@@ -21,6 +21,8 @@ class DataSharedPreferences {
 
   static const _keyFirstTimeResult = 'result';
 
+  static const _keyDuration = 'dur';
+
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
 
@@ -117,4 +119,11 @@ class DataSharedPreferences {
         0,
         0,
       ];
+  static Future<void> setArUiDuration(int duration) async {
+    await _preferences.setInt(_keyDuration, duration);
+  }
+
+  static int getArUiDuration() {
+    return _preferences.getInt(_keyDuration) ?? 5;
+  }
 }
