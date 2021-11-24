@@ -62,7 +62,7 @@ class _QuestionScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     final quizNum = ModalRoute.of(context)?.settings.arguments as int;
-    final mediaQUery = MediaQuery.of(context).size;
+    final mediaQuery = MediaQuery.of(context).size;
 
     return WillPopScope(
       onWillPop: () async {
@@ -78,24 +78,46 @@ class _QuestionScreenState extends State<QuizScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
-                      vertical: 10.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Obx(
-                      () => Text(
-                        'Question No. ${quizController.questionNumber.value}',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
+                  SizedBox(
+                    width: mediaQuery.width,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      alignment: Alignment.topCenter,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.w,
+                            vertical: 10.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Obx(
+                            () => Text(
+                              'Question No. ${quizController.questionNumber.value}',
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        if (quizNum == 1)
+                          Positioned(
+                            top: 5.h,
+                            left: 16.w,
+                            child: InkWell(
+                              onTap: showHint,
+                              child: Icon(
+                                Icons.error_outline_outlined,
+                                color: Colors.white54,
+                                size: 28.r,
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -106,14 +128,14 @@ class _QuestionScreenState extends State<QuizScreen> {
                     alignment: Alignment.centerLeft,
                     children: [
                       Container(
-                        width: mediaQUery.width * 0.45,
+                        width: mediaQuery.width * 0.45,
                         height: 6,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             color: Theme.of(context).primaryColor),
                       ),
                       Container(
-                        width: mediaQUery.width *
+                        width: mediaQuery.width *
                             0.45 *
                             (currentIndex + 1) *
                             1 /
@@ -148,7 +170,7 @@ class _QuestionScreenState extends State<QuizScreen> {
                                 ? _five
                                 : null
                             : null,
-                        mediaQuery: mediaQUery,
+                        mediaQuery: mediaQuery,
                         textStyle: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 16.sp,
@@ -178,6 +200,34 @@ class _QuestionScreenState extends State<QuizScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void showHint() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Tips',
+          style: TextStyle(fontSize: 20, color: Theme.of(context).primaryColor),
+        ),
+        content: const Text(
+          "Hold on mic button and speak the correct vehicle pronunciation.",
+          style: TextStyle(fontSize: 14, color: Colors.black),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              "I understand",
+              style: TextStyle(
+                  fontSize: 16, color: Theme.of(context).primaryColor),
+            ),
+          )
+        ],
       ),
     );
   }

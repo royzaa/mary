@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../services/audio_player_controller.dart';
-// import '../../services/unity_controller.dart';
+import '../../services/unity_controller.dart';
 
 class DialogExit extends StatelessWidget {
   const DialogExit({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class DialogExit extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final audioPlayer = Get.find<AudioPlayerController>();
-    // final unityController = Get.find<UnityController>();
+    final _unityController = Get.find<UnityController>();
     double seriesWidth = 160.w;
     return Dialog(
       insetAnimationCurve: Curves.easeIn,
@@ -56,11 +56,11 @@ class DialogExit extends StatelessWidget {
                   ),
                   onPressed: () async {
                     audioPlayer.dispose();
-                    // unityController.unityController!
-                    //     .postMessage('GameManager', 'QuitApp', 'quit');
+                    if (_unityController.unityController != null) {
+                      _unityController.unityController!.quit();
+                    }
 
                     SystemNavigator.pop();
-                    // exit(0);
                   },
                   child: Text(
                     'Yes',

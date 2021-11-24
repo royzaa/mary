@@ -61,7 +61,6 @@ class _ArScreenState extends State<ArScreen> {
     'Scooter',
     'Ship',
     'Skateboard',
-    'Ski Chairlift',
     'Space Shuttle',
     'Speed Boat',
     'Sport Car',
@@ -84,33 +83,7 @@ class _ArScreenState extends State<ArScreen> {
       if (DataSharedPreferences.getFirstLaunchAR() == false) {
         Future.delayed(
           const Duration(milliseconds: 5250),
-          () => showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text(
-                'Tips',
-                style: TextStyle(
-                    fontSize: 20, color: Theme.of(context).primaryColor),
-              ),
-              content: const Text(
-                "You should point your device camera in large surface area",
-                style: TextStyle(fontSize: 14, color: Colors.black),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    DataSharedPreferences.setFirstLaunchAR(true);
-                  },
-                  child: Text(
-                    "I understand",
-                    style: TextStyle(
-                        fontSize: 16, color: Theme.of(context).primaryColor),
-                  ),
-                )
-              ],
-            ),
-          ),
+          () => showHint(),
         );
       }
     });
@@ -197,6 +170,17 @@ class _ArScreenState extends State<ArScreen> {
                     alignment: Alignment.center,
                     children: [
                       Positioned(
+                        top: 32.h,
+                        child: InkWell(
+                          onTap: showHint,
+                          child: Icon(
+                            Icons.error_outline_outlined,
+                            color: Colors.white.withOpacity(0.5),
+                            size: 32.r,
+                          ),
+                        ),
+                      ),
+                      Positioned(
                         top: 30,
                         left: 20,
                         child: ElevatedButton.icon(
@@ -231,7 +215,7 @@ class _ArScreenState extends State<ArScreen> {
                         ),
                       ),
                       Positioned(
-                        right: -60.w,
+                        right: -85.w,
                         child: Transform.rotate(
                           angle: math.pi * 3 / 2,
                           child: Row(
@@ -239,10 +223,10 @@ class _ArScreenState extends State<ArScreen> {
                             children: [
                               Transform.rotate(
                                 angle: math.pi / 2,
-                                child: const Text(
+                                child: Text(
                                   '-',
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -252,18 +236,21 @@ class _ArScreenState extends State<ArScreen> {
                                 height: 20.h,
                               ),
                               Obx(
-                                () => Slider(
-                                  min: 1 / 3,
-                                  max: 3,
-                                  thumbColor: Colors.white,
-                                  activeColor: Colors.white,
-                                  value: scaleFactor.value,
-                                  onChanged: (value) {
-                                    scaleFactor.value = value;
+                                () => SizedBox(
+                                  width: 250.w,
+                                  child: Slider(
+                                    min: 1 / 3,
+                                    max: 3,
+                                    thumbColor: Colors.white,
+                                    activeColor: Colors.white,
+                                    value: scaleFactor.value,
+                                    onChanged: (value) {
+                                      scaleFactor.value = value;
 
-                                    _setScaleFactorValue(
-                                        scaleFactor.value.toString());
-                                  },
+                                      _setScaleFactorValue(
+                                          scaleFactor.value.toString());
+                                    },
+                                  ),
                                 ),
                               ),
                               const SizedBox(
@@ -271,10 +258,10 @@ class _ArScreenState extends State<ArScreen> {
                               ),
                               Transform.rotate(
                                 angle: math.pi / 2,
-                                child: const Text(
+                                child: Text(
                                   '+',
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -286,7 +273,7 @@ class _ArScreenState extends State<ArScreen> {
                       ),
                       Positioned(
                         bottom: 40.h,
-                        height: 100.h,
+                        height: 110.h,
                         width: MediaQuery.of(context).size.width,
                         child: Stack(
                           alignment: Alignment.center,
@@ -301,12 +288,24 @@ class _ArScreenState extends State<ArScreen> {
                                   _currentVehicleIndex = index;
                                 });
                               },
+                              itemCount: _vehicles.length,
                               itemBuilder: (context, index) {
                                 return Transform.scale(
                                   scale:
                                       index == _currentVehicleIndex ? 1 : 0.8,
-                                  child: VehicleCard(
-                                    name: _vehicles[index],
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35.r),
+                                      border: Border.all(
+                                        color: index == _currentVehicleIndex
+                                            ? Colors.white30
+                                            : Colors.transparent,
+                                        width: 8.r,
+                                      ),
+                                    ),
+                                    child: VehicleCard(
+                                      name: _vehicles[index],
+                                    ),
                                   ),
                                 );
                               },
@@ -335,7 +334,7 @@ class _ArScreenState extends State<ArScreen> {
                         ),
                       ),
                       Positioned(
-                        bottom: 150.h,
+                        bottom: 160.h,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -347,24 +346,21 @@ class _ArScreenState extends State<ArScreen> {
                                 color: Colors.white,
                               ),
                             ),
-                            SizedBox(
-                              height: 20.w,
-                            ),
                             Obx(
-                              () => Slider(
-                                min: -180,
-                                max: 180,
-                                thumbColor: Colors.white,
-                                activeColor: Colors.white,
-                                value: rotation.value,
-                                onChanged: (value) {
-                                  rotation.value = value;
-                                  _setRotation(value.toString());
-                                },
+                              () => SizedBox(
+                                width: 250.w,
+                                child: Slider(
+                                  min: -180,
+                                  max: 180,
+                                  thumbColor: Colors.white,
+                                  activeColor: Colors.white,
+                                  value: rotation.value,
+                                  onChanged: (value) {
+                                    rotation.value = value;
+                                    _setRotation(value.toString());
+                                  },
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 20.w,
                             ),
                             Text(
                               '-180°',
@@ -410,6 +406,35 @@ class _ArScreenState extends State<ArScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void showHint() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Tips',
+          style: TextStyle(fontSize: 20, color: Theme.of(context).primaryColor),
+        ),
+        content: const Text(
+          "You should point your device camera in large surface area",
+          style: TextStyle(fontSize: 14, color: Colors.black),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              DataSharedPreferences.setFirstLaunchAR(true);
+            },
+            child: Text(
+              "I understand",
+              style: TextStyle(
+                  fontSize: 16, color: Theme.of(context).primaryColor),
+            ),
+          )
+        ],
       ),
     );
   }

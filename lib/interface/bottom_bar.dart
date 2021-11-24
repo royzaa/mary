@@ -25,6 +25,7 @@ import './widget/learning_goal.dart';
 import './screens/learning_guide_screen/learning_guide_screen.dart';
 import './screens/learning_enrichment_screen/learning_enrichement_screen.dart';
 import '../interface/screens/ar_screen.dart';
+import '../services/unity_controller.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
@@ -42,6 +43,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final _four = GlobalKey();
   final AudioPlayerController _audioPlayerController =
       Get.find<AudioPlayerController>();
+  final UnityController _unityController = Get.find<UnityController>();
 
   late List<Widget> _pages;
 
@@ -95,6 +97,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
           return false;
         } else {
           _audioPlayerController.dispose();
+
+          if (_unityController.unityController != null) {
+            _unityController.unityController!.quit();
+          }
 
           SystemNavigator.pop();
 
