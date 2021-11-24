@@ -20,7 +20,7 @@ class ArScreen extends StatefulWidget {
 
 class _ArScreenState extends State<ArScreen> {
   final _unityController = Get.find<UnityController>();
-  RxDouble scaleFactor = 0.0.obs;
+  RxDouble scaleFactor = 1.0.obs;
   RxDouble rotation = 0.0.obs;
   int _currentVehicleIndex = 0;
   final PageController _pageController = PageController(viewportFraction: 0.3);
@@ -83,7 +83,7 @@ class _ArScreenState extends State<ArScreen> {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       if (DataSharedPreferences.getFirstLaunchAR() == false) {
         Future.delayed(
-          const Duration(milliseconds: 5500),
+          const Duration(milliseconds: 5250),
           () => showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -253,8 +253,8 @@ class _ArScreenState extends State<ArScreen> {
                               ),
                               Obx(
                                 () => Slider(
-                                  min: -0.01,
-                                  max: 0.01,
+                                  min: 1 / 3,
+                                  max: 3,
                                   thumbColor: Colors.white,
                                   activeColor: Colors.white,
                                   value: scaleFactor.value,
