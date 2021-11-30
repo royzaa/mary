@@ -20,8 +20,8 @@ class ArScreen extends StatefulWidget {
 
 class _ArScreenState extends State<ArScreen> {
   final _unityController = Get.find<UnityController>();
-  RxDouble scaleFactor = 1.0.obs;
-  RxDouble rotation = 0.0.obs;
+  final RxDouble _scaleFactor = 1.0.obs;
+  final RxDouble _rotation = 0.0.obs;
   int _currentVehicleIndex = 0;
   final PageController _pageController = PageController(viewportFraction: 0.3);
   int duration = DataSharedPreferences.getArUiDuration();
@@ -206,6 +206,9 @@ class _ArScreenState extends State<ArScreen> {
                               primary: Theme.of(context).primaryColor),
                           onPressed: () async {
                             _restartScene('restart');
+                            setState(() {
+                              _currentVehicleIndex = 0;
+                            });
                           },
                           icon: const Icon(Icons.refresh),
                           label: const Text(
@@ -243,12 +246,12 @@ class _ArScreenState extends State<ArScreen> {
                                     max: 3,
                                     thumbColor: Colors.white,
                                     activeColor: Colors.white,
-                                    value: scaleFactor.value,
+                                    value: _scaleFactor.value,
                                     onChanged: (value) {
-                                      scaleFactor.value = value;
+                                      _scaleFactor.value = value;
 
                                       _setScaleFactorValue(
-                                          scaleFactor.value.toString());
+                                          _scaleFactor.value.toString());
                                     },
                                   ),
                                 ),
@@ -286,6 +289,7 @@ class _ArScreenState extends State<ArScreen> {
                                 _setVehicleIndex(index.toString());
                                 setState(() {
                                   _currentVehicleIndex = index;
+                                  _scaleFactor.value = 1.0;
                                 });
                               },
                               itemCount: _vehicles.length,
@@ -354,9 +358,9 @@ class _ArScreenState extends State<ArScreen> {
                                   max: 180,
                                   thumbColor: Colors.white,
                                   activeColor: Colors.white,
-                                  value: rotation.value,
+                                  value: _rotation.value,
                                   onChanged: (value) {
-                                    rotation.value = value;
+                                    _rotation.value = value;
                                     _setRotation(value.toString());
                                   },
                                 ),
@@ -474,7 +478,10 @@ class VehicleCard extends StatelessWidget {
           ),
           Text(
             name,
-            style: TextStyle(color: Colors.white, fontSize: 12.sp),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: name.length <= 10 ? 12.sp : 10.sp,
+            ),
           )
         ],
       ),

@@ -66,26 +66,51 @@ class MyDrawer extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(30.r),
                   ),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.open_in_browser,
-                      color: Colors.white,
-                      size: 24.r,
-                    ),
-                    title: Text(
-                      'More apps',
-                      style: TextStyle(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.open_in_browser,
                           color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14.sp),
-                    ),
-                    onTap: () async {
-                      await canLaunch(
-                              'https://m-edukasi.kemdikbud.go.id/medukasi')
-                          ? await launch(
-                              'https://m-edukasi.kemdikbud.go.id/medukasi')
-                          : throw 'Couldn\'t access url';
-                    },
+                          size: 24.r,
+                        ),
+                        title: Text(
+                          'More apps',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14.sp),
+                        ),
+                        onTap: () async {
+                          await canLaunch(
+                                  'https://m-edukasi.kemdikbud.go.id/medukasi')
+                              ? await launch(
+                                  'https://m-edukasi.kemdikbud.go.id/medukasi')
+                              : throw 'Couldn\'t access url';
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.task,
+                          color: Colors.white,
+                          size: 24.r,
+                        ),
+                        title: Text(
+                          'LKPD',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14.sp),
+                        ),
+                        onTap: () async {
+                          const lkpdUrl =
+                              'https://docs.google.com/document/d/1pyNuozj-GHdIzGZpdT6wlD8JOH1beOj0/edit?usp=sharing&ouid=112259298456303259999&rtpof=true&sd=true';
+                          await canLaunch(lkpdUrl)
+                              ? await launch(lkpdUrl)
+                              : throw 'Couldn\'t access url';
+                        },
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(

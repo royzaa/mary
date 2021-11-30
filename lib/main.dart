@@ -22,13 +22,12 @@ import './services/unity_controller.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await DataSharedPreferences.init();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) => runApp(const MyApp()));
   await _localPath().then((dirApp) async {
     await compute(writeMusicinLocal, dirApp);
   });
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) => runApp(const MyApp()));
 }
 
 Future<String> _localPath() async {
