@@ -89,6 +89,10 @@ class MyDrawer extends StatelessWidget {
                               : throw 'Couldn\'t access url';
                         },
                       ),
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 2.0,
+                      ),
                       ListTile(
                         leading: Icon(
                           Icons.task,

@@ -209,7 +209,6 @@ class QuizBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            height: 120.h,
             width: 140.w,
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
             decoration: BoxDecoration(
@@ -238,6 +237,9 @@ class QuizBox extends StatelessWidget {
                           height: 80.h,
                           fit: BoxFit.scaleDown,
                         ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
                       ),
                       Text(
                         quizTitle!,

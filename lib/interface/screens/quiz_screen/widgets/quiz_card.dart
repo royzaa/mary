@@ -165,17 +165,23 @@ class _QuizCardState extends State<QuizCard>
                         end: Alignment.topRight,
                       ),
                     ),
+                    height: widget.mediaQuery.height.h * 0.22,
                     padding: EdgeInsets.all(15.r),
                     margin: EdgeInsets.only(
                       top: 15.h,
                       right: 15.w,
                       left: 15.w,
                     ),
-                    child: Text(
-                      widget.descriptiveText!,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12.sp,
+                    child: Scrollbar(
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Text(
+                          widget.descriptiveText!,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.sp,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -208,7 +214,7 @@ class _QuizCardState extends State<QuizCard>
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
-                      fontSize: widget.option != null ? 18.sp : 14.sp,
+                      fontSize: widget.option != null ? 18.sp : 13.sp,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
