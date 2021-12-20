@@ -151,8 +151,10 @@ class _ResultScreenState extends State<ResultScreen> {
                             quizController.correctAnswer.value.toString());
                         debugPrint('wrong:' +
                             quizController.wrongAnswer.value.toString());
-                        secondQuiz.isOpen = true;
-                        DataSharedPreferences.setQuizTwoUnlocked(true);
+                        if (!secondQuiz.isOpen) {
+                          secondQuiz.isOpen = true;
+                          DataSharedPreferences.setQuizTwoUnlocked(true);
+                        }
                         final tempQuizData =
                             DataSharedPreferences.getQuizTracking();
                         tempQuizData.add(score);

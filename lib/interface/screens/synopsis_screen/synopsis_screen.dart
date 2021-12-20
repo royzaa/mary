@@ -178,7 +178,7 @@ class _SynopsisScreenState extends State<SynopsisScreen>
                 SizedBox(
                   width: size.width * 0.45.w,
                   child: Text(
-                    'Let\'s read this beautiful synopsis for understanding more about our topic',
+                    'Let\'s read this synopsis for understanding more about our topic',
                     style: TextStyle(
                       color: timeSession.isDay ? Colors.black : Colors.white,
                       fontWeight: FontWeight.w500,

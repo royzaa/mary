@@ -10,12 +10,12 @@ final List<OnBoarding> onBoadringData = [
   OnBoarding(
       title: 'Welcome $userName',
       desc:
-          """Hi $userName, I am mary. Today we will go around in our city. We will spot any of wonderful city vehicle. I am very looking forward to start a journey with you.
+          """Hi $userName, I am Mary. Today we will go around in our city. We will spot any wonderful city vehicles. I am very looking forward to start a journey with you.
 """,
       imageUrl:
           'https://drive.google.com/uc?id=1DyeB3wusaZZc3Iii5iEwWAkkqFnyrmoZ'),
   const OnBoarding(
-      title: 'Wonderful City Vehicle',
+      title: 'Wonderful City Vehicles',
       desc:
           """Many vehicles pass through the city. We will recognize them one by one. Together with Mary, we will learn to describe them. Don't worry, this will be a lot of fun.
 """,

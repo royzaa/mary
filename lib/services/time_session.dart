@@ -6,11 +6,11 @@ class TimeSession extends GetxController {
 
     int hour = DateTime.now().hour;
 
-    if (hour > 4 && hour < 12) {
+    if (hour > 5 && hour < 12) {
       session = 'Good Morning';
-    } else if (hour >= 12 && hour < 15) {
+    } else if (hour >= 12 && hour < 18) {
       session = 'Good Afternoon';
-    } else if (hour >= 15 && hour <= 18) {
+    } else if (hour >= 18 && hour <= 24) {
       session = 'Good Evening';
     } else {
       session = 'Good Night';

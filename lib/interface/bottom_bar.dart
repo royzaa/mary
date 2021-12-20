@@ -234,7 +234,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 size: 24.r,
               ),
             ),
-          ],
+          ].reversed.toList(),
         ),
       ),
     );

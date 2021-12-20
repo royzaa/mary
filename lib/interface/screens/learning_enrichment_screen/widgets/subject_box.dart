@@ -19,67 +19,64 @@ class SubjectBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-        duration: const Duration(milliseconds: 350),
-        height: isSelected ? 105.h : 95.h,
-        width: isSelected ? 90.w : 85.w,
-        curve: Curves.easeInQuart,
-        padding: EdgeInsets.all(15.r),
-        margin: EdgeInsets.only(right: 20.w),
-        decoration: BoxDecoration(
-          color: isSelected ? Theme.of(context).primaryColor : Colors.grey[200],
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30.r),
-            bottomRight: Radius.circular(30.r),
-          ),
-          boxShadow: [
-            isSelected
-                ? BoxShadow(
-                    color: Theme.of(context).primaryColor.withOpacity(0.5),
-                    blurRadius: 50,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 20),
-                  )
-                : const BoxShadow(
-                    color: Color.fromRGBO(137, 137, 137, 0.25),
-                    blurRadius: 50,
-                    spreadRadius: 5,
-                    offset: Offset(0, 20),
-                  ),
-          ],
+      duration: const Duration(milliseconds: 350),
+      height: isSelected ? 105.h : 95.h,
+      width: isSelected ? 90.w : 85.w,
+      curve: Curves.easeInQuart,
+      padding: EdgeInsets.all(15.r),
+      margin: EdgeInsets.only(right: 20.w),
+      decoration: BoxDecoration(
+        color: isSelected ? Theme.of(context).primaryColor : Colors.grey[200],
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30.r),
+          bottomRight: Radius.circular(30.r),
         ),
-        child: Column(
-          children: [
-            if (icon != null)
-              Expanded(
-                flex: 1,
-                child: Icon(
+        boxShadow: [
+          isSelected
+              ? BoxShadow(
+                  color: Theme.of(context).primaryColor.withOpacity(0.5),
+                  blurRadius: 50,
+                  spreadRadius: 2,
+                  offset: const Offset(0, 20),
+                )
+              : const BoxShadow(
+                  color: Color.fromRGBO(137, 137, 137, 0.25),
+                  blurRadius: 50,
+                  spreadRadius: 5,
+                  offset: Offset(0, 20),
+                ),
+        ],
+      ),
+      child: Scrollbar(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null)
+                Icon(
                   icon,
                   color: isSelected ? Colors.white : Colors.black,
                   size: 36.r,
                 ),
-              ),
-            if (assetImage != null && lightAssetImage != null)
-              Expanded(
-                flex: 1,
-                child: Image.asset(
+              if (assetImage != null && lightAssetImage != null)
+                Image.asset(
                   isSelected ? lightAssetImage! : assetImage!,
                   fit: BoxFit.contain,
                 ),
+              SizedBox(
+                height: 15.h,
               ),
-            SizedBox(
-              height: 15.h,
-            ),
-            Expanded(
-              flex: 1,
-              child: Text(
+              Text(
                 title,
                 style: TextStyle(
                   color: isSelected ? Colors.white : Colors.black,
                   fontSize: 12.sp,
                 ),
               ),
-            ),
-          ],
-        ));
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

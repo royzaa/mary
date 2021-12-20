@@ -72,7 +72,7 @@ class _QuestionScreenState extends State<QuizScreen> {
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(79, 88, 170, 1),
         body: SafeArea(
-          child: Padding(
+          child: Container(
             padding: const EdgeInsets.all(16),
             child: Center(
               child: Column(

@@ -89,8 +89,7 @@ final FirstQuiz firstQuiz = FirstQuiz(
 
 SecondQuiz secondQuiz = SecondQuiz(
   imageUrl: 'https://drive.google.com/uc?id=1mZmhgZWfj4PJlCvilV6CspXpeNDOgFgm',
-  isOpen: true,
-  // DataSharedPreferences.getQuizTwoUnlocked()!,
+  isOpen: DataSharedPreferences.getQuizTwoUnlocked()!,
   quizItemData: [
     SecondQuizItem(
       quizQuestion: 'What does the text tell about?',

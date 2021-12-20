@@ -113,7 +113,7 @@ class QuizBox extends StatelessWidget {
                     ),
                   ),
                   content: Text(
-                    'Pray first before you try to practice. Ensure you have already all set. After you click ready, you cannot go back until you finish the quiz.',
+                    'Pray first before you try to practice. Ensure you have all set already. After you click ready, you cannot go back until you finish the quiz.',
                     style: TextStyle(
                       fontSize: 15.sp,
                     ),

@@ -64,13 +64,13 @@ class _PlayScreenState extends State<PlayScreen>
 
       int hour = DateTime.now().hour;
 
-      if (hour > 3 && hour < 12) {
+      if (hour > 5 && hour < 12) {
         imageUrl =
             'https://drive.google.com/uc?id=1cE48IYRJQvtPcsod-xcfuhIsw9ebzWTi';
       } else if (hour >= 12 && hour < 15) {
         imageUrl =
             'https://drive.google.com/uc?id=1yWcazbQVw1iIhPu5R0ouNONTEHf0vK5I';
-      } else if (hour >= 15 && hour <= 19) {
+      } else if (hour >= 15 && hour <= 18) {
         imageUrl =
             'https://drive.google.com/uc?id=13BsjrU03ErBDAcgmXbgXHHH2tKJBKMe8';
       } else {

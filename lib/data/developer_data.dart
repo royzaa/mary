@@ -13,13 +13,13 @@ List<Developer> devData = [
       sosmedurl: 'https://github.com/royzaa'),
   Developer(
       imageUrl:
-          'https://drive.google.com/uc?id=1u4utbPl2GJvOF6uzhPtdZvEko-REF3HC',
+          'https://drive.google.com/uc?id=1btgavCluHgbpdx9y_4SggasiL0N9WhPq',
       name: 'Bayu Setiawan',
       roles: [
         '3D artist',
       ],
-      sosmed: 'sosmed Bayu',
-      sosmedurl: 'https://instagram.com'),
+      sosmed: '_bayusetya',
+      sosmedurl: 'https://instagram.com/_bayusetya'),
   Developer(
       imageUrl: '',
       name: 'Manikawati',
