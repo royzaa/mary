@@ -140,13 +140,6 @@ class _ResultScreenState extends State<ResultScreen> {
                         ),
                       ),
                       onPressed: () {
-                        // DataSharedPreferences.setListOfScore(
-                        //   quizController.listOfScore
-                        //       .map(
-                        //         (score) => score.toString(),
-                        //       )
-                        //       .toList(),
-                        // );
                         debugPrint('correct:' +
                             quizController.correctAnswer.value.toString());
                         debugPrint('wrong:' +
@@ -154,6 +147,12 @@ class _ResultScreenState extends State<ResultScreen> {
                         if (!secondQuiz.isOpen) {
                           secondQuiz.isOpen = true;
                           DataSharedPreferences.setQuizTwoUnlocked(true);
+                        } else if (secondQuiz.isOpen && !thirdQuiz.isOpen) {
+                          thirdQuiz.isOpen = true;
+                          DataSharedPreferences.setQuizThreeUnlocked(true);
+                        } else if (thirdQuiz.isOpen && !fourthQuiz.isOpen) {
+                          fourthQuiz.isOpen = true;
+                          DataSharedPreferences.setQuizFourthUnlocked(true);
                         }
                         final tempQuizData =
                             DataSharedPreferences.getQuizTracking();

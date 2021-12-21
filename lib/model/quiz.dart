@@ -43,3 +43,19 @@ class SecondQuiz extends Quiz {
           title: title,
         );
 }
+
+class ThirdAndFourthQuiz extends Quiz {
+  final List<ThirdAndFourthQuizItem> quizItemData;
+  ThirdAndFourthQuiz({
+    required String title,
+    String? imageUrl,
+    required bool isOpen,
+    required int quizNum,
+    required this.quizItemData,
+  }) : super(
+          imageUrl: imageUrl,
+          isOpen: isOpen,
+          quizNum: quizNum,
+          title: title,
+        );
+}

@@ -44,7 +44,7 @@ class CountDown extends StatelessWidget {
                   // countdown timer container
                   alignment: Alignment.bottomRight,
                   height: mediaQuery.height.h * 0.08,
-                  width: (mediaQuery.width.w - 32.h) * countDownValue,
+                  width: (mediaQuery.width - 32) * countDownValue,
                   decoration: const BoxDecoration(
                     color: Color.fromRGBO(79, 88, 170, 1),
                   ),

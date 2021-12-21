@@ -216,23 +216,50 @@ class _PlayScreenState extends State<PlayScreen>
                 SizedBox(
                   height: 20.h,
                 ),
-                Row(
-                  children: [
-                    QuizBox(
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  clipBehavior: Clip.none,
+                  physics: const BouncingScrollPhysics(),
+                  child: Row(
+                    children: [
+                      QuizBox(
                         isOpen: firstQuiz.isOpen,
                         numQuiz: firstQuiz.quizNum,
                         imageUrl: firstQuiz.imageUrl,
-                        quizTitle: firstQuiz.title),
-                    SizedBox(
-                      width: 25.w,
-                    ),
-                    QuizBox(
-                      isOpen: secondQuiz.isOpen,
-                      numQuiz: secondQuiz.quizNum,
-                      imageUrl: secondQuiz.imageUrl,
-                      quizTitle: secondQuiz.title,
-                    ),
-                  ],
+                        quizTitle: firstQuiz.title,
+                      ),
+                      SizedBox(
+                        width: 25.w,
+                      ),
+                      QuizBox(
+                        isOpen: secondQuiz.isOpen,
+                        numQuiz: secondQuiz.quizNum,
+                        imageUrl: secondQuiz.imageUrl,
+                        quizTitle: secondQuiz.title,
+                      ),
+                      SizedBox(
+                        width: 25.w,
+                      ),
+                      QuizBox(
+                        isOpen: thirdQuiz.isOpen,
+                        numQuiz: thirdQuiz.quizNum,
+                        imageUrl: thirdQuiz.imageUrl,
+                        quizTitle: thirdQuiz.title,
+                      ),
+                      SizedBox(
+                        width: 25.w,
+                      ),
+                      QuizBox(
+                        isOpen: fourthQuiz.isOpen,
+                        numQuiz: fourthQuiz.quizNum,
+                        imageUrl: fourthQuiz.imageUrl,
+                        quizTitle: fourthQuiz.title,
+                      ),
+                      SizedBox(
+                        width: 25.w,
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 25.h,

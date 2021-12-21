@@ -14,7 +14,9 @@ class ReferencModalBottom extends StatelessWidget {
       'https://www.youtube.com/watch?v=TVAxASr0iUY',
       'https://www.youtube.com/watch?v=8YhYqN9BwB4',
       'http://math2.org/math/geometry/areasvols.html',
-      'http://englishclass.com'
+      'http://englishclass.com',
+      'https://www.juraganles.com/2018/01/kumpulan-soal-bangun-ruang-lengkap-plus-kunci-jawaban.html',
+      'https://afrizatul.com/contoh-soal-dan-pembahasan-volume-bangun-ruang-dan-luas-permukaan-balok',
     ];
     Size size = MediaQuery.of(context).size;
     return GestureDetector(

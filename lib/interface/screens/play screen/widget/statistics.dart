@@ -50,7 +50,20 @@ class _StatisticsState extends State<Statistics> {
       totalCorrectQuestion += e;
     }
 
-    completionProgress = totalCorrectQuestion / 200 * 100;
+    final thirdQuizCompletion = DataSharedPreferences.getThirdQuizCompletion();
+    debugPrint(thirdQuizCompletion.toString());
+    for (var e in thirdQuizCompletion) {
+      totalCorrectQuestion += e;
+    }
+
+    final fourthQuizCompletion =
+        DataSharedPreferences.getFourthQuizCompletion();
+    debugPrint(fourthQuizCompletion.toString());
+    for (var e in fourthQuizCompletion) {
+      totalCorrectQuestion += e;
+    }
+
+    completionProgress = totalCorrectQuestion / 400 * 100;
 
     animation = IntTween(
       begin: 0,

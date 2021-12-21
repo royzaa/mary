@@ -23,20 +23,29 @@ class QuizCard extends StatefulWidget {
     required this.controller,
     required this.showCaseKey,
     required this.index,
+    required this.quizNum,
     this.option,
-    this.descriptiveText,
+    this.descriptiveTextorNaration,
+    this.correctAnswerForEssay,
     this.rightAnswer,
+    required this.isEssay,
     this.svgUrl,
+    this.imageUrl,
   }) : super(key: key);
 
   final Size mediaQuery;
   final TextStyle textStyle;
   final String question;
-  final String? rightAnswer, svgUrl, descriptiveText;
+  final String? rightAnswer,
+      svgUrl,
+      descriptiveTextorNaration,
+      correctAnswerForEssay,
+      imageUrl;
   final List<choice.ChoiceChip>? option;
   final PageController controller;
   final GlobalKey? showCaseKey;
-  final int index;
+  final int index, quizNum;
+  final bool isEssay;
 
   @override
   State<QuizCard> createState() => _QuizCardState();
@@ -46,6 +55,7 @@ class _QuizCardState extends State<QuizCard>
     with SingleTickerProviderStateMixin {
   final QuizController quizController = Get.find<QuizController>();
   late AnimationController _animationController;
+  final TextEditingController _essayTypingController = TextEditingController();
 
   final ValueNotifier<bool> isCorrectAnswer = ValueNotifier(false);
   late ValueNotifier<bool> isAnswered;
@@ -139,7 +149,11 @@ class _QuizCardState extends State<QuizCard>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CountDown(
-                  duration: widget.rightAnswer != null ? 30 : 45,
+                  duration: widget.quizNum == 1
+                      ? 30
+                      : widget.quizNum == 2
+                          ? 45
+                          : 90,
                   mediaQuery: widget.mediaQuery,
                 ),
                 if (widget.svgUrl != null)
@@ -149,7 +163,14 @@ class _QuizCardState extends State<QuizCard>
                     width: widget.mediaQuery.width.w * 0.75,
                     fit: BoxFit.contain,
                   ),
-                if (widget.descriptiveText != null)
+                if (widget.imageUrl != null)
+                  Image.network(
+                    widget.imageUrl!,
+                    height: widget.mediaQuery.height.h * 0.18,
+                    width: widget.mediaQuery.width.w * 0.75,
+                    fit: BoxFit.contain,
+                  ),
+                if (widget.descriptiveTextorNaration != null)
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -176,7 +197,7 @@ class _QuizCardState extends State<QuizCard>
                       child: SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
                         child: Text(
-                          widget.descriptiveText!,
+                          widget.descriptiveTextorNaration!,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12.sp,
@@ -186,7 +207,7 @@ class _QuizCardState extends State<QuizCard>
                     ),
                   ),
 
-                if (widget.rightAnswer != null)
+                if (widget.quizNum != 2)
                   ClipRRect(
                     borderRadius: BorderRadius.circular(40),
                     child: Container(
@@ -210,7 +231,6 @@ class _QuizCardState extends State<QuizCard>
                   width: widget.mediaQuery.width - 32 - 40,
                   child: Text(
                     widget.question,
-                    maxLines: 2,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
@@ -228,14 +248,6 @@ class _QuizCardState extends State<QuizCard>
                     },
                     onTapDown: (details) async {
                       listeningNotifer.value = true;
-                      // Timer(
-                      //   const Duration(milliseconds: 1900),
-                      //   () {
-                      //     debugPrint('error timer');
-                      //     SpeechToTextApi.stopListen();
-                      //     listeningNotifer.value = false;
-                      //   },
-                      // );
 
                       SpeechToTextApi.startListen(
                         onResult: (result) {
@@ -244,20 +256,6 @@ class _QuizCardState extends State<QuizCard>
                                 result.toLowerCase() == widget.rightAnswer;
 
                             isAnswered.value = true;
-                            // Future.delayed(
-                            //   const Duration(milliseconds: 500),
-                            //   () {
-                            //     if (quizController.questionNumber.value == 1) {
-                            //       debugPrint(
-                            //         'answered? no 1: ' +
-                            //             isAnswered.value.toString(),
-                            //       );
-                            //       isCorrectAnswer.value
-                            //           ? quizController.correctAnswer.value++
-                            //           : quizController.wrongAnswer.value++;
-                            //     }
-                            //   },
-                            // );
 
                             _animationController.forward();
                             debugPrint('hasil: $result');
@@ -317,6 +315,25 @@ class _QuizCardState extends State<QuizCard>
                       },
                     ),
                   ),
+                if (widget.isEssay)
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: TextField(
+                      controller: _essayTypingController,
+                      cursorColor: Theme.of(context).primaryColor,
+                      decoration: InputDecoration(
+                        labelText: 'Type your answer here',
+                        focusColor: Theme.of(context).primaryColor,
+                        floatingLabelStyle: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                    ),
+                  ),
                 if (widget.option != null)
                   Wrap(
                     alignment: WrapAlignment.center,
@@ -361,7 +378,7 @@ class _QuizCardState extends State<QuizCard>
                   ),
 
                 // submit button
-                if (widget.option != null)
+                if (widget.option != null || widget.isEssay)
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
@@ -376,46 +393,146 @@ class _QuizCardState extends State<QuizCard>
                       ],
                     ),
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10.h, horizontal: 35.w),
-                        ),
-                        child: Text(
-                          'Submit',
-                          style: widget.textStyle,
-                        ),
-                        onPressed: () {
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 35.w),
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: widget.textStyle,
+                      ),
+                      onPressed: () {
+                        if (!widget.isEssay) {
                           try {
                             final selectedChoice = shuffledChoices.firstWhere(
                               (choice) => choice.isSelected == true,
                             );
-                            if (selectedChoice.isRightChoice) {
-                              quizController.correctAnswer.value++;
-                              // second quiz
-                              final tempBlockScores = DataSharedPreferences
-                                  .getSecondQuizCompletion();
-                              debugPrint(
-                                  'block score 2' + tempBlockScores.toString());
-                              if (tempBlockScores[widget.index] == 0) {
-                                tempBlockScores[widget.index] = 20;
-                                DataSharedPreferences.setSecondQuizCompletion(
-                                    tempBlockScores);
-                                debugPrint('block score 2' +
-                                    tempBlockScores.toString());
-                              }
-                            } else {
-                              quizController.wrongAnswer.value++;
+                            switch (widget.quizNum) {
+                              case 2:
+                                if (selectedChoice.isRightChoice) {
+                                  quizController.correctAnswer.value++;
+                                  // second quiz
+                                  final tempBlockScores = DataSharedPreferences
+                                      .getSecondQuizCompletion();
+                                  debugPrint('block score 2' +
+                                      tempBlockScores.toString());
+                                  if (tempBlockScores[widget.index] == 0) {
+                                    tempBlockScores[widget.index] = 20;
+                                    DataSharedPreferences
+                                        .setSecondQuizCompletion(
+                                            tempBlockScores);
+                                    debugPrint('block score 2' +
+                                        tempBlockScores.toString());
+                                  }
+                                } else {
+                                  quizController.wrongAnswer.value++;
+                                }
+                                break;
+                              case 3:
+                                if (selectedChoice.isRightChoice) {
+                                  quizController.correctAnswer.value++;
+                                  // third quiz
+                                  final tempBlockScores = DataSharedPreferences
+                                      .getThirdQuizCompletion();
+                                  debugPrint('block score quiz 3' +
+                                      tempBlockScores.toString());
+                                  if (tempBlockScores[widget.index] == 0) {
+                                    tempBlockScores[widget.index] = 20;
+                                    DataSharedPreferences
+                                        .setThirdQuizCompletion(
+                                            tempBlockScores);
+                                    debugPrint('block score quiz 3' +
+                                        tempBlockScores.toString());
+                                  }
+                                } else {
+                                  quizController.wrongAnswer.value++;
+                                }
+                                break;
+                              case 4:
+                                if (selectedChoice.isRightChoice) {
+                                  quizController.correctAnswer.value++;
+                                  // fourth quiz
+                                  final tempBlockScores = DataSharedPreferences
+                                      .getFourthQuizCompletion();
+                                  debugPrint('block score of quiz 4' +
+                                      tempBlockScores.toString());
+                                  if (tempBlockScores[widget.index] == 0) {
+                                    tempBlockScores[widget.index] = 20;
+                                    DataSharedPreferences
+                                        .setFourthQuizCompletion(
+                                            tempBlockScores);
+                                    debugPrint('block score of quiz 4' +
+                                        tempBlockScores.toString());
+                                  }
+                                } else {
+                                  quizController.wrongAnswer.value++;
+                                }
+                                break;
+                              default:
                             }
                             quizController.nextQuestion();
                           } catch (e) {
                             debugPrint(e.toString());
                             Fluttertoast.showToast(msg: 'Select one answer');
                           }
-                        }),
+                        } else if (widget.isEssay) {
+                          if (_essayTypingController.text.isNotEmpty) {
+                            switch (widget.quizNum) {
+                              case 3:
+                                if (_essayTypingController.text ==
+                                    widget.correctAnswerForEssay) {
+                                  quizController.correctAnswer.value++;
+                                  // third quiz with essay
+                                  final tempBlockScores = DataSharedPreferences
+                                      .getThirdQuizCompletion();
+                                  debugPrint('block score of quiz 3' +
+                                      tempBlockScores.toString());
+                                  if (tempBlockScores[widget.index] == 0) {
+                                    tempBlockScores[widget.index] = 20;
+                                    DataSharedPreferences
+                                        .setThirdQuizCompletion(
+                                            tempBlockScores);
+                                    debugPrint('block score of quiz 3' +
+                                        tempBlockScores.toString());
+                                  }
+                                } else {
+                                  quizController.wrongAnswer.value++;
+                                }
+                                break;
+                              case 4:
+                                if (_essayTypingController.text ==
+                                    widget.correctAnswerForEssay) {
+                                  quizController.correctAnswer.value++;
+                                  // fourth quiz with essay
+                                  final tempBlockScores = DataSharedPreferences
+                                      .getFourthQuizCompletion();
+                                  debugPrint('block score of quiz 4' +
+                                      tempBlockScores.toString());
+                                  if (tempBlockScores[widget.index] == 0) {
+                                    tempBlockScores[widget.index] = 20;
+                                    DataSharedPreferences
+                                        .setFourthQuizCompletion(
+                                            tempBlockScores);
+                                    debugPrint('block score of quiz 4' +
+                                        tempBlockScores.toString());
+                                  }
+                                } else {
+                                  quizController.wrongAnswer.value++;
+                                }
+                                break;
+                              default:
+                            }
+                            quizController.nextQuestion();
+                          } else {
+                            Fluttertoast.showToast(msg: 'fill yout answer');
+                          }
+                        }
+                      },
+                    ),
                   ),
                 SizedBox(
                   height: 15.h,

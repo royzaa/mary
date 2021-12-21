@@ -155,8 +155,11 @@ class QuizBox extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
-                        Get.find<QuizController>().setDuration =
-                            numQuiz == 1 ? 30 : 45;
+                        Get.find<QuizController>().setDuration = numQuiz == 1
+                            ? 30
+                            : numQuiz == 3 || numQuiz == 4
+                                ? 90
+                                : 45;
                         Get.find<QuizController>().onReady();
                         Navigator.of(context).pushReplacementNamed(
                           QuizScreen.routeName,

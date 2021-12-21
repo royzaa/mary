@@ -13,11 +13,19 @@ class DataSharedPreferences {
 
   static const _keyUnlockQuiz = 'unlock quiz';
 
+  static const _keyUnlockQuiz3 = 'quiz3';
+
+  static const _keyUnlockQuiz4 = 'quiz4';
+
   static const _keyQuizTracking = 'quiz tracking';
 
   static const _keyFirstQuizCompletion = 'quiz one completion';
 
   static const _keySecondQuizCompletion = 'quiz two completion';
+
+  static const _keyThirdQuizCompletion = 'quiz third completion';
+
+  static const _keyFourthQuizCompletion = 'quiz fourth completion';
 
   static const _keyFirstTimeResult = 'result';
 
@@ -70,6 +78,22 @@ class DataSharedPreferences {
   static bool? getQuizTwoUnlocked() =>
       _preferences.getBool(_keyUnlockQuiz) ?? false;
 
+  static Future setQuizThreeUnlocked(bool status) async {
+    await _preferences.setBool(_keyUnlockQuiz3, status);
+  }
+
+  /// wheter the third quiz has unlocked or not
+  static bool getQuizThreeUnlocked() =>
+      _preferences.getBool(_keyUnlockQuiz3) ?? false;
+
+  static Future setQuizFourthUnlocked(bool status) async {
+    await _preferences.setBool(_keyUnlockQuiz4, status);
+  }
+
+  /// wheter the 4th quiz has unlocked or not
+  static bool getQuizFourthUnlocked() =>
+      _preferences.getBool(_keyUnlockQuiz4) ?? false;
+
   static Future setQuizTracking(List<int> total) async {
     final quizTracking = total.map((mark) => mark.toString()).toList();
     return _preferences.setStringList(_keyQuizTracking, quizTracking);
@@ -119,6 +143,45 @@ class DataSharedPreferences {
         0,
         0,
       ];
+
+  static Future setThirdQuizCompletion(List<int> allNumber) async {
+    final block = allNumber.map((mark) => mark.toString()).toList();
+    return _preferences.setStringList(_keyThirdQuizCompletion, block);
+  }
+
+  /// return an array of score of every block question
+  static List<int> getThirdQuizCompletion() =>
+      _preferences
+          .getStringList(_keyThirdQuizCompletion)
+          ?.map((e) => int.parse(e))
+          .toList() ??
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+      ];
+
+  static Future setFourthQuizCompletion(List<int> allNumber) async {
+    final block = allNumber.map((mark) => mark.toString()).toList();
+    return _preferences.setStringList(_keyFourthQuizCompletion, block);
+  }
+
+  /// return an array of score of every block question
+  static List<int> getFourthQuizCompletion() =>
+      _preferences
+          .getStringList(_keyFourthQuizCompletion)
+          ?.map((e) => int.parse(e))
+          .toList() ??
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+      ];
+
   static Future<void> setArUiDuration(int duration) async {
     await _preferences.setInt(_keyDuration, duration);
   }

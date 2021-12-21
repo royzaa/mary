@@ -30,3 +30,19 @@ class SecondQuizItem extends QuizItem {
           quizQuestion: quizQuestion,
         );
 }
+
+class ThirdAndFourthQuizItem extends QuizItem {
+  final String? naration;
+  final String? correctAnswerForEssay;
+  final String? questionImage;
+  final bool isEssay;
+  final List<ChoiceChip>? choices;
+  const ThirdAndFourthQuizItem({
+    required String quizQuestion,
+    required this.isEssay,
+    this.questionImage,
+    this.choices,
+    this.correctAnswerForEssay,
+    this.naration,
+  }) : super(quizQuestion: quizQuestion);
+}
