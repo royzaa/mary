@@ -17,6 +17,8 @@ class ReferencModalBottom extends StatelessWidget {
       'http://englishclass.com',
       'https://www.juraganles.com/2018/01/kumpulan-soal-bangun-ruang-lengkap-plus-kunci-jawaban.html',
       'https://afrizatul.com/contoh-soal-dan-pembahasan-volume-bangun-ruang-dan-luas-permukaan-balok',
+      'https://filosofiberselimutmatematika.blogspot.com/2020/05/kumpulan-soal-dan-pembahasan-lengkap-tentang-gaya-dan-hukum-newton.html',
+      'https://www.avkimia.com/2017/10/bank-soal-ipa-kelas-8-smp-materi-hukum-hukum-newton-tentang-gerak.html',
     ];
     Size size = MediaQuery.of(context).size;
     return GestureDetector(

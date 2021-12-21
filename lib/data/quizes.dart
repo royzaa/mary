@@ -466,7 +466,7 @@ ThirdAndFourthQuiz fourthQuiz = ThirdAndFourthQuiz(
   quizItemData: [
     const ThirdAndFourthQuizItem(
       questionImage:
-          'https://4.bp.blogspot.com/-ERbvliHxcSk/WdXRaOrz9DI/AAAAAAAAD9I/XucB9DAs6ggAJyoOHVJxzYVUWJpxe4efwCLcBGAs/s1600/Gambar%2Bsoal%2B14%2B.JPG',
+          'https://drive.google.com/uc?id=1Bb7RJCtrz5uZa7HWltbYdkUiZx5GrORA',
       quizQuestion:
           'The acceleration experienced by the object in the picture above is . . . . m/s^2',
       isEssay: true,
