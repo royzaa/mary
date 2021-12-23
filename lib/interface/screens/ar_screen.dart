@@ -139,14 +139,16 @@ class _ArScreenState extends State<ArScreen> {
                 child: UnityWidget(
                   onUnityMessage: (message) {
                     if (message.toString().contains(':')) {
-                      if (message.toString().contains('length')) {
-                        length = message.toString().split(':')[1];
-                      } else if (message.toString().contains('width')) {
-                        width = message.toString().split(':')[1];
-                      } else if (message.toString().contains('height')) {
-                        height = message.toString().split(':')[1];
-                      }
-                      setState(() {});
+                      setState(() {
+                        if (message.toString().contains('length')) {
+                          length = message.toString().split(':')[1];
+                        } else if (message.toString().contains('width')) {
+                          width = message.toString().split(':')[1];
+                        } else if (message.toString().contains('height')) {
+                          height = message.toString().split(':')[1];
+                        }
+                        print('message: executeddd');
+                      });
                     } else if (message == 'mary') {
                       setState(() {
                         _isFirstScene = !_isFirstScene;
@@ -281,7 +283,9 @@ class _ArScreenState extends State<ArScreen> {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      'Length: $length',
+                                      length.isNotEmpty
+                                          ? 'Length: $length'
+                                          : '',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 14.sp,
@@ -291,7 +295,7 @@ class _ArScreenState extends State<ArScreen> {
                                       height: 14.h,
                                     ),
                                     Text(
-                                      'Width: $width',
+                                      width.isNotEmpty ? 'Width: $width' : '',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 14.sp,
@@ -301,7 +305,9 @@ class _ArScreenState extends State<ArScreen> {
                                       height: 14.h,
                                     ),
                                     Text(
-                                      'Height: $height',
+                                      height.isNotEmpty
+                                          ? 'Height: $height'
+                                          : '',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 14.sp,
