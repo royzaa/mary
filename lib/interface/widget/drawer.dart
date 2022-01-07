@@ -100,7 +100,7 @@ class MyDrawer extends StatelessWidget {
                           size: 24.r,
                         ),
                         title: Text(
-                          'LKPD',
+                          'Exam',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,

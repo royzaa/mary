@@ -11,6 +11,8 @@ import '../youtube_player_screen/youtube_player_screen.dart';
 import '../../../data/lessons_data.dart';
 import '../lesson_screen/lessons_screen.dart';
 import '../../../services/audio_player_controller.dart';
+import './widgets/quiiz_box.dart';
+import '../../../data/quizes.dart';
 
 class LearningEnrichmentScreen extends StatefulWidget {
   const LearningEnrichmentScreen({Key? key}) : super(key: key);
@@ -229,184 +231,248 @@ class _LearningEnrichmentScreenState extends State<LearningEnrichmentScreen> {
     ];
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20.r),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// APP BAR
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    child: Wrap(
-                      children: [
-                        IconButton(
-                          onPressed: () => Navigator.pop(context),
-                          icon: Icon(
-                            Icons.arrow_back_ios_new,
-                            color: Colors.black,
-                            size: 24.r,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20.w,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 8.h),
-                          child: Text(
-                            'Learning enrichment',
-                            style: TextStyle(fontSize: 20.sp),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Icon(
-                    Icons.border_color_sharp,
-                    size: 24.r,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-
-              /// Subject Box
-              Flexible(
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _subjects.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _currentSubjectIndex = index;
-                        });
-                      },
-                      child: SubjectBox(
-                        assetImage: _subjects[index]['asset'],
-                        lightAssetImage: _subjects[index]['lightAsset'],
-                        icon: _subjects[index]['icon'],
-                        isSelected: _currentSubjectIndex == index,
-                        title: _subjects[index]['title'],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-
-              /// ACTION BOX
-              SizedBox(
-                height: 260.h,
-                width: MediaQuery.of(context).size.width,
-                child: Stack(
-                  alignment: Alignment.center,
-                  clipBehavior: Clip.none,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Container(
+            height: 880.h,
+            padding: EdgeInsets.all(20.r),
+            clipBehavior: Clip.none,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// APP BAR
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _currentActionIndex != 0
-                        ? Positioned(
-                            left: 0.w,
-                            child: Icon(
+                    SizedBox(
+                      child: Wrap(
+                        children: [
+                          IconButton(
+                            onPressed: () => Navigator.pop(context),
+                            icon: Icon(
                               Icons.arrow_back_ios_new,
-                              size: 32.r,
-                              color: Colors.grey[400],
+                              color: Colors.black,
+                              size: 24.r,
                             ),
-                          )
-                        : const SizedBox(),
-                    _currentActionIndex + 1 !=
-                                _actions[_currentSubjectIndex].length &&
-                            _actions[_currentSubjectIndex].length != 1
-                        ? Positioned(
-                            right: 0.w,
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              size: 32.r,
-                              color: Colors.grey[400],
-                            ),
-                          )
-                        : const SizedBox(),
-                    PageView.builder(
-                      clipBehavior: Clip.none,
-                      allowImplicitScrolling: true,
-                      controller: PageController(
-                        viewportFraction:
-                            _actions[_currentSubjectIndex].length == 1
-                                ? 1.0
-                                : 0.8,
-                      ),
-                      onPageChanged: (index) {
-                        setState(() {
-                          _currentActionIndex = index;
-                        });
-                        debugPrint(
-                            _actions[_currentSubjectIndex][index]['imageUrl']);
-                      },
-                      itemCount: _actions[_currentSubjectIndex].length,
-                      itemBuilder: (context, index) {
-                        return Transform.scale(
-                          scale: index == _currentActionIndex ? 1 : 0.8,
-                          child: ActionBox(
-                            url: _actions[_currentSubjectIndex][index]
-                                ['imageUrl'],
-                            title: _actions[_currentSubjectIndex][index]
-                                ['title'],
-                            onTap: _actions[_currentSubjectIndex][index]
-                                ['function'],
                           ),
-                        );
-                      },
+                          SizedBox(
+                            width: 20.w,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.h),
+                            child: Text(
+                              'Learning enrichment',
+                              style: TextStyle(fontSize: 20.sp),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.border_color_sharp,
+                      size: 24.r,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Text(
-                'Lessons',
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
+                SizedBox(
+                  height: 20.h,
                 ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Flexible(
-                child: ListView.builder(
-                  clipBehavior: Clip.none,
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _lessons[_currentSubjectIndex].length,
-                  itemBuilder: (_, index) {
-                    return LessonBox(
-                      icon: _lessons[_currentSubjectIndex][index]['icon'],
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LessonScreen(
-                            lessonData: _currentSubjectIndex == 0
-                                ? lessonData.english
-                                : _currentSubjectIndex == 1
-                                    ? lessonData.physics
-                                    : lessonData.math,
-                            subjectIndex: _currentSubjectIndex,
-                            lessonIndex: index,
+
+                /// Subject Box
+                Flexible(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _subjects.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _currentSubjectIndex = index;
+                          });
+                        },
+                        child: SubjectBox(
+                          assetImage: _subjects[index]['asset'],
+                          lightAssetImage: _subjects[index]['lightAsset'],
+                          icon: _subjects[index]['icon'],
+                          isSelected: _currentSubjectIndex == index,
+                          title: _subjects[index]['title'],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+
+                /// ACTION BOX
+                SizedBox(
+                  height: 260.h,
+                  width: MediaQuery.of(context).size.width,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    clipBehavior: Clip.none,
+                    children: [
+                      _currentActionIndex != 0
+                          ? Positioned(
+                              left: 0.w,
+                              child: Icon(
+                                Icons.arrow_back_ios_new,
+                                size: 32.r,
+                                color: Colors.grey[400],
+                              ),
+                            )
+                          : const SizedBox(),
+                      _currentActionIndex + 1 !=
+                                  _actions[_currentSubjectIndex].length &&
+                              _actions[_currentSubjectIndex].length != 1
+                          ? Positioned(
+                              right: 0.w,
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 32.r,
+                                color: Colors.grey[400],
+                              ),
+                            )
+                          : const SizedBox(),
+                      PageView.builder(
+                        clipBehavior: Clip.none,
+                        allowImplicitScrolling: true,
+                        controller: PageController(
+                          viewportFraction:
+                              _actions[_currentSubjectIndex].length == 1
+                                  ? 1.0
+                                  : 0.8,
+                        ),
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentActionIndex = index;
+                          });
+                          debugPrint(_actions[_currentSubjectIndex][index]
+                              ['imageUrl']);
+                        },
+                        itemCount: _actions[_currentSubjectIndex].length,
+                        itemBuilder: (context, index) {
+                          return Transform.scale(
+                            scale: index == _currentActionIndex ? 1 : 0.8,
+                            child: ActionBox(
+                              url: _actions[_currentSubjectIndex][index]
+                                  ['imageUrl'],
+                              title: _actions[_currentSubjectIndex][index]
+                                  ['title'],
+                              onTap: _actions[_currentSubjectIndex][index]
+                                  ['function'],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  'Lessons',
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Flexible(
+                  child: ListView.builder(
+                    clipBehavior: Clip.none,
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _lessons[_currentSubjectIndex].length,
+                    itemBuilder: (_, index) {
+                      return LessonBox(
+                        icon: _lessons[_currentSubjectIndex][index]['icon'],
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LessonScreen(
+                              lessonData: _currentSubjectIndex == 0
+                                  ? lessonData.english
+                                  : _currentSubjectIndex == 1
+                                      ? lessonData.physics
+                                      : lessonData.math,
+                              subjectIndex: _currentSubjectIndex,
+                              lessonIndex: index,
+                            ),
                           ),
                         ),
-                      ),
-                      title: _lessons[_currentSubjectIndex][index]['title'],
-                    );
-                  },
+                        title: _lessons[_currentSubjectIndex][index]['title'],
+                      );
+                    },
+                  ),
                 ),
-              )
-            ],
+                SizedBox(
+                  height: 25.h,
+                ),
+                Text(
+                  'Quizes',
+                  style:
+                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  clipBehavior: Clip.none,
+                  physics: const BouncingScrollPhysics(),
+                  child: Row(
+                    children: [
+                      QuizBox(
+                        isOpen: firstQuiz.isOpen,
+                        numQuiz: firstQuiz.quizNum,
+                        imageUrl: firstQuiz.imageUrl,
+                        quizTitle: firstQuiz.title,
+                      ),
+                      SizedBox(
+                        width: 25.w,
+                      ),
+                      QuizBox(
+                        isOpen: secondQuiz.isOpen,
+                        numQuiz: secondQuiz.quizNum,
+                        imageUrl: secondQuiz.imageUrl,
+                        quizTitle: secondQuiz.title,
+                      ),
+                      SizedBox(
+                        width: 25.w,
+                      ),
+                      QuizBox(
+                        isOpen: thirdQuiz.isOpen,
+                        numQuiz: thirdQuiz.quizNum,
+                        imageUrl: thirdQuiz.imageUrl,
+                        quizTitle: thirdQuiz.title,
+                      ),
+                      SizedBox(
+                        width: 25.w,
+                      ),
+                      QuizBox(
+                        isOpen: fourthQuiz.isOpen,
+                        numQuiz: fourthQuiz.quizNum,
+                        imageUrl: fourthQuiz.imageUrl,
+                        quizTitle: fourthQuiz.title,
+                      ),
+                      SizedBox(
+                        width: 25.w,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -47,35 +47,39 @@ class SubjectBox extends StatelessWidget {
                 ),
         ],
       ),
-      child: Scrollbar(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (icon != null)
-                Icon(
-                  icon,
-                  color: isSelected ? Colors.white : Colors.black,
-                  size: 36.r,
-                ),
-              if (assetImage != null && lightAssetImage != null)
-                Image.asset(
-                  isSelected ? lightAssetImage! : assetImage!,
-                  fit: BoxFit.contain,
-                ),
-              SizedBox(
-                height: 15.h,
+      child: Column(
+        children: [
+          if (icon != null)
+            Expanded(
+              flex: 1,
+              child: Icon(
+                icon,
+                color: isSelected ? Colors.white : Colors.black,
+                size: 36.r,
               ),
-              Text(
-                title,
-                style: TextStyle(
-                  color: isSelected ? Colors.white : Colors.black,
-                  fontSize: 12.sp,
-                ),
+            ),
+          if (assetImage != null && lightAssetImage != null)
+            Expanded(
+              flex: 1,
+              child: Image.asset(
+                isSelected ? lightAssetImage! : assetImage!,
+                fit: BoxFit.contain,
               ),
-            ],
+            ),
+          SizedBox(
+            height: 15.h,
           ),
-        ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              title,
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.black,
+                fontSize: title.length < 22 ? 12.sp : 11.sp,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

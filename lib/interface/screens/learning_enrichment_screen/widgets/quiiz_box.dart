@@ -212,7 +212,8 @@ class QuizBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: 140.w,
+            width: 120.w,
+            height: 120.h,
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
@@ -236,8 +237,8 @@ class QuizBox extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15.r),
                         child: CachedSvg(
                           svgUrl: imageUrl!,
-                          width: 110.w,
-                          height: 80.h,
+                          width: 70.w,
+                          height: 60.h,
                           fit: BoxFit.scaleDown,
                         ),
                       ),
@@ -246,9 +247,10 @@ class QuizBox extends StatelessWidget {
                       ),
                       Text(
                         quizTitle!,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Theme.of(context).primaryColor.withRed(20),
-                          fontSize: 14.sp,
+                          fontSize: 12.sp,
                         ),
                       )
                     ],
@@ -266,7 +268,7 @@ class QuizBox extends StatelessWidget {
           ),
           Text(
             'Quiz $numQuiz',
-            style: TextStyle(fontSize: 14.sp),
+            style: TextStyle(fontSize: 15.sp),
           ),
         ],
       ),

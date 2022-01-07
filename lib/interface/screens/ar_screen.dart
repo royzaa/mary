@@ -147,7 +147,6 @@ class _ArScreenState extends State<ArScreen> {
                         } else if (message.toString().contains('height')) {
                           height = message.toString().split(':')[1];
                         }
-                        print('message: executeddd');
                       });
                     } else if (message == 'mary') {
                       setState(() {
@@ -201,79 +200,109 @@ class _ArScreenState extends State<ArScreen> {
                                 top: 30.h,
                                 child: SizedBox(
                                   width: MediaQuery.of(context).size.width,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      ElevatedButton.icon(
-                                        style: ElevatedButton.styleFrom(
-                                            primary:
-                                                Theme.of(context).primaryColor),
-                                        onPressed: () async {
-                                          DataSharedPreferences.setArUiDuration(
-                                              0);
-                                          Navigator.of(context).pop();
-                                          await _unityController
-                                              .unityController!
-                                              .pause();
-                                        },
-                                        icon: const Icon(Icons.arrow_back),
-                                        label: const Text(
-                                          'Back',
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          InkWell(
-                                            onTap: showHint,
-                                            child: Icon(
-                                              Icons.error_outline_outlined,
-                                              color:
-                                                  Colors.white.withOpacity(0.5),
-                                              size: 50.r,
+                                  child: SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 150.h,
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Positioned(
+                                          left: 0,
+                                          child: ElevatedButton.icon(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Theme.of(context)
+                                                    .primaryColor),
+                                            onPressed: () async {
+                                              DataSharedPreferences
+                                                  .setArUiDuration(0);
+                                              Navigator.of(context).pop();
+                                              await _unityController
+                                                  .unityController!
+                                                  .pause();
+                                            },
+                                            icon: const Icon(Icons.arrow_back),
+                                            label: const Text(
+                                              'Back',
+                                              style: TextStyle(fontSize: 16),
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 25.h,
+                                        ),
+                                        Positioned(
+                                          top: 0,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              InkWell(
+                                                onTap: showHint,
+                                                child: Icon(
+                                                  Icons.error_outline_outlined,
+                                                  color: Colors.white
+                                                      .withOpacity(0.5),
+                                                  size: 50.r,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 25.h,
+                                              ),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  _changeScene('1');
+                                                  setState(() {
+                                                    _isFirstScene =
+                                                        !_isFirstScene;
+                                                  });
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Colors.white12,
+                                                ),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.videogame_asset,
+                                                      color: Theme.of(context)
+                                                          .primaryColor,
+                                                      size: 50.r,
+                                                    ),
+                                                    const Text(
+                                                      'Newton\'s \nsimulation',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          InkWell(
-                                            onTap: () {
-                                              _changeScene('1');
+                                        ),
+                                        Positioned(
+                                          right: 0,
+                                          child: ElevatedButton.icon(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Theme.of(context)
+                                                    .primaryColor),
+                                            onPressed: () async {
+                                              _restartScene('restart');
                                               setState(() {
-                                                _isFirstScene = !_isFirstScene;
+                                                _currentVehicleIndex = 0;
                                               });
                                             },
-                                            child: Icon(
-                                              Icons.change_circle,
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              size: 50.r,
+                                            icon: const Icon(Icons.refresh),
+                                            label: const Text(
+                                              'Refresh',
+                                              style: TextStyle(fontSize: 16),
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                      ElevatedButton.icon(
-                                        style: ElevatedButton.styleFrom(
-                                            primary:
-                                                Theme.of(context).primaryColor),
-                                        onPressed: () async {
-                                          _restartScene('restart');
-                                          setState(() {
-                                            _currentVehicleIndex = 0;
-                                          });
-                                        },
-                                        icon: const Icon(Icons.refresh),
-                                        label: const Text(
-                                          'Refresh',
-                                          style: TextStyle(fontSize: 16),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -288,7 +317,7 @@ class _ArScreenState extends State<ArScreen> {
                                           : '',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 14.sp,
+                                        fontSize: 12.sp,
                                       ),
                                     ),
                                     SizedBox(
@@ -298,7 +327,7 @@ class _ArScreenState extends State<ArScreen> {
                                       width.isNotEmpty ? 'Width: $width' : '',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 14.sp,
+                                        fontSize: 12.sp,
                                       ),
                                     ),
                                     SizedBox(
@@ -310,7 +339,7 @@ class _ArScreenState extends State<ArScreen> {
                                           : '',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 14.sp,
+                                        fontSize: 12.sp,
                                       ),
                                     ),
                                   ],

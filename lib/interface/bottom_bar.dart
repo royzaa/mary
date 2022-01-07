@@ -16,14 +16,10 @@ import 'package:url_launcher/url_launcher.dart';
 import './screens/credit_screen/credit_screen.dart';
 import './screens/synopsis_screen/synopsis_screen.dart';
 import './screens/play screen/play_screen.dart';
-import './widget/label_menu.dart';
 import './widget/my_show_case.dart';
 import '../services/shared_preferences.dart';
 import './widget/drawer.dart';
 import '../services/audio_player_controller.dart';
-import './widget/learning_goal.dart';
-import './screens/learning_guide_screen/learning_guide_screen.dart';
-import './screens/learning_enrichment_screen/learning_enrichement_screen.dart';
 import '../interface/screens/ar_screen.dart';
 import '../services/unity_controller.dart';
 
@@ -139,8 +135,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               const BottomNavigationBarItem(
                 icon: Icon(null),
-                label: 'Play',
-                tooltip: 'Play',
+                label: 'Home',
+                tooltip: 'Home',
               ),
               BottomNavigationBarItem(
                 icon: MyShowCase(
@@ -160,10 +156,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: SpeedDial(
-          animationSpeed: 225,
-          curve: Curves.easeInCubic,
-          spaceBetweenChildren: 10.h,
-          icon: Icons.play_arrow_rounded,
+          icon: Icons.home_filled,
           backgroundColor: Theme.of(context).primaryColor,
           iconTheme: IconThemeData(size: 32.r),
           activeIcon: Icons.close,
@@ -174,67 +167,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
               _selectedIndex = 1;
             });
           },
-          children: [
-            SpeedDialChild(
-                labelWidget: const LabelMenu(
-                  title: 'Learning Guide',
-                ),
-                elevation: 20,
-                child: Icon(
-                  Icons.ballot_outlined,
-                  color: Theme.of(context).primaryColor,
-                  size: 24.r,
-                ),
-                onTap: () async {
-                  await Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LearningGuideScreen()));
-                }),
-            SpeedDialChild(
-                labelWidget: const LabelMenu(
-                  title: 'Goal',
-                ),
-                elevation: 20,
-                child: Icon(
-                  Icons.auto_awesome,
-                  color: Theme.of(context).primaryColor,
-                  size: 24.r,
-                ),
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      elevation: 40,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => const LearningGoal());
-                }),
-            SpeedDialChild(
-              elevation: 20,
-              labelWidget: const LabelMenu(
-                title: 'Augmented Reality',
-              ),
-              child: Icon(
-                Icons.camera_alt,
-                color: Theme.of(context).primaryColor,
-                size: 24.r,
-              ),
-              onTap: goToArScreen,
-            ),
-            SpeedDialChild(
-              onTap: () async {
-                await Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const LearningEnrichmentScreen()));
-              },
-              elevation: 20,
-              labelWidget: const LabelMenu(
-                title: 'Learning Enrichment',
-              ),
-              child: Icon(
-                Icons.border_color_sharp,
-                color: Theme.of(context).primaryColor,
-                size: 24.r,
-              ),
-            ),
-          ].reversed.toList(),
         ),
       ),
     );

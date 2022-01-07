@@ -5,8 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import './widget/pop_up_volume.dart';
 import './widget/menus.dart';
-import 'widget/quiiz_box.dart';
-import '../../../data/quizes.dart';
 import '../../widget/my_show_case.dart';
 import '../../../services/shared_preferences.dart';
 import '../../../services/time_session.dart';
@@ -204,62 +202,6 @@ class _PlayScreenState extends State<PlayScreen>
                   desc: "You can select menu icon to start your learning",
                   showCaseKey: widget.fourthShowCaseKey,
                   child: const Menus(),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Text(
-                  'Quizes',
-                  style:
-                      TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  clipBehavior: Clip.none,
-                  physics: const BouncingScrollPhysics(),
-                  child: Row(
-                    children: [
-                      QuizBox(
-                        isOpen: firstQuiz.isOpen,
-                        numQuiz: firstQuiz.quizNum,
-                        imageUrl: firstQuiz.imageUrl,
-                        quizTitle: firstQuiz.title,
-                      ),
-                      SizedBox(
-                        width: 25.w,
-                      ),
-                      QuizBox(
-                        isOpen: secondQuiz.isOpen,
-                        numQuiz: secondQuiz.quizNum,
-                        imageUrl: secondQuiz.imageUrl,
-                        quizTitle: secondQuiz.title,
-                      ),
-                      SizedBox(
-                        width: 25.w,
-                      ),
-                      QuizBox(
-                        isOpen: thirdQuiz.isOpen,
-                        numQuiz: thirdQuiz.quizNum,
-                        imageUrl: thirdQuiz.imageUrl,
-                        quizTitle: thirdQuiz.title,
-                      ),
-                      SizedBox(
-                        width: 25.w,
-                      ),
-                      QuizBox(
-                        isOpen: fourthQuiz.isOpen,
-                        numQuiz: fourthQuiz.quizNum,
-                        imageUrl: fourthQuiz.imageUrl,
-                        quizTitle: fourthQuiz.title,
-                      ),
-                      SizedBox(
-                        width: 25.w,
-                      ),
-                    ],
-                  ),
                 ),
                 SizedBox(
                   height: 25.h,
